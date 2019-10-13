@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>web前端架构-vue-初次学习 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期三, 五月 30日 2018, 5:39 下午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><h2 id="整体框架：vue2-x"><a href="#整体框架：vue2-x" class="headerlink" title="整体框架：vue2.x"></a>整体框架：vue2.x</h2><h3 id="为什么选择-Vue"><a href="#为什么选择-Vue" class="headerlink" title="为什么选择 Vue"></a>为什么选择 Vue</h3><h4 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h4><ul>
+<li>具有热更新功能，代码变更保存即可看到效果，对提高调试与开发的效率有很大帮助。</li>
+<li>社区资源丰富，大部分的问题均可查找得到合理的解决方案。</li>
+<li>语法简洁。</li>
+<li>Api 友好。</li>
+<li>Github 维护热度高，大量高质量程序员都参与其中。</li>
+</ul>
+<h4 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h4><ul>
+<li>Bilibili、简书、饿了么、掘金、搜狐手机版、UC 奇趣百科等知名网站都在使用 Vue</li>
+</ul>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><ul>
+<li>不输给目前其他流行框架 如 ReactJs，AngularJS</li>
+<li>原生渲染</li>
+<li>自动按需加载组件，ReactJs 暂时不能做到自动按需加载。</li>
+</ul>
+<h4 id="自身优势"><a href="#自身优势" class="headerlink" title="自身优势"></a>自身优势</h4><ul>
+<li>高度模块化。</li>
+<li>维护简单。</li>
+<li>数据双向绑定，跨组件强制单向数据流。</li>
+</ul>
+<h2 id="UI-库"><a href="#UI-库" class="headerlink" title="UI 库"></a>UI 库</h2><p>后期有需求会增加别的 ui 库</p>
+<ul>
+<li><a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">ElementUi</a></li>
+<li><a href="https://chenz24.github.io/vue-blu/#/" target="_blank" rel="noopener">Vue blu</a></li>
+</ul>
+<h2 id="网络请求框架"><a href="#网络请求框架" class="headerlink" title="网络请求框架"></a>网络请求框架</h2><ul>
+<li><a href="https://github.com/axios/axios" target="_blank" rel="noopener">axios</a><pre><code>使用范例
+axios
+    .get(&#39;rul&#39;)
+    .then(response =&gt; (this.info = response))</code></pre></li>
+</ul>
+<h2 id="工具链："><a href="#工具链：" class="headerlink" title="工具链："></a>工具链：</h2><ul>
+<li><a href="https://yarnpkg.com/lang/en/" target="_blank" rel="noopener">yarn</a>：快速、可靠、安全的依赖管理，npm 的升级版。</li>
+<li><a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a>：是 JavaScript 世界的包管理器，大部分的 JS 开发者会在这里发布他们的库。</li>
+<li><a href="https://webpack.docschina.org/" target="_blank" rel="noopener">webpack</a>：前端构建工具，用与打包压缩混淆前端代码。</li>
+<li><a href="http://eslint.cn/" target="_blank" rel="noopener">Eslint</a>：静态代码检查器，用于规范开发编码习惯。</li>
+</ul>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><ul>
+<li>组件内部双向绑定</li>
+<li>子组件与父组件单向绑定</li>
+</ul>
+<h2 id="设计模式：Mvvm"><a href="#设计模式：Mvvm" class="headerlink" title="设计模式：Mvvm"></a>设计模式：Mvvm</h2><ul>
+<li>为了让页面与页面逻辑分离。</li>
+<li>降低耦合度。</li>
+</ul>
+<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p><img src="https://upload-images.jianshu.io/upload_images/5692364-6ccaecf3481d7dce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p>
+<ul>
+<li>node_modules：存放 npm 下载的包，所有第三方的库都会存放在这里。</li>
+<li>Page：用于存放页面<ul>
+<li>View：具体的页面样式与 html 结构。<ul>
+<li>Css：控制页面的样式。</li>
+<li>Html：控制页面的 Dom 树。</li>
+</ul>
+</li>
+<li>Model：每个页面所需要的数据结构。</li>
+<li>ViewModel：页面的 VM，负责具体业务并且让 View 与 Model 交互。</li>
+</ul>
+</li>
+<li>Components：用于存放单个组件。<ul>
+<li>ControlComponents：控制类组件，具有可操作的能力，例如操纵 Dom，可以存储输入状态如日期选择器。</li>
+<li>ViewComponents：展示类组件，不具有操作的能力，不存储非 UI 的状态，不直接修改外部环境。</li>
+<li>ContainerComponents：容器类组件 如卡片。</li>
+</ul>
+</li>
+<li>router<ul>
+<li>设置页面的路由</li>
+</ul>
+</li>
+</ul>
+<h2 id="组件结构"><a href="#组件结构" class="headerlink" title="组件结构"></a>组件结构</h2><ul>
+<li>扩展 js<br><img src="https://upload-images.jianshu.io/upload_images/5692364-ea55f8bca6e4a162.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="公共js.png"></li>
+</ul>
+<h3 id="控制类组件"><a href="#控制类组件" class="headerlink" title="控制类组件"></a>控制类组件</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-0f1828413f3d6554.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="控制类组件构建.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5692364-519efa270d13e96f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="控制类组件.png"></p>
+<ul>
+<li>展示类组件<br><img src="https://upload-images.jianshu.io/upload_images/5692364-1306b65112c7c634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="展示类组件结构.png"></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/5692364-e73c2b538b813cb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="展示类组件.png"></p>
+<ul>
+<li>容器类组件<br><img src="https://upload-images.jianshu.io/upload_images/5692364-b16163ce1f818544.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="容器类组件.png"></li>
+</ul>
+<h2 id="页面构建结构"><a href="#页面构建结构" class="headerlink" title="页面构建结构"></a>页面构建结构</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-01b499bb6f636217.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="页面结构.png"></p>
+<h4 id="首页（例子）"><a href="#首页（例子）" class="headerlink" title="首页（例子）"></a>首页（例子）</h4><p><img src="https://upload-images.jianshu.io/upload_images/5692364-0ee0f6ea4cef58ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="首页结构.png"></p>
+<h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><p>一个页面由多个组件组建而成，ViewModel 控制组件交互，并且负责具体业务。</p>
+<h3 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-7d83c04898cd2cce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="页面结构.png"></p>
+<h2 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h2><ul>
+<li>组件不能含有具体业务逻辑。</li>
+<li>展示类组件应只允许输入数据。</li>
+<li>控制类组件要暴露回调函数给外部组件控制，并且隐藏不必要的细节。</li>
+<li><code>View</code> 与 <code>Model</code> 的交互必须通过 <code>ViewModel</code></li>
+<li>凡是可复用的函数或者组件都必须抽象封装出来。</li>
+<li>不许对 api 请求 try catch，应该判断状态码做相应的事情。</li>
+<li>尽量使用 <code>let</code> 和 <code>const</code> 声明变量名。</li>
+<li>禁止使用 <code>eval</code> 函数</li>
+<li>禁止使用 <code>NaN</code>，要用 <code>isNaN()</code></li>
+<li>变量命名要尽量易懂，不容易懂的应加上注释</li>
+<li>函数用小驼峰命名，</li>
+<li>组件命名遵循：“my-component”，且使用小驼峰。</li>
+<li><code>class</code> 命名大驼峰。</li>
+<li>变量名 小驼峰。</li>
+<li><code>HTML、CSS、Vue</code> 文件需要同名并且命名需要是名词。</li>
+</ul>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "web前端架构-vue-初次学习&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>

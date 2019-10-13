@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>screen使用教程-无比简单</title>
+    <link href="undefined2019/07/01/screen%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E6%97%A0%E6%AF%94%E7%AE%80%E5%8D%95/"/>
+    <url>2019/07/01/screen%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E6%97%A0%E6%AF%94%E7%AE%80%E5%8D%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="常规命令"><a href="#常规命令" class="headerlink" title="常规命令"></a>常规命令</h2><pre><code class="javaScript">创建：screen -S fuck查看有多少会话：screen -ls恢复：screen -r fuck删除 screen -S fuck -X quit</code></pre><h3 id="screen-r-fuck-失败"><a href="#screen-r-fuck-失败" class="headerlink" title="screen -r fuck 失败"></a>screen -r fuck 失败</h3><pre><code>如果不能恢复：先screen -d fuck,再screen -r fuck</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>nginx的邻居caddy</title>
+    <link href="undefined2019/07/01/nginx%E7%9A%84%E9%82%BB%E5%B1%85caddy/"/>
+    <url>2019/07/01/nginx%E7%9A%84%E9%82%BB%E5%B1%85caddy/</url>
+    
+    <content type="html"><![CDATA[<p>本文不讲安装,只讲最简单的配置<br>每次配置更新完要 sudo pkill -USR1 caddy 刷新</p><h2 id="将静态文件映射到二级域名"><a href="#将静态文件映射到二级域名" class="headerlink" title="将静态文件映射到二级域名"></a>将静态文件映射到二级域名</h2><pre><code>你想在外网访问的网站地址 {  tls 你的破https证书  gzip  root  你的网站本地地址  index 首页 不填默认index的东西}</code></pre><h2 id="反代理"><a href="#反代理" class="headerlink" title="反代理"></a>反代理</h2><pre><code>你想在外网访问的网站地址 {  tls 你的破https证书  proxy / localhost:你想访问的破端口}</code></pre><h2 id="import"><a href="#import" class="headerlink" title="import"></a>import</h2><p>可以把几个文件合并拼接起来<br>例如</p><h3 id="a-conf"><a href="#a-conf" class="headerlink" title="a.conf"></a>a.conf</h3><pre><code>你的破配置</code></pre><h3 id="b-conf"><a href="#b-conf" class="headerlink" title="b.conf"></a>b.conf</h3><pre><code>import a.conf</code></pre><p>相当于把<strong>a.conf</strong>里的代码拷贝到<strong>b.conf</strong>里.没啥特别的</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ORM是什么？</title>
+    <link href="undefined2019/05/17/ORM%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <url>2019/05/17/ORM%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="引用-阮一峰博客"><a href="#引用-阮一峰博客" class="headerlink" title="引用-阮一峰博客"></a>引用-<a href="http://www.ruanyifeng.com/blog/2019/02/orm-tutorial.html" target="_blank" rel="noopener">阮一峰博客</a></h1><h2 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h2><h3 id="字面意思"><a href="#字面意思" class="headerlink" title="字面意思"></a>字面意思</h3><p>实际上就是个缩写，表示对象-关系映射的缩写</p><ul><li><code>O</code>-&gt;<strong>Object</strong></li><li><code>RM</code>-&gt;<strong>Relational</strong> (关系) <strong>Mapping(映射)</strong></li></ul><h3 id="代表什么思想"><a href="#代表什么思想" class="headerlink" title="代表什么思想"></a>代表什么思想</h3><p>实际上就是一种把数据库映射成对象的想法</p><ul><li>数据库的表（<code>table</code>） –&gt; 类（<code>class</code>）</li><li>记录（<code>record</code>，行数据）–&gt; 对象（<code>object</code>）</li><li>字段（<code>field</code>）–&gt; 对象的属性（<code>attribute</code>）</li></ul><p><strong>比如说查询语句 <code>SELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10</code></strong></p><p>对应到代码就是</p><pre><code class="c#">res = db.执行数据库(sql);name = res[0][&quot;FIRST_NAME&quot;];</code></pre><p>那么<strong>ORM</strong>的写法就是</p><pre><code class="c#">p = Person.get(10);name = p.first_name;</code></pre><p>这样的好处就是可以不需要了解数据库底层，因为它不需要接触<code>SQL</code>语句</p><p>所以<code>ORM</code>有这样一些优点</p><ul><li><code>ORM</code>生态已经比较完备，有很多的工具支持</li><li>天生的<code>MVC</code>，<code>ORM</code>就是天生的<code>Model</code></li><li>可以不写<code>SQL</code>了。</li></ul><p>它的缺点来说：</p><ul><li>复杂查询很难做到，做到了性能也很差</li><li>学习成本比较高</li><li>由于不需要接触<code>SQL</code>所以无法定制一些特殊的<code>SQL</code></li></ul><h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>目前公认最规范的是 Ruby 语言的 <a href="https://guides.rubyonrails.org/active_record_basics.html" target="_blank" rel="noopener">Active Record</a>。Active Record 对于对象和数据库表的映射，有一些命名限制。</p><p>（1）一个类对应一张表。类名是单数，且首字母大写；表名是复数，且全部是小写。比如，表 <code>books</code> 对应类 <code>Book</code>。</p><p>（2）如果名字是不规则复数，则类名依照英语习惯命名，比如，表 <code>mice</code> 对应类 <code>Mouse</code>，表 <code>people</code> 对应类 <code>Person</code>。</p><p>（3）如果名字包含多个单词，那么类名使用首字母全部大写的骆驼拼写法，而表名使用下划线分隔的小写单词。比如，表 <code>book_clubs</code> 对应类 <code>BookClub</code>，表 <code>line_items</code> 对应类 <code>LineItem</code>。</p><p>（4）每个表都必须有一个主键字段，通常是叫做 <code>id</code> 的整数字段。外键字段名约定为单数的表名 + 下划线 + id，比如 <code>item_id</code> 表示该字段对应 <code>items</code> 表的 <code>id</code> 字段。</p><h2 id="示例库-OpenRecord"><a href="#示例库-OpenRecord" class="headerlink" title="示例库 OpenRecord"></a>示例库 <a href="https://github.com/PhilWaldmann/openrecord" target="_blank" rel="noopener">OpenRecord</a></h2><p><code>OpenRecord</code> 是仿 <code>Active Record</code> 的，将其移植到了 <code>JavaScript</code>，而且实现得很轻量级，学习成本较低。我写了一个<a href="https://github.com/ruanyf/openrecord-demos" target="_blank" rel="noopener">示例库</a>，请将它克隆到本地。</p><h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>使用 ORM 的第一步，就是你必须告诉它，怎么连接数据库（<a href="https://github.com/ruanyf/openrecord-demos/blob/master/demos/demo01.js" target="_blank" rel="noopener">完整代码</a>看这里）。</p><blockquote><pre><code class="javascript">// demo01.jsconst Store = require(&#39;openrecord/store/sqlite3&#39;)const store = new Store({    type: &#39;sqlite3&#39;,    file: &#39;./db/sample.db&#39;,    autoLoad: true,})await store.connect()</code></pre></blockquote><p>连接成功以后，就可以操作数据库了。</p><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>没啥好说的，就是<strong>ORM</strong>的框架会把表转成类对象</p><h2 id="CRUD-操作"><a href="#CRUD-操作" class="headerlink" title="CRUD 操作"></a>CRUD 操作</h2><p>也没什么好说的，增删改查都从查询语句变成了调用方法</p><h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><p>表与表之间的关系（relation），分成三种。</p><blockquote><ul><li><strong>一对一</strong>（one-to-one）：一种对象与另一种对象是一一对应关系，比如一个学生只能在一个班级。</li><li><strong>一对多</strong>（one-to-many）： 一种对象可以属于另一种对象的多个实例，比如一张唱片包含多首歌。</li><li><strong>多对多</strong>（many-to-many）：两种对象彼此都是 “一对多” 关系，比如一张唱片包含多首歌，同时一首歌可以属于多张唱片。</li></ul></blockquote><p>了解到这就足够用了</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>web前端架构-vue-初次学习</title>
+    <link href="undefined2018/05/30/web%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    <url>2018/05/30/web%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84/</url>
+    
+    <content type="html"><![CDATA[<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><h2 id="整体框架：vue2-x"><a href="#整体框架：vue2-x" class="headerlink" title="整体框架：vue2.x"></a>整体框架：vue2.x</h2><h3 id="为什么选择-Vue"><a href="#为什么选择-Vue" class="headerlink" title="为什么选择 Vue"></a>为什么选择 Vue</h3><h4 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h4><ul><li>具有热更新功能，代码变更保存即可看到效果，对提高调试与开发的效率有很大帮助。</li><li>社区资源丰富，大部分的问题均可查找得到合理的解决方案。</li><li>语法简洁。</li><li>Api 友好。</li><li>Github 维护热度高，大量高质量程序员都参与其中。</li></ul><h4 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h4><ul><li>Bilibili、简书、饿了么、掘金、搜狐手机版、UC 奇趣百科等知名网站都在使用 Vue</li></ul><h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><ul><li>不输给目前其他流行框架 如 ReactJs，AngularJS</li><li>原生渲染</li><li>自动按需加载组件，ReactJs 暂时不能做到自动按需加载。</li></ul><h4 id="自身优势"><a href="#自身优势" class="headerlink" title="自身优势"></a>自身优势</h4><ul><li>高度模块化。</li><li>维护简单。</li><li>数据双向绑定，跨组件强制单向数据流。</li></ul><h2 id="UI-库"><a href="#UI-库" class="headerlink" title="UI 库"></a>UI 库</h2><p>后期有需求会增加别的 ui 库</p><ul><li><a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">ElementUi</a></li><li><a href="https://chenz24.github.io/vue-blu/#/" target="_blank" rel="noopener">Vue blu</a></li></ul><h2 id="网络请求框架"><a href="#网络请求框架" class="headerlink" title="网络请求框架"></a>网络请求框架</h2><ul><li><a href="https://github.com/axios/axios" target="_blank" rel="noopener">axios</a><pre><code>使用范例axios    .get(&#39;rul&#39;)    .then(response =&gt; (this.info = response))</code></pre></li></ul><h2 id="工具链："><a href="#工具链：" class="headerlink" title="工具链："></a>工具链：</h2><ul><li><a href="https://yarnpkg.com/lang/en/" target="_blank" rel="noopener">yarn</a>：快速、可靠、安全的依赖管理，npm 的升级版。</li><li><a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a>：是 JavaScript 世界的包管理器，大部分的 JS 开发者会在这里发布他们的库。</li><li><a href="https://webpack.docschina.org/" target="_blank" rel="noopener">webpack</a>：前端构建工具，用与打包压缩混淆前端代码。</li><li><a href="http://eslint.cn/" target="_blank" rel="noopener">Eslint</a>：静态代码检查器，用于规范开发编码习惯。</li></ul><h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><ul><li>组件内部双向绑定</li><li>子组件与父组件单向绑定</li></ul><h2 id="设计模式：Mvvm"><a href="#设计模式：Mvvm" class="headerlink" title="设计模式：Mvvm"></a>设计模式：Mvvm</h2><ul><li>为了让页面与页面逻辑分离。</li><li>降低耦合度。</li></ul><h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><p><img src="https://upload-images.jianshu.io/upload_images/5692364-6ccaecf3481d7dce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><ul><li>node_modules：存放 npm 下载的包，所有第三方的库都会存放在这里。</li><li>Page：用于存放页面<ul><li>View：具体的页面样式与 html 结构。<ul><li>Css：控制页面的样式。</li><li>Html：控制页面的 Dom 树。</li></ul></li><li>Model：每个页面所需要的数据结构。</li><li>ViewModel：页面的 VM，负责具体业务并且让 View 与 Model 交互。</li></ul></li><li>Components：用于存放单个组件。<ul><li>ControlComponents：控制类组件，具有可操作的能力，例如操纵 Dom，可以存储输入状态如日期选择器。</li><li>ViewComponents：展示类组件，不具有操作的能力，不存储非 UI 的状态，不直接修改外部环境。</li><li>ContainerComponents：容器类组件 如卡片。</li></ul></li><li>router<ul><li>设置页面的路由</li></ul></li></ul><h2 id="组件结构"><a href="#组件结构" class="headerlink" title="组件结构"></a>组件结构</h2><ul><li>扩展 js<br><img src="https://upload-images.jianshu.io/upload_images/5692364-ea55f8bca6e4a162.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="公共js.png"></li></ul><h3 id="控制类组件"><a href="#控制类组件" class="headerlink" title="控制类组件"></a>控制类组件</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-0f1828413f3d6554.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="控制类组件构建.png"></p><p><img src="https://upload-images.jianshu.io/upload_images/5692364-519efa270d13e96f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="控制类组件.png"></p><ul><li>展示类组件<br><img src="https://upload-images.jianshu.io/upload_images/5692364-1306b65112c7c634.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="展示类组件结构.png"></li></ul><p><img src="https://upload-images.jianshu.io/upload_images/5692364-e73c2b538b813cb6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="展示类组件.png"></p><ul><li>容器类组件<br><img src="https://upload-images.jianshu.io/upload_images/5692364-b16163ce1f818544.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="容器类组件.png"></li></ul><h2 id="页面构建结构"><a href="#页面构建结构" class="headerlink" title="页面构建结构"></a>页面构建结构</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-01b499bb6f636217.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="页面结构.png"></p><h4 id="首页（例子）"><a href="#首页（例子）" class="headerlink" title="首页（例子）"></a>首页（例子）</h4><p><img src="https://upload-images.jianshu.io/upload_images/5692364-0ee0f6ea4cef58ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="首页结构.png"></p><h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><p>一个页面由多个组件组建而成，ViewModel 控制组件交互，并且负责具体业务。</p><h3 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h3><p><img src="https://upload-images.jianshu.io/upload_images/5692364-7d83c04898cd2cce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="页面结构.png"></p><h2 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h2><ul><li>组件不能含有具体业务逻辑。</li><li>展示类组件应只允许输入数据。</li><li>控制类组件要暴露回调函数给外部组件控制，并且隐藏不必要的细节。</li><li><code>View</code> 与 <code>Model</code> 的交互必须通过 <code>ViewModel</code></li><li>凡是可复用的函数或者组件都必须抽象封装出来。</li><li>不许对 api 请求 try catch，应该判断状态码做相应的事情。</li><li>尽量使用 <code>let</code> 和 <code>const</code> 声明变量名。</li><li>禁止使用 <code>eval</code> 函数</li><li>禁止使用 <code>NaN</code>，要用 <code>isNaN()</code></li><li>变量命名要尽量易懂，不容易懂的应加上注释</li><li>函数用小驼峰命名，</li><li>组件命名遵循：“my-component”，且使用小驼峰。</li><li><code>class</code> 命名大驼峰。</li><li>变量名 小驼峰。</li><li><code>HTML、CSS、Vue</code> 文件需要同名并且命名需要是名词。</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>读黑客与画家有感</title>
+    <link href="undefined2018/05/13/%E8%AF%BB%E9%BB%91%E5%AE%A2%E4%B8%8E%E7%94%BB%E5%AE%B6%E6%9C%89%E6%84%9F/"/>
+    <url>2018/05/13/%E8%AF%BB%E9%BB%91%E5%AE%A2%E4%B8%8E%E7%94%BB%E5%AE%B6%E6%9C%89%E6%84%9F/</url>
+    
+    <content type="html"><![CDATA[<p>前几天一口气读完了黑客与画家，留下点感悟。</p><h2 id="书呆子不受欢迎的原因"><a href="#书呆子不受欢迎的原因" class="headerlink" title="书呆子不受欢迎的原因"></a>书呆子不受欢迎的原因</h2><p>学校是个特殊的地方，它是人为设计出来的，一半像无菌室，一半像野蛮之地。它就像人生一样，无所不包，却又不是事情的真相。它只是一个短暂的过程，只要你向前看，就能超越它，即使你身在其中。</p><ul><li>受欢迎是要付出精力的，他们更愿意把精力放在变得更优秀上。</li><li>欺负书呆子的原因可能是为了自己不被孤立。</li><li>特别受欢迎的人很少去欺负特别不受欢迎的人。</li></ul><h2 id="黑客与画家"><a href="#黑客与画家" class="headerlink" title="黑客与画家"></a>黑客与画家</h2><h3 id="黑客真正想做的是设计优美的软件"><a href="#黑客真正想做的是设计优美的软件" class="headerlink" title="黑客真正想做的是设计优美的软件"></a>黑客真正想做的是设计优美的软件</h3><ul><li>大公司里设计软件的职责是技工，翻译产品经历的“构想”成代码</li><li>想战胜大公司的方法是将设计权交给黑客</li><li>编程跟绘画很像，不要一开始就追求完美的软件；起个草案，逐步修改</li></ul><h2 id="不能说的话"><a href="#不能说的话" class="headerlink" title="不能说的话"></a>不能说的话</h2><p>不能说的话，社会中总有些话好像是不能说出来的，政治不正确的话就是其中一类。</p><h3 id="找出不能说的话"><a href="#找出不能说的话" class="headerlink" title="找出不能说的话"></a>找出不能说的话</h3><ul><li>与历史对比，看看哪些以前可以说现在不能说，或者反之。</li><li>想想有什么话是你不敢在大众面前说的。</li><li>看看那些卫道者到底在捍卫什么。</li><li>观察禁忌是如何产生的，来龙去脉是什么。</li><li>那些所谓的异端邪说，被冠上有伤风化之类的帽子的话。</li></ul><h3 id="为什么要找不能说的话？"><a href="#为什么要找不能说的话？" class="headerlink" title="为什么要找不能说的话？"></a>为什么要找不能说的话？</h3><ul><li>好奇心，纯粹的好奇。</li><li>没有什么东西是不应该思考就有答案的。</li></ul><h3 id="发现了不能说的话之后怎么办？"><a href="#发现了不能说的话之后怎么办？" class="headerlink" title="发现了不能说的话之后怎么办？"></a>发现了不能说的话之后怎么办？</h3><p>闭嘴，别说。</p><h2 id="创造财富的最好的方法就是创业"><a href="#创造财富的最好的方法就是创业" class="headerlink" title="创造财富的最好的方法就是创业"></a>创造财富的最好的方法就是创业</h2><ul><li>可测量性：你的职位必须是可测量的，不然做再多也没有更多报酬。</li><li>可放大性：你的决定必须能够产生巨大效应。</li></ul><h2 id="防止垃圾邮件的一种方法"><a href="#防止垃圾邮件的一种方法" class="headerlink" title="防止垃圾邮件的一种方法"></a>防止垃圾邮件的一种方法</h2><ul><li>对单词做<a href="https://www.jianshu.com/p/5e8d7984e629" target="_blank" rel="noopener">贝叶斯判断</a></li></ul><h2 id="研究和设计的区别"><a href="#研究和设计的区别" class="headerlink" title="研究和设计的区别"></a>研究和设计的区别</h2><p>研究必须是新的，而设计必须是“好”的。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>计算机杂锦</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>webpack-简易</title>
+    <link href="undefined2018/05/09/webpack%E6%95%99%E7%A8%8B/"/>
+    <url>2018/05/09/webpack%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><ul><li>安装 node.js npm</li><li>安装 webpack npm install webpack -g</li><li>进入项目目录 是否有<code>package.json</code>没有就通过<code>npm init</code>创建</li><li>在项目目录下命令行执行<code>npm install webpack --save-dev</code></li><li>创建<code>webpack.config.js</code>文件,下面是例子</li></ul><pre><code>const path = require(&#39;path&#39;)module.exports = {  entry: &#39;./js/main.js&#39;, // 代码输入文件  // 下面的文件夹和文件不需要自己创建  output: {    path: path.resolve(__dirname, &#39;./dist&#39;), // 代码输入文件夹    filename: &#39;build.js&#39;  }}</code></pre><ul><li><p>在 package.json 文件</p><ul><li>在 scripts 下加<code>&quot;start&quot;: &quot;webpack&quot;</code></li></ul></li><li><p>命令行 npm start</p></li><li><p>其他的文件写法</p></li></ul><p><code>app.js</code></p><pre><code>const Say = require(&#39;./to.js&#39;)……Say()</code></pre><p><code>to.js</code></p><pre><code>var Say = function () {    console.log(&#39;hello&#39;)}module.exports = Say</code></pre><ul><li>导入 jq 等插件的方式<code>npm install jquery --save-dev</code></li></ul><pre><code>var $ = require(&#39;jquery&#39;)</code></pre><ul><li>运行<br>命令行敲 <code>webpack --mode production</code><br>如果想实时刷新<code>webpack --mode production --watch</code></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>浅谈依赖注入</title>
+    <link href="undefined2018/05/09/%E6%B5%85%E8%B0%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
+    <url>2018/05/09/%E6%B5%85%E8%B0%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="依赖注入个人见解"><a href="#依赖注入个人见解" class="headerlink" title="依赖注入个人见解"></a>依赖注入个人见解</h1><p>当笔记用，勿喷。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><ul><li>我不想因为我的依赖变化导致每次我都要改造自己</li><li>我不想再控制我的依赖了</li><li>我不关心我在依赖谁，我只想使用依赖的功能而已</li></ul><h2 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h2><p>依赖注入跟控制反转是一起出现的，首先就要理解什么叫依赖注入，什么叫控制反转。</p><ul><li>依赖注入：将依赖用注入的方式送给你。</li><li>控制反转：本来依赖由你来控制，现在你不控制它了，随便丢给某人控制，这叫控制反转。</li></ul><p>举个例子：</p><ul><li>依赖注入：你家里有上千台手机，每天你都要用手机看直播，你只想看直播，并不关心什么手机，然后每天管家都会去挑选一个合适的手机塞给你，这个<code>管家塞给你</code>的过程就叫依赖注入。</li><li>控制反转：本来这个手机是由你来控制用什么手机的，现在你不关心它了，丢给管家处理，这个管理权的变化就叫控制反转。</li></ul><p>一个很精彩的例子<br><code>假设你自己是一个“口”字，你的需求是变成一个别的字，这时候如果传一个“人”，就变成了“囚”；如果传入“十”，就变成了“田”；如果传入“木”就变成了“困”</code></p><p>依赖抽象而不依赖具体</p><p>控制反转是一种思想，实现控制反转的技术手段就是依赖注入。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>计算机杂锦</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>一本漫画闯天涯</title>
+    <link href="undefined2017/06/25/%E4%B8%80%E6%9C%AC%E6%BC%AB%E7%94%BB%E9%97%AF%E5%A4%A9%E6%B6%AF/"/>
+    <url>2017/06/25/%E4%B8%80%E6%9C%AC%E6%BC%AB%E7%94%BB%E9%97%AF%E5%A4%A9%E6%B6%AF/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>星仔本是酒吧一个小服务员，一次偶然的机会见到了黑社会火拼，黑老大给了他一张名片为以后的剧情铺垫。</p></blockquote><p>黑老大抓了一个对头的人严刑拷打，希望可以供出幕后主谋，威逼利诱下供出了自己的老大洪义，黑老大放他走。他走的时候遇见杀手，被杀。</p><p>黑老大约洪义谈判，洪义迟到。骂了一顿黑老大，黑老大手下不开心想干掉他，洪义从车里抓出一个人-黑老大的儿子，大摇大摆并且嘲笑了黑老大然后给黑老大儿子手臂开了一枪。黑老大非常生气。</p><p>星仔莫名其妙被洪义的人打了一顿，回到酒吧也被辞退了，回头一想去找黑老大，黑老大安排了一个工作给他。</p><p>星仔去到酒吧看到一个妹子在唱歌，很开心。进房后自我介绍后被叫买宵夜，很不开心，然后被阿俊（黑老大义子）叫出去聊天，两人交谈了一下。见到那个妹子被三个流氓欺负，星仔去救，失败，啊俊出场。三人结识。</p><p>星仔和洪义一起聚桑拿（坐隔壁），洪义让星仔拼命浇水，整个桑拿房无比闷热，星仔放了几个屁，洪义让其继续加水。星仔拿着浇水的盆咋想洪义的手下的头，星仔队友开枪打死洪义。</p><p>再次回到酒吧，星仔表演唱歌被笑，啊俊上……</p><p>三人到处玩耍，得知妹子的妹子叫安妮，安妮给她们两个人都送了一支笔，笔上分别有他们的字。埋下伏笔</p><p>黑老大派星仔和阿俊还有阿标（黑老大手下）去泰国跟全叔谈判要加量，全叔直接被拜猜的人干掉，三人被抓，阿俊和阿标被打得半死不活，星仔挺身而出救了他们自己做了人质，星仔和拜猜聊天，都很开心，（但如果阿俊他们不回来交易就会被杀），交易结束。</p><p>星仔回到香港抱怨没人来接，回到家里泡澡疑似有人闯进来，被盖住头立马跪下求饶，被阿俊和阿标嘲笑，然后星仔去阿标家里吃饭。</p><p>黑老大召集大家开了一个会议是关于继承人的事情，大家推举阿标坐他的位置，黑老大不爽，派人杀阿标。</p><p>阿标办了一个酒会庆祝他有儿子，结束后星仔扶阿标走，被阿标询问儿子应该叫什么，星仔取了一个名字给他“周润龙”，阿标不知道“润”怎么写，星仔用笔在阿标手上写了润字，笔遗漏在阿标车顶，阿标拒绝了星仔送回家，被黑老大杀手杀死。</p><p>另一个杀手准备杀星仔，被星仔逃跑，大家都怀疑是星仔杀阿标的，黑老大通缉星仔。</p><p>星仔打电话给阿俊，阿俊被跟踪。星仔跟阿俊谈判的时候杀手开了一枪，没有打死，星仔做诱饵，阿俊跑上山把杀手干掉。</p><p>阿俊跟人打斗的时候死了，星仔难过，跟安妮交代之后退隐。</p><p>黑老大跟儿子说：“现在你的绊脚石都杀了”，还讲了刘邦的故事，然后黑老大就被枪打死了，儿子说：我最大的绊脚石就是你</p><blockquote><p>全剧终。</p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>essays</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>春娇救志明3</title>
+    <link href="undefined2017/06/22/%E6%98%A5%E5%A8%87%E6%95%91%E5%BF%97%E6%98%8E3/"/>
+    <url>2017/06/22/%E6%98%A5%E5%A8%87%E6%95%91%E5%BF%97%E6%98%8E3/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>春娇童年有一个关于“吃刚刚”的故事，这是她的心里阴影。</p></blockquote><p>志明喜欢买各种东西，常把男人必须有一个 xx 挂在嘴边。</p><p>志明去遛狗，一个误会让春娇首次怀疑志明，误会解除。</p><p>志明的干妈想跟他借种（纯借精），志明考虑很久拒绝，春娇开心，两人准备去台湾。</p><p>春娇的爸爸是很不责任喜欢逃避的人，跟志明混在一起，春娇害怕志明跟她爸一样。</p><p>志明见她爸，春娇问她爸女票：为什么是他，答：最危险时想起的人就是对的</p><p>春娇与志明去台湾，春娇故意没带套想要小孩，完事后疑似地震，志明抛弃春娇，春娇难过…跑路</p><p>春娇强行让自己体会危险，跑浴缸，拿朔料袋盖住头，无果。</p><p>两人经过极度挣扎，在春娇生日时，春娇唱歌，志明难过…</p><p>志明与春娇她爸和飞鹰演戏被拆穿，春娇说算了。</p><p>志明疯狂唱歌，表白：是你让我长大，是你拯救我，要不是你我还长不大变不了一个男人…以前我以为一个男人需要很多别的事证明，其实不用，只需要跟一个我喜欢的在乎的女人好好过日子就行。半跪求婚 ing</p><blockquote><p>带上戒指，完。</p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>essays</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Xamarin Forms-如何横置组件</title>
+    <link href="undefined2017/06/05/XamarinForms-%E5%A6%82%E4%BD%95%E6%A8%AA%E7%BD%AE%E7%BB%84%E4%BB%B6/"/>
+    <url>2017/06/05/XamarinForms-%E5%A6%82%E4%BD%95%E6%A8%AA%E7%BD%AE%E7%BB%84%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<p>原理其实很简单，就是通过 <code>ListView</code> 的 <code>Rotation</code> 属性旋转即可。 ##如果你想做图片轮播话建议用 <code>scroview</code>，如果 <code>page</code> 里面有一个竖向的 <code>listview</code> 也有一个横向的，会导致两者冲突，用 <code>scroview</code> 才对。代码换成 <code>scroview</code> 即可完美解决</p><h1 id="例子如下："><a href="#例子如下：" class="headerlink" title="例子如下："></a>例子如下：</h1><h2 id="MainPage-Xaml"><a href="#MainPage-Xaml" class="headerlink" title="MainPage.Xaml"></a>MainPage.Xaml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;             xmlns:local=&quot;clr-namespace:TapListView&quot;             x:Class=&quot;TapListView.MainPage&quot;&gt;    &lt;StackLayout Orientation=&quot;Horizontal&quot;&gt;        &lt;Button x:Name=&quot;Button1&quot; Text=&quot;左滑&quot; HorizontalOptions=&quot;FillAndExpand&quot; Opacity=&quot;0.5&quot;&gt;&lt;/Button&gt;        &lt;StackLayout HorizontalOptions=&quot;FillAndExpand&quot;&gt;            &lt;ListView x:Name=&quot;ListView&quot; Rotation=&quot;90&quot; HasUnevenRows=&quot;True&quot;&gt;                &lt;ListView.ItemTemplate&gt;                    &lt;DataTemplate&gt;                        &lt;ViewCell&gt;                            &lt;Image Source=&quot;{Binding .}&quot; Rotation=&quot;270&quot;                                   VerticalOptions=&quot;FillAndExpand&quot;                                   HorizontalOptions=&quot;FillAndExpand&quot;&gt;                            &lt;/Image&gt;                        &lt;/ViewCell&gt;                    &lt;/DataTemplate&gt;                &lt;/ListView.ItemTemplate&gt;            &lt;/ListView&gt;        &lt;/StackLayout&gt;        &lt;Button x:Name=&quot;Button2&quot; Text=&quot;右滑&quot; Opacity=&quot;0.5&quot;                HorizontalOptions=&quot;FillAndExpand&quot;&gt;&lt;/Button&gt;    &lt;/StackLayout&gt;&lt;/ContentPage&gt;</code></pre><h2 id="MainPage-cs（这代码跟横置-ListView-没有关系）"><a href="#MainPage-cs（这代码跟横置-ListView-没有关系）" class="headerlink" title="MainPage.cs（这代码跟横置 ListView 没有关系）"></a>MainPage.cs（这代码跟横置 ListView 没有关系）</h2><pre><code>using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using Xamarin.Forms;namespace TapListView{    public partial class MainPage : ContentPage    {        public List&lt;ImageSource&gt; ImageSources { get; set; } = new List&lt;ImageSource&gt;();        public MainPage()        {            InitializeComponent();            SetSource();            ListView.ItemsSource = ImageSources;        }        private void SetSource()        {            ImageSources.Add(ImageSource.FromUri(new Uri(&quot;http://img.youguoquan.com/uploads/magazine/content/4317b8660f13b0826380d5ef0c4bc963_magazine_web_m.jpg&quot;)));            ImageSources.Add(ImageSource.FromUri(new Uri(&quot;http://img.youguoquan.com/uploads/magazine/content/7621a57ace831fa0c8616fff6497edf3_magazine_web_m.jpg&quot;)));            ImageSources.Add(ImageSource.FromUri(new Uri(&quot;http://img.youguoquan.com/uploads/magazine/content/f5ff39f3f5304a45e8b8b4952fdca368_magazine_web_m.jpg&quot;)));            ImageSources.Add(ImageSource.FromUri(new Uri(&quot;http://img.youguoquan.com/uploads/magazine/content/1595ab2bad62fe267b55c1f450445136_magazine_web_m.jpg&quot;)));        }    }}</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>跨平台App</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
