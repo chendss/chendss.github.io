@@ -14,7 +14,7 @@
   <meta name="description" content>
   <meta name="author" content="CardHouse">
   <meta name="keywords" content>
-  <title>归档 ~ 少爷的博客</title>
+  <title>2048小游戏javascript实现 ~ 少爷的博客</title>
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
@@ -30,7 +30,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
    <meta name="referrer" content="never">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -102,6 +102,9 @@
             </span>
 
             
+              <br>
+              <p>星期二, 一月 2日 2018, 7:13 晚上</p>
+            
           </div>
 
           
@@ -112,53 +115,65 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 13 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2018</p>
-    
-    <a href="/2018/05/30/web前端架构/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">web前端架构-vue-初次学习</span>
-      <span style="float: right;">05-30</span>
-    </a>
-  
-    
-    <a href="/2018/05/13/读黑客与画家有感/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">读黑客与画家有感</span>
-      <span style="float: right;">05-13</span>
-    </a>
-  
-    
-    <a href="/2018/05/09/webpack教程/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">webpack-简易</span>
-      <span style="float: right;">05-09</span>
-    </a>
-  
-    
-    <a href="/2018/05/09/浅谈依赖注入/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">浅谈依赖注入</span>
-      <span style="float: right;">05-09</span>
-    </a>
-  
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="原生-js-实现-2048-小游戏"><a href="#原生-js-实现-2048-小游戏" class="headerlink" title="原生 js 实现 2048 小游戏"></a>原生 js 实现 2048 小游戏</h1><p><a href="https://github.com/chendss/2048" target="_blank" rel="noopener">GitHub 地址</a> ，希望大家多多捧场觉得还可以就给个 star 吧～</p>
+<h2 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h2><ul>
+<li>利用了 css3 实现动画效果</li>
+<li>使用了语义化的 html 使得代码更可读，利用了部分 html5 特性。</li>
+<li>纯原生的 javascript 代码操控 DOM 控制元素组件</li>
+<li>大量使用 es6 语法使得代码更简洁</li>
+</ul>
+<h2 id="试玩地址"><a href="#试玩地址" class="headerlink" title="试玩地址"></a>试玩地址</h2><p><a href="https://2048.dashao.me" target="_blank" rel="noopener">2048</a></p>
+<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p><img src="http://upload-images.jianshu.io/upload_images/5692364-f61ba16480e4202b.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="gif.gif"><br><img src="http://upload-images.jianshu.io/upload_images/5692364-dd1072566a35798c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="start.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-e2a41c6b1edea24b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="end.png"></p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0App">跨平台App</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
 </div>
 
+<!-- custom -->
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
     
   </main>
 
@@ -209,7 +224,8 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>    <script src="/lib/prettify/prettify.min.js" ></script>
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
 <script>
   $(document).ready(function() {
     $('pre').addClass('prettyprint linenums');
@@ -221,7 +237,7 @@
   var typed = new Typed('#subtitle', {
     strings: [
       '  ',
-      "归档&nbsp;",
+      "2048小游戏javascript实现&nbsp;",
     ],
     cursorChar: "_",
     typeSpeed: 70,

@@ -137,6 +137,25 @@
   
   
   <entry>
+    <title>2048小游戏javascript实现</title>
+    <link href="undefined2018/01/02/2048%E5%B0%8F%E6%B8%B8%E6%88%8Fjavascript%E5%AE%9E%E7%8E%B0/"/>
+    <url>2018/01/02/2048%E5%B0%8F%E6%B8%B8%E6%88%8Fjavascript%E5%AE%9E%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="原生-js-实现-2048-小游戏"><a href="#原生-js-实现-2048-小游戏" class="headerlink" title="原生 js 实现 2048 小游戏"></a>原生 js 实现 2048 小游戏</h1><p><a href="https://github.com/chendss/2048" target="_blank" rel="noopener">GitHub 地址</a> ，希望大家多多捧场觉得还可以就给个 star 吧～</p><h2 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h2><ul><li>利用了 css3 实现动画效果</li><li>使用了语义化的 html 使得代码更可读，利用了部分 html5 特性。</li><li>纯原生的 javascript 代码操控 DOM 控制元素组件</li><li>大量使用 es6 语法使得代码更简洁</li></ul><h2 id="试玩地址"><a href="#试玩地址" class="headerlink" title="试玩地址"></a>试玩地址</h2><p><a href="https://2048.dashao.me" target="_blank" rel="noopener">2048</a></p><h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p><img src="http://upload-images.jianshu.io/upload_images/5692364-f61ba16480e4202b.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="gif.gif"><br><img src="http://upload-images.jianshu.io/upload_images/5692364-dd1072566a35798c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="start.png"></p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-e2a41c6b1edea24b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="end.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>跨平台App</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>一本漫画闯天涯</title>
     <link href="undefined2017/06/25/%E4%B8%80%E6%9C%AC%E6%BC%AB%E7%94%BB%E9%97%AF%E5%A4%A9%E6%B6%AF/"/>
     <url>2017/06/25/%E4%B8%80%E6%9C%AC%E6%BC%AB%E7%94%BB%E9%97%AF%E5%A4%A9%E6%B6%AF/</url>
