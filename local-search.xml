@@ -175,6 +175,25 @@
   
   
   <entry>
+    <title>Xamarin Forms 建立可以绑定属性的方法</title>
+    <link href="undefined2017/06/19/XamarinForms%E5%BB%BA%E7%AB%8B%E5%8F%AF%E4%BB%A5%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <url>2017/06/19/XamarinForms%E5%BB%BA%E7%AB%8B%E5%8F%AF%E4%BB%A5%E7%BB%91%E5%AE%9A%E5%B1%9E%E6%80%A7%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<p>本文讲述如何实现控件的属性如何可以被 Binding</p><h1 id="官方例子"><a href="#官方例子" class="headerlink" title="官方例子"></a>官方例子</h1><pre><code>[RenderWith(typeof(_ActivityIndicatorRenderer))]    public class ActivityIndicator : View, IElementConfiguration&lt;ActivityIndicator&gt;    {        //这就是值类型绑定的实现        public static readonly BindableProperty IsRunningProperty = BindableProperty.Create        (&quot;IsRunning&quot;, typeof(bool), typeof(ActivityIndicator), default(bool));        public static readonly BindableProperty ColorProperty = BindableProperty.Create        (&quot;Color&quot;, typeof(Color), typeof(ActivityIndicator), Color.Default);        readonly Lazy&lt;PlatformConfigurationRegistry&lt;ActivityIndicator&gt;&gt; _platformConfigurationRegistry;        public ActivityIndicator()        {            _platformConfigurationRegistry = new Lazy&lt;PlatformConfigurationRegistry&lt;ActivityIndicator&gt;&gt;(() =&gt; new PlatformConfigurationRegistry&lt;ActivityIndicator&gt;(this));        }        public Color Color        {            get { return (Color)GetValue(ColorProperty); }            set { SetValue(ColorProperty, value); }        }        //与之对对应的属性        public bool IsRunning        {            get { return (bool)GetValue(IsRunningProperty); }            set { SetValue(IsRunningProperty, value); }        }        public IPlatformElementConfiguration&lt;T, ActivityIndicator&gt; On&lt;T&gt;() where T : IConfigPlatform        {            return _platformConfigurationRegistry.Value.On&lt;T&gt;();        }    }</code></pre><blockquote><p>Ps：这个官方例子是有问题的。</p></blockquote><h2 id="下面讲一下如何绑定事件，其实-Xamarin-Forms-绑定事件用的是-Command，方法也不难。"><a href="#下面讲一下如何绑定事件，其实-Xamarin-Forms-绑定事件用的是-Command，方法也不难。" class="headerlink" title="下面讲一下如何绑定事件，其实 Xamarin Forms 绑定事件用的是 Command，方法也不难。"></a>下面讲一下如何绑定事件，其实 Xamarin Forms 绑定事件用的是 Command，方法也不难。</h2><pre><code>public class MyEntry:Entry{    public ICommand MyCommand    {        get =&gt; (ICommand )GetValue(MyCommandProperty);        set =&gt; SetValue(MyCommandProperty, value);    }    /// &lt;summary&gt;    /// MyCommandProperty的Mvvm实现    /// &lt;/summary&gt;    public static readonly BindableProperty MyCommandProperty = Create    (        nameof(回调方法),        typeof(ICommand),        typeof(MyEntry)    ); //注意这里变量名的命名规则是MyCommand + Property，前者随便，后者固定语法    private void 回调方法()    {        MyCommand?.Execute(null);    }}//这样这个MyEntry的MyCommand就可以被Mvvm绑定了。</code></pre><h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><pre><code>&lt;MyEntry MyCommand={ Binding ThisCommand &gt;&lt;/MyEntry&gt;</code></pre><h3 id="ViewModel"><a href="#ViewModel" class="headerlink" title="ViewModel"></a>ViewModel</h3><pre><code>public class Model:某个mvvm框架的BasePage{    public Command ThisCommand    {        get        {            retrun new Command(()=&gt;            {                //做点什么            });        }    }}</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>跨平台App</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Rg.Popup-Xamarin Forms使用教程</title>
     <link href="undefined2017/06/06/Rg.Popup-XamarinForms%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
     <url>2017/06/06/Rg.Popup-XamarinForms%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
