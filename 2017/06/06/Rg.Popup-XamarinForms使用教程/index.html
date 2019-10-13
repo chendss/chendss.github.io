@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>Rg.Popup-Xamarin Forms使用教程 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期二, 六月 6日 2017, 11:53 晚上</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<p>这是一个增强 popup 的插件，这里只讲用法，不讲原理。<br>第一步：装 Nuget 包，在 Pcl 项目中搜索”Rg.Plugins.Popup”作者是：Kirill Lyubimov，其他项目不需要装。(<a href="http://www.jianshu.com/p/a71d10660b3a" target="_blank" rel="noopener">装 Nuget 教程</a>）<br>第二步：创建 popup 页面（就是弹出显示的那个页面）<br>第三步：使用 PopupNavigation 类的几个导航方法。</p>
+<p>好，知道了基本步骤之后就开始教程。<br>第一步应该都知道怎么操作，不多讲了。</p>
+<p>重点讲第二步：<br>第二步内容比较多，我们一个一个来操作。 ##（1） 新建一个项目叫 Demo（跨平台项目） ##（2） 创建一个 Popup 的 Page<br>新建项：——类型选：Forms Blank Content Page Xaml ，取名为 DemoPopupPage 吧。 ##（3）在 DemoPopupPage.Xaml 页面里面必须这样写</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;pages:PopupPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             xmlns:pages=&quot;clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup&quot;
+             xmlns:animations=&quot;clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup&quot;
+             x:Class=&quot;Demo.DemoPopupPage&quot;&gt;
+
+ &lt;!--代码块1--&gt;
+
+&lt;/pages:PopupPage&gt;</code></pre><p>下面是“代码块 1”：</p>
+<pre><code>  &lt;pages:PopupPage.Animation&gt;
+    &lt;animations:ScaleAnimation
+      PositionIn=&quot;Top&quot;
+      PositionOut=&quot;Center&quot;
+      ScaleIn=&quot;1&quot;
+      ScaleOut=&quot;0.7&quot;
+      DurationIn=&quot;700&quot;
+      EasingIn=&quot;BounceOut&quot;/&gt;
+  &lt;/pages:PopupPage.Animation&gt;
+&lt;!--布局--&gt;</code></pre><h2 id="对上面的代码稍作解释："><a href="#对上面的代码稍作解释：" class="headerlink" title="对上面的代码稍作解释："></a>对上面的代码稍作解释：</h2><p>animations:ScaleAnimation 表示使用缩放动画<br>对于 PositionIn/PositionOut 属性</p>
+<pre><code>表示Popup从页面的哪个方位进入/弹出。它有：
+Center,Left,Right,Top,Bottom四个可以选，它的类型是MoveAnimationOptions，它是一个枚举。</code></pre><p>关于 PositionIn/PositionOut</p>
+<pre><code>表示Popup出现/消失动画的持续时间
+</code></pre><p>关于 ScaleIn/ScaleOut</p>
+<pre><code>表示出现/消失动画执行完毕后渲染Popup的时间</code></pre><p>关于 EasingIn</p>
+<pre><code>表示动画的特性。一共有
+* Linear;   线性变换。
+* SinOut;   平滑减速，就是慢慢变慢
+* SinIn;    平稳加速，缓缓变快
+* SinInOut; 加速进出，Popup出现和消失都会加速
+* CubicIn;  慢慢开始加速，加速度不定的加速。
+* CubicOut; 开始快速减速。，加速度不定的减速。
+* CubicInOut加速减速。 一般选择。
+* BounceOut;弹跳3次，静止在目的地
+* BounceIn; 弹跳2次，然后静止在目的地
+* SpringIn;不知道怎么解释，自己测试吧
+* SpringOut;跟BounceIn有些类似，但是更有柔软性
+</code></pre><p>Ps：这些属性在不同的动画类型展示出来的效果是不一样的。这些属性更像形容词，套到这里的缩放动画就是：线性变化的缩放动画</p>
+<p>Ok，其他动画也大同小异。然后到<!--布局-->这里<br>这里没有什么太大的问题。<br>要注意 2 个点，第一层布局必须是 StackLayout,Grid 这类布局，然后第二层布局一定是 Frame（为了不把背景全部盖住），再下一级的布局跟正常的布局是一样的没有区别。<br>示例代码：</p>
+<pre><code>    &lt;StackLayout VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;
+        &lt;Frame BackgroundColor=&quot;Silver&quot;&gt;
+            &lt;StackLayout Spacing=&quot;20&quot;&gt;
+                &lt;ListView x:Name=&quot;ListView&quot;&gt;
+                    &lt;ListView.ItemTemplate&gt;
+                        &lt;DataTemplate&gt;
+                            &lt;ViewCell&gt;
+                                &lt;StackLayout Orientation=&quot;Horizontal&quot;&gt;
+                                    &lt;Label Text=&quot;{Binding Briefing}&quot;&gt;&lt;/Label&gt;
+                                    &lt;Label Text=&quot;{Binding Color}&quot;&gt;&lt;/Label&gt;
+                                    &lt;Label Text=&quot;{Binding Composition}&quot;&gt;&lt;/Label&gt;
+                                &lt;/StackLayout&gt;
+                            &lt;/ViewCell&gt;
+                        &lt;/DataTemplate&gt;
+                    &lt;/ListView.ItemTemplate&gt;
+                &lt;/ListView&gt;
+                &lt;Label Text=&quot;??&quot;&gt;&lt;/Label&gt;
+            &lt;/StackLayout&gt;
+        &lt;/Frame&gt;
+    &lt;/StackLayout&gt;</code></pre><p>Ps:StackLayout 的 VerticalOptions=”Center” HorizontalOptions=”Center”表示这个 Popup 会在屏幕中间，修改可以出现在其他的地方。</p>
+<p>自定义动画：</p>
+<blockquote>
+<p>有空再更</p>
+</blockquote>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0App">跨平台App</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "Rg.Popup-Xamarin Forms使用教程&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>

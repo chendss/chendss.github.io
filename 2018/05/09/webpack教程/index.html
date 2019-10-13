@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>webpack-简易 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/He2f5147f809c4a2db82f44260083bec8u.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期三, 五月 9日 2018, 9:24 上午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><ul>
+<li>安装 node.js npm</li>
+<li>安装 webpack npm install webpack -g</li>
+<li>进入项目目录 是否有<code>package.json</code>没有就通过<code>npm init</code>创建</li>
+<li>在项目目录下命令行执行<code>npm install webpack --save-dev</code></li>
+<li>创建<code>webpack.config.js</code>文件,下面是例子</li>
+</ul>
+<pre><code>const path = require(&#39;path&#39;)
+
+module.exports = {
+  entry: &#39;./js/main.js&#39;, // 代码输入文件
+  // 下面的文件夹和文件不需要自己创建
+  output: {
+    path: path.resolve(__dirname, &#39;./dist&#39;), // 代码输入文件夹
+    filename: &#39;build.js&#39;
+  }
+}
+</code></pre><ul>
+<li><p>在 package.json 文件</p>
+<ul>
+<li>在 scripts 下加<code>&quot;start&quot;: &quot;webpack&quot;</code></li>
+</ul>
+</li>
+<li><p>命令行 npm start</p>
+</li>
+<li><p>其他的文件写法</p>
+</li>
+</ul>
+<p><code>app.js</code></p>
+<pre><code>const Say = require(&#39;./to.js&#39;)
+……
+Say()</code></pre><p><code>to.js</code></p>
+<pre><code>var Say = function () {
+    console.log(&#39;hello&#39;)
+}
+module.exports = Say</code></pre><ul>
+<li>导入 jq 等插件的方式<code>npm install jquery --save-dev</code></li>
+</ul>
+<pre><code>var $ = require(&#39;jquery&#39;)</code></pre><ul>
+<li>运行<br>命令行敲 <code>webpack --mode production</code><br>如果想实时刷新<code>webpack --mode production --watch</code></li>
+</ul>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "webpack-简易&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>
