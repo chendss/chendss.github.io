@@ -509,6 +509,7 @@ main .right {
   width: auto !important;
   flex: auto;
   max-width: 100% !important;
+  white-space: nowrap;
 }
 main .right #toc {
   position: relative !important;
