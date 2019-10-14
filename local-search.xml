@@ -147,7 +147,7 @@
     
     <tags>
       
-      <tag>跨平台App</tag>
+      <tag>个人项目</tag>
       
     </tags>
     
@@ -166,7 +166,26 @@
     
     <tags>
       
-      <tag>essays</tag>
+      <tag>杂文</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>奇葩说-第四季金句</title>
+    <link href="undefined2017/06/25/%E5%A5%87%E8%91%A9%E8%AF%B4-01/"/>
+    <url>2017/06/25/%E5%A5%87%E8%91%A9%E8%AF%B4-01/</url>
+    
+    <content type="html"><![CDATA[<p>你都敢尿床了，还怕被人说吗？– 欧阳超</p><p>抬头看着太阳说，你该下山了。</p><p>世上是没有事有意义的，意义都是人赋予的，而坚持本身就是无比闪亮的意义 – 陈铭</p><p>你不觉得，现实本身是由梦想来支撑的吗？– 张泉灵</p><p>好朋友就像另一个自己，我们要听好朋友的声音是听一个我们无法跟自己内心 直接对话可是我们想要听到另外一个自己的声音，你作为一个好朋友，不提供这个声音让那个人听见，却误以为他只要照他自己的意思走下去就够了，那他在世界上孤身一人家好了，要好朋友干什么？所以好朋友像人生的一个滤勺，它把我们的杂质都滤掉了，让我们更纯净。 – 蔡康永</p><p>什么叫梦想，一种叫我实现了梦想，一种是梦想因我而实现。– 宋佳</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>杂文</tag>
       
     </tags>
     
@@ -185,7 +204,7 @@
     
     <tags>
       
-      <tag>essays</tag>
+      <tag>杂文</tag>
       
     </tags>
     
@@ -204,7 +223,7 @@
     
     <tags>
       
-      <tag>跨平台App</tag>
+      <tag>XamarinForms</tag>
       
     </tags>
     
@@ -217,13 +236,13 @@
     <link href="undefined2017/06/06/Rg.Popup-XamarinForms%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
     <url>2017/06/06/Rg.Popup-XamarinForms%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
     
-    <content type="html"><![CDATA[<p>这是一个增强 popup 的插件，这里只讲用法，不讲原理。<br>第一步：装 Nuget 包，在 Pcl 项目中搜索”Rg.Plugins.Popup”作者是：Kirill Lyubimov，其他项目不需要装。(<a href="http://www.jianshu.com/p/a71d10660b3a" target="_blank" rel="noopener">装 Nuget 教程</a>）<br>第二步：创建 popup 页面（就是弹出显示的那个页面）<br>第三步：使用 PopupNavigation 类的几个导航方法。</p><p>好，知道了基本步骤之后就开始教程。<br>第一步应该都知道怎么操作，不多讲了。</p><p>重点讲第二步：<br>第二步内容比较多，我们一个一个来操作。 ##（1） 新建一个项目叫 Demo（跨平台项目） ##（2） 创建一个 Popup 的 Page<br>新建项：——类型选：Forms Blank Content Page Xaml ，取名为 DemoPopupPage 吧。 ##（3）在 DemoPopupPage.Xaml 页面里面必须这样写</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;&lt;pages:PopupPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;             xmlns:pages=&quot;clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup&quot;             xmlns:animations=&quot;clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup&quot;             x:Class=&quot;Demo.DemoPopupPage&quot;&gt; &lt;!--代码块1--&gt;&lt;/pages:PopupPage&gt;</code></pre><p>下面是“代码块 1”：</p><pre><code>  &lt;pages:PopupPage.Animation&gt;    &lt;animations:ScaleAnimation      PositionIn=&quot;Top&quot;      PositionOut=&quot;Center&quot;      ScaleIn=&quot;1&quot;      ScaleOut=&quot;0.7&quot;      DurationIn=&quot;700&quot;      EasingIn=&quot;BounceOut&quot;/&gt;  &lt;/pages:PopupPage.Animation&gt;&lt;!--布局--&gt;</code></pre><h2 id="对上面的代码稍作解释："><a href="#对上面的代码稍作解释：" class="headerlink" title="对上面的代码稍作解释："></a>对上面的代码稍作解释：</h2><p>animations:ScaleAnimation 表示使用缩放动画<br>对于 PositionIn/PositionOut 属性</p><pre><code>表示Popup从页面的哪个方位进入/弹出。它有：Center,Left,Right,Top,Bottom四个可以选，它的类型是MoveAnimationOptions，它是一个枚举。</code></pre><p>关于 PositionIn/PositionOut</p><pre><code>表示Popup出现/消失动画的持续时间</code></pre><p>关于 ScaleIn/ScaleOut</p><pre><code>表示出现/消失动画执行完毕后渲染Popup的时间</code></pre><p>关于 EasingIn</p><pre><code>表示动画的特性。一共有* Linear;   线性变换。* SinOut;   平滑减速，就是慢慢变慢* SinIn;    平稳加速，缓缓变快* SinInOut; 加速进出，Popup出现和消失都会加速* CubicIn;  慢慢开始加速，加速度不定的加速。* CubicOut; 开始快速减速。，加速度不定的减速。* CubicInOut加速减速。 一般选择。* BounceOut;弹跳3次，静止在目的地* BounceIn; 弹跳2次，然后静止在目的地* SpringIn;不知道怎么解释，自己测试吧* SpringOut;跟BounceIn有些类似，但是更有柔软性</code></pre><p>Ps：这些属性在不同的动画类型展示出来的效果是不一样的。这些属性更像形容词，套到这里的缩放动画就是：线性变化的缩放动画</p><p>Ok，其他动画也大同小异。然后到<!--布局-->这里<br>这里没有什么太大的问题。<br>要注意 2 个点，第一层布局必须是 StackLayout,Grid 这类布局，然后第二层布局一定是 Frame（为了不把背景全部盖住），再下一级的布局跟正常的布局是一样的没有区别。<br>示例代码：</p><pre><code>    &lt;StackLayout VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;        &lt;Frame BackgroundColor=&quot;Silver&quot;&gt;            &lt;StackLayout Spacing=&quot;20&quot;&gt;                &lt;ListView x:Name=&quot;ListView&quot;&gt;                    &lt;ListView.ItemTemplate&gt;                        &lt;DataTemplate&gt;                            &lt;ViewCell&gt;                                &lt;StackLayout Orientation=&quot;Horizontal&quot;&gt;                                    &lt;Label Text=&quot;{Binding Briefing}&quot;&gt;&lt;/Label&gt;                                    &lt;Label Text=&quot;{Binding Color}&quot;&gt;&lt;/Label&gt;                                    &lt;Label Text=&quot;{Binding Composition}&quot;&gt;&lt;/Label&gt;                                &lt;/StackLayout&gt;                            &lt;/ViewCell&gt;                        &lt;/DataTemplate&gt;                    &lt;/ListView.ItemTemplate&gt;                &lt;/ListView&gt;                &lt;Label Text=&quot;??&quot;&gt;&lt;/Label&gt;            &lt;/StackLayout&gt;        &lt;/Frame&gt;    &lt;/StackLayout&gt;</code></pre><p>Ps:StackLayout 的 VerticalOptions=”Center” HorizontalOptions=”Center”表示这个 Popup 会在屏幕中间，修改可以出现在其他的地方。</p><p>自定义动画：</p><blockquote><p>有空再更</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>这是一个增强 popup 的插件，这里只讲用法，不讲原理。<br>第一步：装 Nuget 包，在 Pcl 项目中搜索”Rg.Plugins.Popup”作者是：Kirill Lyubimov，其他项目不需要装。(<a href="http://www.jianshu.com/p/a71d10660b3a" target="_blank" rel="noopener">装 Nuget 教程</a>）<br>第二步：创建 popup 页面（就是弹出显示的那个页面）<br>第三步：使用 PopupNavigation 类的几个导航方法。</p><p>好，知道了基本步骤之后就开始教程。<br>第一步应该都知道怎么操作，不多讲了。</p><p>重点讲第二步：<br>第二步内容比较多，我们一个一个来操作。 </p><ul><li>新建一个项目叫 Demo（跨平台项目） </li><li>创建一个 Popup 的 Page 新建项：——类型选：Forms Blank Content Page Xaml ，取名为 DemoPopupPage 吧。 </li><li>在 DemoPopupPage.Xaml 页面里面必须这样写</li></ul><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;&lt;pages:PopupPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;             xmlns:pages=&quot;clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup&quot;             xmlns:animations=&quot;clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup&quot;             x:Class=&quot;Demo.DemoPopupPage&quot;&gt; &lt;!--代码块1--&gt;&lt;/pages:PopupPage&gt;</code></pre><p>下面是“代码块 1”：</p><pre><code>  &lt;pages:PopupPage.Animation&gt;    &lt;animations:ScaleAnimation      PositionIn=&quot;Top&quot;      PositionOut=&quot;Center&quot;      ScaleIn=&quot;1&quot;      ScaleOut=&quot;0.7&quot;      DurationIn=&quot;700&quot;      EasingIn=&quot;BounceOut&quot;/&gt;  &lt;/pages:PopupPage.Animation&gt;&lt;!--布局--&gt;</code></pre><h2 id="对上面的代码稍作解释："><a href="#对上面的代码稍作解释：" class="headerlink" title="对上面的代码稍作解释："></a>对上面的代码稍作解释：</h2><p>animations:ScaleAnimation 表示使用缩放动画<br>对于 PositionIn/PositionOut 属性</p><pre><code>表示Popup从页面的哪个方位进入/弹出。它有：Center,Left,Right,Top,Bottom四个可以选，它的类型是MoveAnimationOptions，它是一个枚举。</code></pre><p>关于 PositionIn/PositionOut</p><pre><code>表示Popup出现/消失动画的持续时间</code></pre><p>关于 ScaleIn/ScaleOut</p><pre><code>表示出现/消失动画执行完毕后渲染Popup的时间</code></pre><p>关于 EasingIn</p><pre><code>表示动画的特性。一共有* Linear;   线性变换。* SinOut;   平滑减速，就是慢慢变慢* SinIn;    平稳加速，缓缓变快* SinInOut; 加速进出，Popup出现和消失都会加速* CubicIn;  慢慢开始加速，加速度不定的加速。* CubicOut; 开始快速减速。，加速度不定的减速。* CubicInOut加速减速。 一般选择。* BounceOut;弹跳3次，静止在目的地* BounceIn; 弹跳2次，然后静止在目的地* SpringIn;不知道怎么解释，自己测试吧* SpringOut;跟BounceIn有些类似，但是更有柔软性</code></pre><p>Ps：这些属性在不同的动画类型展示出来的效果是不一样的。这些属性更像形容词，套到这里的缩放动画就是：线性变化的缩放动画</p><p>Ok，其他动画也大同小异。然后到<!--布局-->这里<br>这里没有什么太大的问题。<br>要注意 2 个点，第一层布局必须是 StackLayout,Grid 这类布局，然后第二层布局一定是 Frame（为了不把背景全部盖住），再下一级的布局跟正常的布局是一样的没有区别。<br>示例代码：</p><pre><code>    &lt;StackLayout VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;        &lt;Frame BackgroundColor=&quot;Silver&quot;&gt;            &lt;StackLayout Spacing=&quot;20&quot;&gt;                &lt;ListView x:Name=&quot;ListView&quot;&gt;                    &lt;ListView.ItemTemplate&gt;                        &lt;DataTemplate&gt;                            &lt;ViewCell&gt;                                &lt;StackLayout Orientation=&quot;Horizontal&quot;&gt;                                    &lt;Label Text=&quot;{Binding Briefing}&quot;&gt;&lt;/Label&gt;                                    &lt;Label Text=&quot;{Binding Color}&quot;&gt;&lt;/Label&gt;                                    &lt;Label Text=&quot;{Binding Composition}&quot;&gt;&lt;/Label&gt;                                &lt;/StackLayout&gt;                            &lt;/ViewCell&gt;                        &lt;/DataTemplate&gt;                    &lt;/ListView.ItemTemplate&gt;                &lt;/ListView&gt;                &lt;Label Text=&quot;??&quot;&gt;&lt;/Label&gt;            &lt;/StackLayout&gt;        &lt;/Frame&gt;    &lt;/StackLayout&gt;</code></pre><p>Ps:StackLayout 的 VerticalOptions=”Center” HorizontalOptions=”Center”表示这个 Popup 会在屏幕中间，修改可以出现在其他的地方。</p><p>自定义动画：</p><blockquote><p>有空再更</p></blockquote>]]></content>
     
     
     
     <tags>
       
-      <tag>跨平台App</tag>
+      <tag>XamarinForms</tag>
       
     </tags>
     
@@ -242,7 +261,7 @@
     
     <tags>
       
-      <tag>跨平台App</tag>
+      <tag>XamarinForms</tag>
       
     </tags>
     
