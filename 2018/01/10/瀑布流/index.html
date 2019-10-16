@@ -14,7 +14,7 @@
   <meta name="description" content>
   <meta name="author" content="CardHouse">
   <meta name="keywords" content>
-  <title>归档 ~ 少爷的博客</title>
+  <title>js实现懒加载和瀑布流 ~ 少爷的博客</title>
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
@@ -30,7 +30,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
    <meta name="referrer" content="never">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -102,6 +102,9 @@
             </span>
 
             
+              <br>
+              <p>星期三, 一月 10日 2018, 6:25 晚上</p>
+            
           </div>
 
           
@@ -112,47 +115,63 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 19 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/07/01/screen使用教程-无比简单/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">screen使用教程-无比简单</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2019/07/01/nginx的邻居caddy/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nginx的邻居caddy</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2019/05/17/ORM是什么？/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ORM是什么？</span>
-      <span style="float: right;">05-17</span>
-    </a>
-  
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="懒加载与瀑布流结合"><a href="#懒加载与瀑布流结合" class="headerlink" title="懒加载与瀑布流结合"></a>懒加载与瀑布流结合</h1><p><a href="https://lazy.dashao.me" target="_blank" rel="noopener">演示地址</a></p>
+<h2 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h2><ul>
+<li>使用了语义化的 html 使得代码更可读，利用了部分 html5 特性。</li>
+<li>大量使用 es6 语法使得代码更简洁</li>
+<li>支持响应式和媒体查询</li>
+</ul>
+<h2 id="GitHub-地址-大家多多支持～"><a href="#GitHub-地址-大家多多支持～" class="headerlink" title="GitHub 地址 大家多多支持～"></a><a href="https://github.com/chendss/WaterfallLazyLoading" target="_blank" rel="noopener">GitHub 地址</a> 大家多多支持～</h2><p><img src="http://upload-images.jianshu.io/upload_images/5692364-63bd3df17e2da54c.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="loading.gif"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-08c776512cd93d40.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="lazy.gif"></p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
 </div>
 
+<!-- custom -->
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
     
   </main>
 
@@ -203,7 +222,8 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>    <script src="/lib/prettify/prettify.min.js" ></script>
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
 <script>
   $(document).ready(function() {
     $('pre').addClass('prettyprint linenums');
@@ -215,7 +235,7 @@
   var typed = new Typed('#subtitle', {
     strings: [
       '  ',
-      "归档&nbsp;",
+      "js实现懒加载和瀑布流&nbsp;",
     ],
     cursorChar: "_",
     typeSpeed: 70,

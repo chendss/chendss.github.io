@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>翻译Rolling your own Mvvm for Xamarin.Forms ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期五, 六月 9日 2017, 1:29 下午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<p>#原文地址：<a href="http://www.michaelridland.com/xamarin/rolling-mvvm-xamarin-forms/" target="_blank" rel="noopener">http://www.michaelridland.com/xamarin/rolling-mvvm-xamarin-forms/</a></p>
+<p>#实现自己的 Mvvm for Xamarin.Forms<br>更新：我已经采取了这个位置的最好的部分，并放入一个框架，这是一个超简单的 Mvvm 框架的 Xamarin.Forms，它放在了 github 和 nuget。<br>在这个博客中，我给出了一个如何在 Xamarin.Forms 中实现自己的 Mvvm 的例子。 这个 Mvvm 是基于约定的，在这种情况下，我使用了 Page / PageModel 命名，而不是 Model / ViewModel 命名，但是如果你喜欢，你可以将其改为 View / ViewModel。 这个博客写的内容基于 github 上可用的示例应用程序。</p>
+<p>##本例中的约定。</p>
+<ul>
+<li>页面必须有一个相应的 PageModel，命名重要，所以 QuotePageModel 必须有一个 QuotePage</li>
+<li>一个页面可以有一个没有参数的 Init 方法</li>
+<li>页面可以有一个 PageModel 属性，它是视图模型</li>
+<li>页面上的 BindingContext 将自动设置为 Model</li>
+<li>一个模型可以有一个接收一个对象的 Init 方法</li>
+<li>一个模型可以具有一个 ReverseInit 方法，它也可以使用一个对象，当一个模型被放在一个对象上时被调用</li>
+</ul>
+<p>###让我们看一个页面</p>
+<pre><code>public class QuotePage : ContentPage
+{
+    //按下时自动弹出
+    public QuotePageModel PageModel { get; set; }
+
+    public QuotePage ()
+    {
+    }
+
+    //出现时自动执行
+    public void Init()
+    {
+        Title = &quot;Quote&quot;;
+    }
+}</code></pre><p>###和相应的 PageModel</p>
+<pre><code>public class QuotePageModel : BasePageModel
+{
+    IDatabaseService _databaseService;
+    public Quote Quote { get; set; }
+
+    //数据库服务自动注入。
+    public QuotePageModel (IDatabaseService databaseService)
+    {
+        _databaseService = databaseService;
+    }
+
+    //当Model出现的时候执行
+    public void Init(object data)
+    {
+        Quote = data as Quote;
+        if (Quote == null)
+            Quote = new Quote ();
+    }
+
+    public Command Done
+    {
+        get {
+            return new Command (() =&gt; {
+                //This pops the current Page
+                PopPageModel();
+            });
+        }
+    }
+}</code></pre><p>##Navigating Models<br>您可以使用 PushPageModel 方法和 PopPageModel 方法从视图模型中推送和弹出页面。</p>
+<p>例如。<code>PushPageModel&lt;QuotePageModel&gt;（quote）;</code></p>
+<p>但在您可以做到这一点之前，您需要实现和注册一个 IRootNavigation 服务。 在我的情况下，我使用了一个 ContainerPage 并将其注册为 NavigationHandler</p>
+<p>//注册根导航</p>
+<pre><code>var containerPage = new RootContainerPage（）;
+TinyIoC.TinyIoCContainer.Current.Register &lt;IRootNavigation&gt;（containerPage）;</code></pre><pre><code>public class RootContainerPage : MasterDetailPage, IRootNavigation
+{
+    ContentPage _menuPage;
+    NavigationPage _contactNavPage, _quotesNavPage;
+
+    public RootContainerPage ()
+    {
+        _contactNavPage = new NavigationPage (BasePageModel.ResolvePageModel&lt;ContactsRootPageModel&gt; (null));
+        _quotesNavPage = new NavigationPage (BasePageModel.ResolvePageModel&lt;QuotesRootPageModel&gt; (null));
+        Detail = _contactNavPage;
+
+        _menuPage = new ContentPage ();
+        _menuPage.Title = &quot;Menu&quot;;
+        var listView = new ListView();
+
+        listView.ItemsSource = new string[] { &quot;Contacts&quot;, &quot;Quotes&quot; };
+
+        listView.ItemSelected += (sender, args) =&gt;
+        {
+            if ((string)args.SelectedItem == &quot;Contacts&quot;)
+                Detail = _contactNavPage;
+            if ((string)args.SelectedItem == &quot;Quotes&quot;)
+                Detail = _quotesNavPage;
+
+            IsPresented = false;
+        };
+
+        _menuPage.Content = listView;
+        Master = new NavigationPage(_menuPage) { Title = &quot;Menu&quot; };
+    }
+
+    public void PushPage (Page page, BasePageModel model)
+    {
+        ((NavigationPage)Detail).PushAsync (page);
+    }
+
+    public void PopPage ()
+    {
+        ((NavigationPage)Detail).PopAsync ();
+    }
+}</code></pre><p>##Implementing Property Changed<br>你会注意到我不需要实现属性更改事件，而是使用一个名为<a href="https://github.com/Fody/PropertyChanged" target="_blank" rel="noopener">Fody / PropertyChanged</a>的开源项目实现。 您可以从 nuget 安装。</p>
+<p>##控制反转/ TinyIOC<br>ViewPage 构造函数的依赖将自动注入。 使用 TinyIOC 注册依赖项。</p>
+<p>//注册数据库服务<br><code>TinyIoC.TinyIoCContainer.Current.Register &lt;IDatabaseService，DatabaseService&gt;();</code></p>
+<p>##神奇的地方在哪里？<br>如果你想知道神奇的实现在哪里发生，那么看看<a href="https://github.com/rid00z/XamarinFormsQuoteApp/blob/master/XamarinFormsQuoteApp/PageModels/BasePageModel.cs" target="_blank" rel="noopener">示例应用程序中的 BasePageModel.cs。</a></p>
+<p>##平台依赖关系<br>此应用程序利用 SQLite 的平台依赖关系。</p>
+<p>##单元测试<br>如果我们遵循惯例，那么模型是松耦合的，容易测试。</p>
+<p>您可以将模拟的依赖关系传递给模型并进行测试。 在这里看到一个例子：</p>
+<pre><code>[TestFixture]
+public class ContactPageModelTests
+{
+    [Test]
+    public static void CreateNewContact()
+    {
+        var container = A.Fake&lt;IRootNavigation&gt; ();
+        TinyIoC.TinyIoCContainer.Current.Register&lt;IRootNavigation&gt; (container);
+
+        var db = new DatabaseService (new SQLiteFactory());
+        var vm = new ContactPageModel (db);
+        vm.Init (null);
+
+        //保存到数据库
+        vm.Contact.Name = &quot;Peter&quot;;
+        vm.Contact.Phone = &quot;9087&quot;;
+        vm.Done.Execute (null);
+
+        Assert.IsTrue (vm.Contact.ContactId &gt; 0);
+
+        //从数据库取出
+        var savedContact
+                = db.Conn.Table&lt;Contact&gt; ().Where ((c) =&gt; c.ContactId == vm.Contact.ContactId).FirstOrDefault ();
+
+        Assert.AreEqual (&quot;Peter&quot;, savedContact.Name);
+        Assert.AreEqual (&quot;9087&quot;, savedContact.Phone);
+        A.CallTo (() =&gt; container.PopPage ()).MustHaveHappened ();
+    }
+}</code></pre><p>请去看看 github 上的代码。</p>
+<p><a href="https://github.com/rid00z/XamarinFormsQuoteApp" target="_blank" rel="noopener">https://github.com/rid00z/XamarinFormsQuoteApp</a></p>
+<p>Thanks</p>
+<p>Michael</p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/XamarinForms">XamarinForms</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "翻译Rolling your own Mvvm for Xamarin.Forms&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>

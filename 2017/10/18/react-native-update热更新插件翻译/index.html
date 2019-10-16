@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>react-native-update 热更新插件翻译 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期三, 十月 18日 2017, 4:07 下午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<p>#原文地址：<a href="https://github.com/remobile/react-native-update" target="_blank" rel="noopener">https://github.com/remobile/react-native-update</a></p>
+<h1 id="React-Native-更新-remobile"><a href="#React-Native-更新-remobile" class="headerlink" title="React Native 更新 (remobile)"></a>React Native 更新 (remobile)</h1><p>更新 js 版本和 app 版本</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="sh">npm install @remobile/react-native-update --save</code></pre>
+<h3 id="安装-Android"><a href="#安装-Android" class="headerlink" title="安装 (Android)"></a>安装 (Android)</h3><pre><code class="gradle">...
+include &#39;:react-native-update&#39;
+project(&#39;:react-native-update&#39;).projectDir
+= new File(settingsDir, &#39;../node_modules/@remobile/react-native-update/android&#39;)</code></pre>
+<ul>
+<li>在 <code>android/app/build.gradle</code></li>
+</ul>
+<pre><code class="gradle">...
+dependencies {
+    ...
+    compile project(&#39;:react-native-update&#39;)
+}</code></pre>
+<ul>
+<li>注册模块 (在 MainActivity.java)</li>
+</ul>
+<pre><code class="java">......
+import com.remobile.update.RCTUpdateMgr;  // &lt;--- import
+
+......
+public class MainApplication extends Application implements ReactApplication {
+    private RCTUpdateMgr mUpdateMgr; // &lt;------ add here
+
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        ......
+        @Override
+        protected String getJSBundleFile() {
+            return mUpdateMgr.getBundleUrl();   // &lt;------ change here
+        }
+
+        @Override
+        protected List&lt;ReactPackage&gt; getPackages() {
+            mUpdateMgr = new RCTUpdateMgr(MainActivity.activity);
+
+            return Arrays.&lt;ReactPackage&gt;asList(
+            ......
+            mUpdateMgr.getReactPackage(),       // &lt;------ add here
+            ......
+            );
+        }
+    };
+    ......
+}</code></pre>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="UpdatePage-js"><a href="#UpdatePage-js" class="headerlink" title="UpdatePage.js"></a>UpdatePage.js</h4><p>#####定义全局变量</p>
+<pre><code class="js">&#39;use strict&#39;;
+import React, { Component } from &#39;react&#39;;
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  Image,
+  TouchableHighlight
+} from &#39;react-native&#39;;
+import ReactNative form &#39;react-native&#39;
+import Update form &#39;@remobile/react-native-update&#39;
+
+var
+STATUS_GET_VERSION = 0, // 获得版本号状态
+STATUS_HAS_VEW_VERSION = 1, // 有新版本状态
+STATUS_HAS_NOT_VEW_VERSION = 2, // 没有新版本号状态
+STATUS_DOWNLOAD_APK_PROGESS = 3, // 下载apk状态
+STATUS_DOWNLOAD_JS_PROGESS = 4, // 下载js状态
+STATUS_UNZIP_JS_PROGESS = 5, // 解压js状态
+STATUS_GET_VERSION_ERROR = 6, // 获得版本异常状态
+STATUS_DOWNKOAD_APK_ERROR = 7, // 下载apk异常状态
+STATUS_DOWNKOAD_JS_ERROR = 8, // 下载js异常状态
+STATUS_UNZIP_JS_ERROR = 9, // 解压js异常状态
+STATUS_FAILED_INSTALL_ERROR = 10,  //失败安装异常状态
+STATUS_UPDATE_END = 11; //更新结束状态
+
+var
+ERROR_NULL = 0,
+ERROR_DOWNKOAD_APK = 1, // 异常下载apk
+ERROR_DOWNKOAD_JS = 2, // 异常下载js
+ERROR_FAILED_INSTALL = 3, // 失败安装
+ERROR_UNZIP_JS = 4; // 解压js
+
+var PROGRESS_WIDTH = sr.tw*0.7;
+var {Button, ProgressBar} = COMPONENTS;</code></pre>
+<p>#####进度 view</p>
+<pre><code>var ProgressInfo = React.createClass({
+    render() {
+        const { progress } = this.props;
+        if (progress &lt; 1000) {
+            return (
+                &lt;View&gt;
+                    &lt;Text&gt;{this.props.title} [{progress}%]&lt;/Text&gt;
+                    &lt;ProgressBar
+                        fillStyle={{}}
+                        backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                        style={{marginTop: 10, width:PROGRESS_WIDTH}}
+                        progress={progress/100.0}
+                        /&gt;
+                    &lt;View style={styles.progressText}&gt;
+                        &lt;Text&gt;0&lt;/Text&gt;
+                        &lt;Text&gt;100&lt;/Text&gt;
+                    &lt;/View&gt;
+                &lt;/View&gt;
+            );
+        } else {
+            let size = progress/1000/1024/1024;
+            return (
+                &lt;View style={{flex: 1, alignItems: 'center'}}&gt;
+                    &lt;Text&gt;{this.props.title} [{size.toFixed(2)} M]&lt;/Text&gt;
+                &lt;/View&gt;
+            );
+        }
+    }
+});</code></pre><p>#####页面显示 view ######函数</p>
+<pre><code>module.exports = React.createClass({
+    getInitialState() {
+        const {options} = this.props;
+        return {
+            options,
+            status: !options ?
+            STATUS_GET_VERSION : options.newVersion ? STATUS_HAS_VEW_VERSION : STATUS_HAS_NOT_VEW_VERSION,
+            progress: 0,
+        };
+    },
+    componentWillMount() {
+        if (!this.state.options) {
+            Update.checkVersion({
+                versionUrl: app.route.ROUTE_VERSION_INFO_URL,
+                iosAppId: CONSTANTS.IOS_APPID,
+            }).then((options)=&gt;{
+                this.setState({options, status: !options ?
+                STATUS_GET_VERSION_ERROR : options.newVersion ?
+                STATUS_HAS_VEW_VERSION : STATUS_HAS_NOT_VEW_VERSION});
+            })
+        }
+    },
+    onError(errCode) {
+        if (errCode == ERROR_DOWNKOAD_APK) {
+            this.setState({status: STATUS_DOWNKOAD_APK_ERROR});
+        } else if (errCode == ERROR_DOWNKOAD_JS) {
+            this.setState({status: STATUS_DOWNKOAD_JS_ERROR});
+        } else if (errCode == ERROR_FAILED_INSTALL) {
+            this.setState({status: STATUS_FAILED_INSTALL_ERROR});
+        } else if (errCode == ERROR_UNZIP_JS) {
+            this.setState({status: STATUS_UNZIP_JS_ERROR});
+        }
+    },
+    doUpdate() {
+        const {jsVersionCode, trackViewUrl} = this.state.options;
+        if (jsVersionCode !== undefined) {
+            Update.updateJS({
+                jsVersionCode,
+                jsbundleUrl: app.isandroid?app.route.ROUTE_JS_ANDROID_URL:app.route.ROUTE_JS_IOS_URL,
+                onDownloadJSProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_JS_PROGESS,progress})},
+                onUnzipJSProgress:(progress)=&gt;{this.setState({status: STATUS_UNZIP_JS_PROGESS,progress})},
+                onUnzipJSEnd:()=&gt;{this.setState({status: STATUS_UPDATE_END})},
+                onError:(errCode)=&gt;{this.onError(errCode)},
+            });
+        } else {
+            Update.updateApp({
+                trackViewUrl,
+                androidApkUrl:app.route.ROUTE_APK_URL,
+                androidApkDownloadDestPath:&#39;/sdcard/yxjqd.apk&#39;,
+                onDownloadAPKProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_APK_PROGESS,progress})},
+                onError:(errCode)=&gt;{this.onError(errCode)},
+            });
+        }
+    },</code></pre><p>######页面的 render</p>
+<pre><code>    render() {
+        var components = {};
+        const {
+          currentVersion,
+          newVersion,
+          description
+        } = this.state.options||{currentVersion:Update.getVersion()};
+
+        components[STATUS_GET_VERSION] = (
+            &lt;Text style={styles.textInfo}&gt;正在获取版本号&lt;/Text&gt;
+        );
+        components[STATUS_HAS_NOT_VEW_VERSION] = (
+            &lt;Text style={styles.textInfo}&gt;当前版本已经是最新版本&lt;/Text&gt;
+        );
+        components[STATUS_GET_VERSION_ERROR] = (
+            &lt;Text style={styles.textInfo}&gt;获取版本信息失败，请稍后再试&lt;/Text&gt;
+        );
+        components[STATUS_DOWNKOAD_APK_ERROR] = (
+            &lt;Text style={styles.textInfo}&gt;下载apk文件失败，请稍后再试&lt;/Text&gt;
+        );
+        components[STATUS_DOWNKOAD_JS_ERROR] = (
+            &lt;Text style={styles.textInfo}&gt;下载js bundle失败，请稍后再试&lt;/Text&gt;
+        );
+        components[STATUS_UNZIP_JS_ERROR] = (
+            &lt;Text style={styles.textInfo}&gt;解压js bundle失败，请稍后再试&lt;/Text&gt;
+        );
+        components[STATUS_FAILED_INSTALL_ERROR] = (
+            &lt;Text style={styles.textInfo}&gt;你放弃了安装&lt;/Text&gt;
+        );
+        components[STATUS_HAS_VEW_VERSION] = (
+            &lt;View style={styles.textInfoContainer}&gt;
+                &lt;Text style={styles.textInfo}&gt;发现新版本{newVersion}&lt;/Text&gt;
+                &lt;View style={styles.descriptionContainer}&gt;
+                    {
+                        description &amp;&amp; description.map((item, i)=&gt;{
+                            return (
+                                &lt;Text style={styles.textInfo}
+                                  key={i}&gt;{(i+1)+&#39;. &#39;+item}
+                                &lt;/Text&gt;
+                            )
+                        })
+                    }
+                &lt;/View&gt;
+                &lt;Button onPress={this.doUpdate}
+                    style={styles.button_layer}
+                    textStyle={styles.button_text}&gt;立即更新
+              &lt;/Button&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_DOWNLOAD_APK_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在下载APK&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_DOWNLOAD_JS_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在下载Bundle文件&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_UNZIP_JS_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在解压Bundle文件&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_UPDATE_END] = (
+            &lt;Text&gt;正在重启...&lt;/Text&gt;
+        );
+        return (
+            ……
+        );
+    },
+});</code></pre><p>######样式</p>
+<pre><code>var styles = StyleSheet.create({
+    ……
+});</code></pre><h4 id="UpdateInfoBox-js"><a href="#UpdateInfoBox-js" class="headerlink" title="UpdateInfoBox.js"></a>UpdateInfoBox.js</h4><p>#####全局变量</p>
+<pre><code class="js">&#39;use strict&#39;;
+var React = require(&#39;react&#39;);
+var ReactNative = require(&#39;react-native&#39;);
+var { StyleSheet, View, Text, Image, TouchableOpacity } = ReactNative;
+
+var Update = require(&#39;@remobile/react-native-update&#39;);
+
+var STATUS_HAS_VEW_VERSION = 0,
+  STATUS_DOWNLOAD_APK_PROGESS = 1,
+  STATUS_DOWNLOAD_JS_PROGESS = 2,
+  STATUS_UNZIP_JS_PROGESS = 3,
+  STATUS_DOWNKOAD_APK_ERROR = 4,
+  STATUS_DOWNKOAD_JS_ERROR = 5,
+  STATUS_UNZIP_JS_ERROR = 6,
+  STATUS_FAILED_INSTALL_ERROR = 7,
+  STATUS_UPDATE_END = 8;
+
+var ERROR_NULL = 0,
+  ERROR_DOWNKOAD_APK = 1,
+  ERROR_DOWNKOAD_JS = 2,
+  ERROR_FAILED_INSTALL = 3,
+  ERROR_UNZIP_JS = 4;
+
+var PROGRESS_WIDTH = sr.tw * 0.7;
+var { Button, ProgressBar } = COMPONENTS;</code></pre>
+<p>#####进度 view</p>
+<pre><code>var ProgressInfo = React.createClass({
+    render() {
+        const { progress } = this.props;
+        if (progress &lt; 1000) {
+            return (
+                &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                    &lt;Text&gt;{this.props.title} [{progress}%]&lt;/Text&gt;
+                    &lt;ProgressBar
+                        fillStyle={{}}
+                        backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                        style={{marginTop: 10, width:PROGRESS_WIDTH}}
+                        progress={progress/100.0}
+                        /&gt;
+                    &lt;View style={styles.progressText}&gt;
+                        &lt;Text&gt;0&lt;/Text&gt;
+                        &lt;Text&gt;100&lt;/Text&gt;
+                    &lt;/View&gt;
+                &lt;/View&gt;
+            );
+        } else {
+            let size = progress/1000/1024/1024;
+            return (
+                &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                    &lt;Text&gt;{this.props.title} [ {size.toFixed(2)} M ]&lt;/Text&gt;
+                &lt;/View&gt;
+            );
+        }
+    }
+});</code></pre><p>#####页面 view ######函数</p>
+<pre><code>module.exports = React.createClass({
+    getInitialState() {
+        return {
+            status:STATUS_HAS_VEW_VERSION,
+            progress: 0,
+        };
+    },
+    onError(errCode) {
+        if (errCode == ERROR_DOWNKOAD_APK) {
+            this.setState({status: STATUS_DOWNKOAD_APK_ERROR});
+        } else if (errCode == ERROR_DOWNKOAD_JS) {
+            this.setState({status: STATUS_DOWNKOAD_JS_ERROR});
+        } else if (errCode == ERROR_FAILED_INSTALL) {
+            this.setState({status: STATUS_FAILED_INSTALL_ERROR});
+        } else if (errCode == ERROR_UNZIP_JS) {
+            this.setState({status: STATUS_UNZIP_JS_ERROR});
+        }
+    },
+    doUpdate() {
+        const {jsVersionCode, trackViewUrl} = this.props.options;
+        if (jsVersionCode !== undefined) {
+            Update.updateJS({
+                jsVersionCode,
+                jsbundleUrl: app.isandroid?app.route.ROUTE_JS_ANDROID_URL:app.route.ROUTE_JS_IOS_URL,
+                onDownloadJSProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_JS_PROGESS,progress})},
+                onUnzipJSProgress:(progress)=&gt;{this.setState({status: STATUS_UNZIP_JS_PROGESS,progress})},
+                onUnzipJSEnd:()=&gt;{this.setState({status: STATUS_UPDATE_END})},
+                onError:(errCode)=&gt;{this.onError(errCode)},
+            });
+        } else {
+            Update.updateApp({
+                trackViewUrl,
+                androidApkUrl:app.route.ROUTE_APK_URL,
+                androidApkDownloadDestPath:&#39;/sdcard/yxjqd.apk&#39;,
+                onDownloadAPKProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_APK_PROGESS,progress})},
+                onError:(errCode)=&gt;{this.onError(errCode)},
+            });
+        }
+    },</code></pre><p>######render</p>
+<pre><code>    render() {
+        const components = {};
+        const {newVersion, description} = this.props.options;
+        components[STATUS_HAS_VEW_VERSION] = (
+            &lt;View style={styles.functionContainer}&gt;
+                &lt;Text style={styles.title}&gt;{`发现新版本(${newVersion})`}&lt;/Text&gt;
+                &lt;Text style={styles.redLine}&gt;
+                &lt;/Text&gt;
+                &lt;Text style={styles.content}&gt;
+                    {&quot;更新内容：&quot;}
+                &lt;/Text&gt;
+                {
+                    description.map((item, i)=&gt;{
+                        return (
+                            &lt;Text style={styles.contentItem} key={i}&gt;{&#39;- &#39;+item}&lt;/Text&gt;
+                        )
+                    })
+                }
+                &lt;View style={styles.buttonViewStyle}&gt;
+                    &lt;TouchableOpacity
+                        onPress={app.closeModal}
+                        style={styles.buttonStyleContainCannel}&gt;
+                        &lt;Text style={styles.buttonStyleCannel}&gt;以后再说&lt;/Text&gt;
+                    &lt;/TouchableOpacity&gt;
+                    &lt;TouchableOpacity
+                        onPress={this.doUpdate}
+                        style={styles.buttonStyleContain}&gt;
+                        &lt;Text style={styles.buttonStyle} &gt;立即更新&lt;/Text&gt;
+                    &lt;/TouchableOpacity&gt;
+                &lt;/View&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_DOWNKOAD_APK_ERROR] = (
+            &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                &lt;Text style={styles.textInfo}&gt;下载apk文件失败，请在设置里重新更新&lt;/Text&gt;
+                &lt;TouchableOpacity
+                    onPress={app.closeModal}
+                    style={styles.buttonStyleContainCannel}&gt;
+                    &lt;Text style={styles.buttonStyleCannel}&gt;我知道了&lt;/Text&gt;
+                &lt;/TouchableOpacity&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_DOWNKOAD_JS_ERROR] = (
+            &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                &lt;Text style={styles.textInfo}&gt;下载js bundle失败，请在设置里重新更新&lt;/Text&gt;
+                &lt;TouchableOpacity
+                    onPress={app.closeModal}
+                    style={styles.buttonStyleContainCannel}&gt;
+                    &lt;Text style={styles.buttonStyleCannel}&gt;我知道了&lt;/Text&gt;
+                &lt;/TouchableOpacity&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_UNZIP_JS_ERROR] = (
+            &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                &lt;Text style={styles.textInfo}&gt;解压js bundle失败，请在设置里重新更新&lt;/Text&gt;
+                &lt;TouchableOpacity
+                    onPress={app.closeModal}
+                    style={styles.buttonStyleContainCannel}&gt;
+                    &lt;Text style={styles.buttonStyleCannel}&gt;我知道了&lt;/Text&gt;
+                &lt;/TouchableOpacity&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_FAILED_INSTALL_ERROR] = (
+            &lt;View style={[styles.functionContainer, {alignItems: &#39;center&#39;, paddingVertical: 30}]}&gt;
+                &lt;Text style={styles.textInfo}&gt;你放弃了安装&lt;/Text&gt;
+                &lt;TouchableOpacity
+                    onPress={app.closeModal}
+                    style={styles.buttonStyleContainCannel}&gt;
+                    &lt;Text style={styles.buttonStyleCannel}&gt;我知道了&lt;/Text&gt;
+                &lt;/TouchableOpacity&gt;
+            &lt;/View&gt;
+        );
+        components[STATUS_DOWNLOAD_APK_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在下载APK&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_DOWNLOAD_JS_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在下载Bundle文件&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_UNZIP_JS_PROGESS] = (
+            &lt;ProgressInfo
+                title=&quot;正在解压Bundle文件&quot;
+                progress={this.state.progress} /&gt;
+        );
+        components[STATUS_UPDATE_END] = (
+            &lt;Text&gt;即将重启...&lt;/Text&gt;
+        );
+        return (
+            &lt;View style={styles.container}&gt;
+                {components[this.state.status]}
+            &lt;/View&gt;
+        );
+    },
+});</code></pre><p>######样式</p>
+<pre><code>
+var styles = StyleSheet.create({
+   ……
+});</code></pre><h2 id="Update-的方法"><a href="#Update-的方法" class="headerlink" title="Update 的方法"></a>Update 的方法</h2><ul>
+<li><code>Update.getVersion</code> - 获得当前版本<ul>
+<li>返回值是 x.x.x</li>
+</ul>
+</li>
+<li><code>Update.checkVersion</code> - 检查服务器版本</li>
+<li><code>Update.updateApp</code> - 更新 apk 或 ios appstore</li>
+<li><code>Update.updateJS</code> - 更新 js 捆绑文件</li>
+</ul>
+<h2 id="检查版本并且显示更新对话框"><a href="#检查版本并且显示更新对话框" class="headerlink" title="检查版本并且显示更新对话框"></a>检查版本并且显示更新对话框</h2><pre><code class="js">const Update = require(&#39;@remobile/react-native-update&#39;);
+const UpdateInfoBox = require(&#39;../modules/update/UpdateInfoBox&#39;);
+Update.checkVersion({
+  versionUrl: app.route.ROUTE_VERSION_INFO_URL,
+  iosAppId: CONSTANTS.IOS_APPID
+}).then(options =&gt; {
+  if (options &amp;&amp; options.newVersion) {
+    app.showModal(&lt;UpdateInfoBox options={options} /&gt;, {
+      backgroundColor: &#39;rgba(0, 0, 0, 0.6)&#39;
+    });
+  }
+});</code></pre>
+<h2 id="检查版本和显示更新页面"><a href="#检查版本和显示更新页面" class="headerlink" title="检查版本和显示更新页面"></a>检查版本和显示更新页面</h2><pre><code class="js">const Update = require(&#39;@remobile/react-native-update&#39;);
+const UpdatePage = require(&#39;../modules/update/UpdatePage&#39;);
+
+Update.checkVersion({
+  versionUrl: app.route.ROUTE_VERSION_INFO_URL,
+  iosAppId: CONSTANTS.IOS_APPID
+}).then(options =&gt; {
+  app.navigator.push({
+    title: &#39;在线更新&#39;,
+    component: UpdatePage,
+    passProps: { options }
+  });
+});</code></pre>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><pre><code>* versionUrl：服务器上的版本的url:
+    * format: { &quot;versionCode&quot;:1, &quot;versionName&quot;:&quot;1.0&quot;, &quot;jsVersionCode&quot;:2, &quot;description（描述）&quot;:&quot;hello&quot;}
+
+   这个结构体将传递给needUpdateApp和updateUpdateJS，如果你设置它们， 所以你可以
+自定义格式，但是versionCode和jsVersionCode必须保持一致</code></pre><pre><code>
+    * iosAppId:the appid on app Store
+
+## Update App Or JS
+```js
+doUpdate() {
+    const {jsVersionCode, trackViewUrl} = this.props.options;
+    if (jsVersionCode !== undefined) {
+        Update.updateJS({
+            jsVersionCode,
+            jsbundleUrl: app.isandroid?app.route.ROUTE_JS_ANDROID_URL:app.route.ROUTE_JS_IOS_URL,
+            onDownloadJSProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_JS_PROGESS,progress})},
+            onUnzipJSProgress:(progress)=&gt;{this.setState({status: STATUS_UNZIP_JS_PROGESS,progress})},
+            onUnzipJSEnd:()=&gt;{this.setState({status: STATUS_UPDATE_END})},
+            onError:(errCode)=&gt;{this.onError(errCode)},
+        });
+    } else {
+        Update.updateApp({
+            trackViewUrl,
+            androidApkUrl:app.route.ROUTE_APK_URL,
+            androidApkDownloadDestPath:&#39;/sdcard/yxjqd.apk&#39;,
+            onDownloadAPKProgress:(progress)=&gt;{this.setState({status: STATUS_DOWNLOAD_APK_PROGESS,progress})},
+            onError:(errCode)=&gt;{this.onError(errCode)},
+        });
+    }
+},</code></pre><h3 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h3><pre><code>* jsbundleUrl:js捆绑网址
+    * 当只有js代码更改或图像资源更改，我希望您发布jsbundle，称为次要版本
+    * 包括www / index.android.bundle或www / index.ios.bundle
+    * 包括android上的图像目录，ios上的资源目录
+    * 在android上，image dir包含一些动态图像（这个版本添加的新图像）
+    * 发布小版本你应该修改jsVersionCode
+* androidApkUrl:apk的网址
+    * 只有native代码改变了，你需要在Android上发布apk或者在ios上发布ipa，叫做Marjor版本
+    * 发布Marjor版本，您应该增加versionCode并将jsVersionCode设置为0
+* androidApkDownloadDestPath：apk文件下载路径，例如/ sdcard / download，确保它存在
+* onDownloadAPKStart:function
+    * 当apk开始下载时回调
+* onDownloadAPKProgress:function
+    * 当apk正在下载时回调
+    * 将通过{total：xx，loaded：xx} 1参数
+* onDownloadAPKEnd:function
+    * 当apk下载结束时回调
+* onDownloadJSStart:function
+* onDownloadJSProgress:function
+    * 当apk正在下载时回调，
+    * 将通过{total：xx，loaded：xx} 1参数
+* onDownloadJSEnd:function
+* onUnzipJSStart:function
+* onUnzipJSProgress:function
+    * 解压时候回调,
+    * 将通过{total：xx，loaded：xx} 1参数
+* onUnzipJSEnd:function
+* onError:function
+    * 将通过errorCode
+    * var ERROR_NULL = 0,
+          ERROR_DOWNKOAD_APK = 1,
+          ERROR_DOWNKOAD_JS = 2,
+          ERROR_GET_VERSION = 3,
+          ERROR_UNZIP_JS = 4;</code></pre><h2 id="生成捆绑"><a href="#生成捆绑" class="headerlink" title="生成捆绑"></a>生成捆绑</h2><pre><code class="bash">#!/bin/bash
+
+distpath=../../localServer/public/download
+
+function genIOSBundle() {
+    react-native bundle \
+        --platform ios \
+        --reset-cache \
+        --verbose \
+        --entry-file index.ios.js \
+        --bundle-output ./tools/www/index.ios.bundle \
+        --assets-dest ./tools/www/ \
+        --dev false
+}
+
+function genAndroidBundle() {
+    react-native bundle \
+        --platform android \
+        --reset-cache \
+        --verbose \
+        --entry-file index.android.js \
+        --bundle-output ./tools/www/index.android.bundle \
+        --assets-dest ./tools/www/ \
+        --dev false
+}
+
+function zipWWW() {
+    node -e &quot;!function(){function i(e,r){var o=n.readdirSync(e);o.forEach(function(o){var s=e+&#39;/&#39;+o;n.statSync(s).isDirectory()?i(s,r+&#39;/&#39;+o):c.folder(r).file(o,n.readFileSync(s))})}function e(e,r,o){r=r||&#39;&#39;,o=o||e+&#39;.zip&#39;,i(e,r);var s=c.generate({base64:!1,compression:&#39;DEFLATE&#39;});n.writeFile(o,s,&#39;binary&#39;,function(){console.log(&#39;success&#39;)})}var r=require(&#39;jszip&#39;),n=require(&#39;fs&#39;),c=new r,o=process.argv.splice(1);e.apply(null,o)}();&quot;  www _www www.zip
+}
+
+function genMd5List() {
+    cd ./tools
+    # git co head ${distpath}/${1}_md5.json
+    node -e &quot;var o=process.argv;require(&#39;./getMd5List&#39;)(o[1],o[2])&quot; ${1} ${distpath}
+}
+
+function zipFile() {
+    zipWWW
+    mv ./www.zip ${distpath}/js${1}.zip
+    rm -fr www
+    mv ./${1}_md5.json ${distpath}/${1}_md5.json
+    echo &quot;${distpath}&quot;
+}
+
+function buildAndroid() {
+    rm -fr www
+    mkdir www
+    cd ..
+    genAndroidBundle
+    genMd5List android
+    zipFile android
+}
+
+function buildIos() {
+    rm -fr www
+    mkdir www
+    cd ..
+    genIOSBundle
+    genMd5List ios
+    zipFile ios
+}
+
+function main() {
+    if [ &quot;$1&quot; = &quot;android&quot; ];then
+        buildAndroid
+    elif [ &quot;$1&quot; = &quot;ios&quot; ];then
+        buildIos
+    elif [ &quot;$1&quot; = &quot;all&quot; ];then
+        buildAndroid
+        buildIos
+    else
+        echo &quot;Usage: ./genbundle ios|android|all&quot;
+    fi
+}
+
+main $@</code></pre>
+<ul>
+<li>确保安装 jszip 在 npm 在全局(global)，我们使用它的 zip</li>
+</ul>
+<h3 id="服务器端-version-json"><a href="#服务器端-version-json" class="headerlink" title="服务器端 version.json"></a>服务器端 version.json</h3><pre><code class="json">{
+  &quot;iosPassed&quot;: true,
+  &quot;iosJsVersionCode&quot;: 0,
+  &quot;iosDescription&quot;: [&quot;修正bug&quot;, &quot;添加新功能&quot;],
+  &quot;androidPassed&quot;: {
+    &quot;baidu&quot;: false,
+    &quot;default&quot;: true
+  },
+  &quot;versionName&quot;: &quot;1.0&quot;,
+  &quot;versionCode&quot;: 1048576,
+  &quot;androidJsVersionCode&quot;: 0,
+  &quot;androidDescription&quot;: [&quot;修改bug&quot;, &quot;添加新功能&quot;]
+}</code></pre>
+<h3 id="看详细使用"><a href="#看详细使用" class="headerlink" title="看详细使用"></a>看详细使用</h3><ul>
+<li><a href="https://github.com/remobile/react-native-template" target="_blank" rel="noopener">https://github.com/remobile/react-native-template</a></li>
+</ul>
+<h4 id="工具在"><a href="#工具在" class="headerlink" title="工具在"></a>工具在</h4><p><a href="https://github.com/remobile/react-native-template/blob/master/project/tools" target="_blank" rel="noopener">useful tools</a></p>
+<p>####例子在 react-native-template<br><a href="https://github.com/remobile/react-native-template/blob/master/project/App/modules/update" target="_blank" rel="noopener">Update</a></p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/XamarinForms">XamarinForms</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "react-native-update 热更新插件翻译&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>

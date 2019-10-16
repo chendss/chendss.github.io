@@ -14,7 +14,7 @@
   <meta name="description" content>
   <meta name="author" content="CardHouse">
   <meta name="keywords" content>
-  <title>归档 ~ 少爷的博客</title>
+  <title>可能是全x最好的vue教程 ~ 少爷的博客</title>
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
@@ -30,7 +30,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
    <meta name="referrer" content="never">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -102,6 +102,9 @@
             </span>
 
             
+              <br>
+              <p>星期四, 七月 12日 2018, 5:02 下午</p>
+            
           </div>
 
           
@@ -112,47 +115,116 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 19 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/07/01/screen使用教程-无比简单/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">screen使用教程-无比简单</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2019/07/01/nginx的邻居caddy/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nginx的邻居caddy</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2019/05/17/ORM是什么？/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ORM是什么？</span>
-      <span style="float: right;">05-17</span>
-    </a>
-  
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="Vue-响应式原理"><a href="#Vue-响应式原理" class="headerlink" title="Vue 响应式原理"></a>Vue 响应式原理</h1><h2 id="为什么不支持-IE8"><a href="#为什么不支持-IE8" class="headerlink" title="为什么不支持 IE8"></a>为什么不支持 IE8</h2><p>其实是依赖<strong>Object.defineProperty()</strong>，进行数据挟持的，而这个 api 在 IE8 下仅仅支持 Dom 对象不支持原生对象，所以 Vue2.x 是不支持 IE8 及以下的浏览器。</p>
+<h2 id="Object-defineProperty-object-propertyname-descriptor"><a href="#Object-defineProperty-object-propertyname-descriptor" class="headerlink" title="Object.defineProperty(object, propertyname, descriptor )"></a>Object.defineProperty(object, propertyname, descriptor )</h2><p>此函数有 3 个参数，均是必传的参数。这个函数的特性其实很像 c#的属性，有 c#基础的理解起来应该很容易。</p>
+<ul>
+<li><p>object：需要设置的对象</p>
+</li>
+<li><p>propertyname：需要设置的属性名（对象的键名）</p>
+</li>
+<li><p>descriptor：描述符，一个对象，用于设置属性的特性。</p>
+<pre><code class="javascript">{
+    value:undefined, // 表示此属性的值。
+    writable:false, // 决定此属性是否可写
+    configurable:true,
+        /*
+        决定此属性是否可配置，
+        如果为false则writable, configurable, enumerable这些属性的设置都将无效.
+        即使重新调用defineProperty函数也无效。
+        特别指出 试图修改configurable的值会抛出异常。
+        */
+    enumerable:false, // 是否可枚举
+    get:undefined, // 函数，当取值时执行
+    set:undefined, // 函数，当设置值时执行
+}</code></pre>
+<pre><code class="javascript">// 此demo示范get和set的作用，其他的属性自行尝试。
+const setName = function(newValue) {
+  console.log(&#39;新的值&#39;, newValue);
+};
+
+const getName = function() {
+  console.log(&#39;取值啦&#39;);
+};
+
+var demo = {
+  name: &#39;初始值&#39;
+};
+
+Object.defineProperty(demo, &#39;name&#39;, {
+  set: setName,
+  get: getName
+});
+
+demo.name = &#39;初始值2&#39;;
+// -&gt; 新的值 初始值2
+let name = demo.name;
+// -&gt; 取值啦</code></pre>
+</li>
+</ul>
+<h2 id="Vue-cli3-0-一些变动"><a href="#Vue-cli3-0-一些变动" class="headerlink" title="Vue-cli3.0 一些变动"></a>Vue-cli3.0 一些变动</h2><ul>
+<li>集成 sass/scss 只需要 <code>yarn add sass-loader node-sass</code></li>
+<li>设置 scss 全局函数要在<code>vue.config.js</code>里添加</li>
+</ul>
+<pre><code>module.exports = {
+  // ...
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `
+          @import &quot;@/你的全局scss文件&quot;;
+        `
+      }
+    }
+  }
+}</code></pre>
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
 </div>
 
+<!-- custom -->
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
     
   </main>
 
@@ -203,7 +275,8 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>    <script src="/lib/prettify/prettify.min.js" ></script>
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
 <script>
   $(document).ready(function() {
     $('pre').addClass('prettyprint linenums');
@@ -215,7 +288,7 @@
   var typed = new Typed('#subtitle', {
     strings: [
       '  ',
-      "归档&nbsp;",
+      "可能是全x最好的vue教程&nbsp;",
     ],
     cursorChar: "_",
     typeSpeed: 70,

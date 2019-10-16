@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>Glimpse the Future of Xamarin Forms 3.0 翻译 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期五, 六月 9日 2017, 9:38 上午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<p>#原文地址：<a href="https://blog.xamarin.com/glimpse-future-xamarin-forms-3-0/" target="_blank" rel="noopener">https://blog.xamarin.com/glimpse-future-xamarin-forms-3-0/</a></p>
+<p>#Xamarin Forms 3.0<br>在 Microsoft Build 2017 中，我们分享了对 Xamarin.Forms 3.0 的愿景：在更多的平台上可以使用 Xamarin.Forms，并且以前更快。 今天，我想介绍一些令人兴奋的新功能，我们将添加到 Xamarin.Forms，我们知道你会爱上这个功能的！</p>
+<p>##Xamarin.Forms 嵌入<br>您一直能够从 Xamarin.Forms 调用本机 API，但是现在我们允许您使用大多数本机应用程序的 Xamarin.Forms。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-16ea9eebb29ddb67.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="embedding-uwp-desktop.gif"></p>
+<p>无论您是将 xamarin.Forms 全部进入，还是只想将其用于您最常使用的本机应用程序，我们将启用所有路径; 我们称之为 Xamarin.Forms 嵌入。 在 XAML 或 C＃中使用任何 ContentPage，并将其直接嵌入到 Xamarin.iOS，Xamarin.Android 或 UWP 应用程序中。</p>
+<p>所有现有的 Xamarin.Forms UI 现在已经在 Xamarin.Forms 应用程序之外扩展了使用。</p>
+<p>这是它的外观。 在非 Xamarin.Forms 应用程序中，使用该平台的预期参数初始化 Forms 并使用方便的方法就可以创建 ContentPage 的本机对象。 就这样，你的手指就掌握了原生的控制！</p>
+<pre><code>// Android
+Forms.Init(this, null);
+var androidFragment = new MyFormsPage().CreateFragment(this);
+
+// iOS
+Forms.Init()
+var iosViewController = new MyFormsPage().CreateViewController();
+
+// UWP
+Forms.Init(e);
+var uwpElement = new MyFormsPage().CreateFrameworkElement();
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/5692364-52aa87d296279e34.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="2017-05-15_13-57-14.gif"></p>
+<p>Xamarin.Forms 的功能，如 DependencyService，MessagingCenter 和数据绑定系统，在这种情况下都可以使用。</p>
+<p>##兼容更多平台</p>
+<p>Xamarin.Forms 正在走向更多的平台！ 准备在 MacOS 使用 WPF，Linux 以及更多的 Windows 应用程序上运行。 今天我们已经开始使用 macOS，但是我们并没有停在那里，我们可以让您定位每个桌面平台！ 我们的团队正在为 GTK＃和 WPF 开发。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-c1b23c21387016cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p>
+<p>##性能提升和增强<br>我们将 Xamarin.Forms 放在显微镜下，以确定使您的应用加载速度更快，运行更快的关键目标，具体为：</p>
+<ul>
+<li>控制渲染器：我们继续我们适当称之为快速渲染器的工作。 这些重构的渲染器避免创建多余的中间对象和实现更好的性能。</li>
+<li>布局压缩：启用时，我们会在编译时优化布局，以提高渲染速度并最大限度地减少内存使用。</li>
+<li>绑定系统：我们正在引入一次绑定模式。</li>
+<li>灵活性：流行的 Web 布局系统来到 Xamarin.Forms。 我们正在引入一个 FlexLayout 系统来构建自适应布局并实现一个 Visual State Manager。</li>
+<li>Styling：我们正在抛光经常需要的 CSS 样式实现。 你可以像今天一样继续为您的应用程序设计样式，如果您是 CSS 的粉丝，那就太好了。</li>
+</ul>
+<p>##介绍 XAML 标准<br>正如 Microsoft Build 2017 所宣布的，我们正在与 XAML Standard 的 Windows 部门进行合作，这是 XAML 作为资产共享的一种方式。 Xamarin.Forms 将完全支持 XAML 标准，并带您到需要启动的每个平台。</p>
+<p>支持 XAML Standard 的框架将能够共享基于 XAML 的常见 UI 定义。 我们的目标是在今年晚些时候推出第一个版本 XAML Standard 1.0。</p>
+<p>##尝试今天加入交流<br>今天可以在这里开始我们为 Xamarin.Forms 3.0 Cooking 的所有好东西。</p>
+<p>##下载 Xamarin.Forms 3.0 预览<br>我们已经将 Xamarin.Forms 的预览内容发布到新的 Feed，并共享了我们的演示代码。 得到它：</p>
+<ul>
+<li>向 NuGet Manager 添加新的源代码：https：//<a href="http://www.myget.org/F/xamarinforms-dev/api/v3/index.json" target="_blank" rel="noopener">www.myget.org/F/xamarinforms-dev/api/v3/index.json</a></li>
+<li>检查预发行</li>
+<li>选择并安装功能名称为“Embedding”的软件包。3.0.0.100-embeddingpreview</li>
+<li>在 GitHub 上下载 Weather 演示应用程序代码。<a href="https://github.com/davidortinau/build2017-new-in-xamarin-forms" target="_blank" rel="noopener">https://github.com/davidortinau/build2017-new-in-xamarin-forms</a></li>
+<li>准备好后，请浏览完整的 Xamarin.Forms 路线图，并加入 GitHub 上的 XAML Standard 对话。</li>
+</ul>
+<p>###准备好后，请浏览完整的 Xamarin.Forms 路线图，并加入 GitHub 上的 XAML Standard 交流。</p>
+<ul>
+<li><a href="https://aka.ms/xfroadmap" target="_blank" rel="noopener">Xamarin.Forms Roadmap</a>，并向我们提供有关这些公告的反馈。</li>
+<li>在<a href="https://aka.ms/xamlstandard" target="_blank" rel="noopener">aka.ms/xamlstandard</a>.中加入 XAML 标准对话。</li>
+<li>在<a href="https://blog.xamarin.com/preview-bringing-macos-to-xamarin-forms/" target="_blank" rel="noopener">blog.xamarin.com/preview-bringing-macos-to-xamarin-forms/</a>.上预览 XAMarin.Forms for macOS。</li>
+</ul>
+<p>####在 channel9.msdn.com/events/Build/2017/B8099 上观看我们完整的 Microsoft Build 2017 Xamarin.Forms 会话。</p>
+<p><a href="https://sec.ch9.ms/ch9/e613/96a58de3-75e5-4d9e-9b15-e216a03fe613/B8099_high.mp4" target="_blank" rel="noopener">观看连接</a></p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/XamarinForms">XamarinForms</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "Glimpse the Future of Xamarin Forms 3.0 翻译&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>
