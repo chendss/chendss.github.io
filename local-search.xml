@@ -308,25 +308,6 @@
   
   
   <entry>
-    <title>宇宙第一IDE，Visual studio-Nuget使用教程</title>
-    <link href="undefined2017/06/09/Nuget%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
-    <url>2017/06/09/Nuget%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一些废话："><a href="#一些废话：" class="headerlink" title="一些废话："></a>一些废话：</h1><p><a href="https://www.visualstudio.com/zh-hans/downloads/" target="_blank" rel="noopener">VS2017 的下载地址</a><br>现在的 Visual studio（简称 vs）跟我在大学期间老师常用的 vs2010 已经不太一样了。<br>想起我刚学的时候在网上搜索 Nuget 怎么使用都是一堆的命令行写法铺面而来，让我很是烦恼，例如这一种。<br><img src="http://upload-images.jianshu.io/upload_images/5692364-6af62c65d399db82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>这里要讲的是另外一种，更加简单。<br>先打开 VS，图标是这样的。<br><img src="http://upload-images.jianshu.io/upload_images/5692364-db537594be002937.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>然后点击文件</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-37a3147992bb4f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>然后<br><img src="http://upload-images.jianshu.io/upload_images/5692364-94ad12cac48a8725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>这里然后创建一个解决方案（微软粑粑给我们预设的很多模板，我们按需求挑一个来用就可以了）这里选择</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-ea9542c0eb23df2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>所有的 vs 都可以创建控制台应用。</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-e32fc6a40ad51e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>有可能你的 vs 没有解决方案资源管理器，那么可以在</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-7dcb2851b3aa0535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>这里搜索</p><p>然后<br><img src="http://upload-images.jianshu.io/upload_images/5692364-c0b175cdb70747c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>然后会出现</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-570b90cdecc9f158.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>计算机杂锦</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Xamarin Forms MvvM框架之FreshMvvM翻译一</title>
     <link href="undefined2017/06/09/XamarinForms-MvvM%E6%A1%86%E6%9E%B6%E4%B9%8BFreshMvvM%E7%BF%BB%E8%AF%91%E4%B8%80/"/>
     <url>2017/06/09/XamarinForms-MvvM%E6%A1%86%E6%9E%B6%E4%B9%8BFreshMvvM%E7%BF%BB%E8%AF%91%E4%B8%80/</url>
@@ -338,6 +319,25 @@
     <tags>
       
       <tag>XamarinForms</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>宇宙第一IDE，Visual studio-Nuget使用教程</title>
+    <link href="undefined2017/06/09/Nuget%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <url>2017/06/09/Nuget%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一些废话："><a href="#一些废话：" class="headerlink" title="一些废话："></a>一些废话：</h1><p><a href="https://www.visualstudio.com/zh-hans/downloads/" target="_blank" rel="noopener">VS2017 的下载地址</a><br>现在的 Visual studio（简称 vs）跟我在大学期间老师常用的 vs2010 已经不太一样了。<br>想起我刚学的时候在网上搜索 Nuget 怎么使用都是一堆的命令行写法铺面而来，让我很是烦恼，例如这一种。<br><img src="http://upload-images.jianshu.io/upload_images/5692364-6af62c65d399db82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>这里要讲的是另外一种，更加简单。<br>先打开 VS，图标是这样的。<br><img src="http://upload-images.jianshu.io/upload_images/5692364-db537594be002937.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>然后点击文件</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-37a3147992bb4f5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>然后<br><img src="http://upload-images.jianshu.io/upload_images/5692364-94ad12cac48a8725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>这里然后创建一个解决方案（微软粑粑给我们预设的很多模板，我们按需求挑一个来用就可以了）这里选择</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-ea9542c0eb23df2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>所有的 vs 都可以创建控制台应用。</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-e32fc6a40ad51e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>有可能你的 vs 没有解决方案资源管理器，那么可以在</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-7dcb2851b3aa0535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"><br>这里搜索</p><p>然后<br><img src="http://upload-images.jianshu.io/upload_images/5692364-c0b175cdb70747c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p><p>然后会出现</p><p><img src="http://upload-images.jianshu.io/upload_images/5692364-570b90cdecc9f158.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" srcset="/img/loading.gif" alt="image.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>计算机杂锦</tag>
       
     </tags>
     
