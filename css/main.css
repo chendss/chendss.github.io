@@ -493,9 +493,6 @@ main .nopadding-md {
 main .nopadding-md #board {
   transition: all 0.3s;
 }
-main .nopadding-md #board:hover {
-  transform: translateY(-10px);
-}
 main .nopadding-md #board .line img {
   transition: all 0.2s;
 }

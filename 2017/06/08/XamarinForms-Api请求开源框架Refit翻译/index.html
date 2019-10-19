@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>Xamarin Forms Api请求开源框架Refit翻译 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期四, 六月 8日 2017, 1:24 下午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h2 id="原文地址：https-github-com-paulcbetts-refit"><a href="#原文地址：https-github-com-paulcbetts-refit" class="headerlink" title="原文地址：https://github.com/paulcbetts/refit"></a>原文地址：<a href="https://github.com/paulcbetts/refit" target="_blank" rel="noopener">https://github.com/paulcbetts/refit</a></h2><p>用于.NET Core，Xamarin 和.NET 的自动类型安全的 REST 库，Refit 是一个受 Square Square Retrofit 库影响的库，但它比 REST API 更容易：</p>
+<pre><code>public interface IGitHubApi
+{
+    [Get(&quot;/users/{user}&quot;)]
+    Task&lt;User&gt; GetUser(string user);
+}</code></pre><p>RestService 类生成一个使用 HttpClient 进行调用的 IGitHubApi 实现：</p>
+<pre><code>var gitHubApi = RestService.For&lt;IGitHubApi&gt;(&quot;https://api.github.com&quot;);
+
+var octocat = await gitHubApi.GetUser(&quot;octocat&quot;);</code></pre><h1 id="兼容的平台"><a href="#兼容的平台" class="headerlink" title="兼容的平台"></a>兼容的平台</h1><h4 id="Refit-目前支持以下平台和任何-NET-Standard-1-3Taget"><a href="#Refit-目前支持以下平台和任何-NET-Standard-1-3Taget" class="headerlink" title="Refit 目前支持以下平台和任何.NET Standard 1.3Taget"></a>Refit 目前支持以下平台和任何.NET Standard 1.3Taget</h4><ul>
+<li>Xamarin.Android</li>
+<li>Xamarin.Mac</li>
+<li>Xamarin.iOS 64-bit (Unified API)</li>
+<li>Desktop .NET 4.5</li>
+<li>Windows Store 8.1+</li>
+<li>Windows Phone 8.1 Universal Apps</li>
+<li>.NET Core</li>
+</ul>
+<h1 id="以下平台不支持"><a href="#以下平台不支持" class="headerlink" title="以下平台不支持"></a>以下平台不支持</h1><ul>
+<li>Xamarin.iOS 32-bit</li>
+</ul>
+<h1 id="关于-NET-Core"><a href="#关于-NET-Core" class="headerlink" title="关于.NET Core"></a>关于.NET Core</h1><p>对于.NET Core 支持，您必须使用 csproj 类型的项目托管您的 Refit 接口。 这是因为 xproj 无法执行不包含在项目文件中的编译时代码生成。 如果您使用 xproj 作为网站，类库或应用程序，您仍然可以通过创建一个 netstandard csproj 然后使用从 xproj 到 csproj 的项目到项目的引用来使用 Refit。 一旦出现“VS 15”和最终的.NET Core 工具，此解决方法就不需要了。</p>
+<h1 id="API-属性"><a href="#API-属性" class="headerlink" title="API 属性"></a>API 属性</h1><ul>
+<li><p>每个方法都必须有一个 HTTP 属性，提供请求方法和相对 URL。 有五个内置注释：Get，Post，Put，Delete 和 Head。 资源的相对 URL 在注释中指定。<br><code>[Get(&quot;/users/list&quot;)]</code></p>
+</li>
+<li><p>你可以在 URL 中指定查询参数：<br><code>[Get(&quot;/users/list?sort=desc&quot;)]</code></p>
+</li>
+<li><p>可以使用方法上的替换块和参数动态更新请求 URL。 替换块是由{}包围的字母数字字符串。如果您的参数名称与 URL 路径中的名称不匹配，请使用 AliasAs 属性。</p>
+</li>
+</ul>
+<pre><code>[Get(&quot;/group/{id}/users&quot;)]
+Task&lt;List&lt;User&gt;&gt; GroupList([AliasAs(&quot;id&quot;)] int groupId)</code></pre><ul>
+<li>未指定为 URL 替换的参数将自动用作查询参数。 这与 Retrofit 不同，其中必须明确指定所有参数。参数名称和 URL 参数之间的比较不区分大小写，因此如果您在路径/ group/{groupid} /show 中命名参数”groupId”，它将正常工作。</li>
+</ul>
+<pre><code>[Get(&quot;/group/{id}/users&quot;)]
+Task&lt;List&lt;User&gt;&gt; GroupList([AliasAs(&quot;id&quot;)] int groupId, [AliasAs(&quot;sort&quot;)] string sortOrder);
+GroupList(4, &quot;desc&quot;);
+&gt;&gt;&gt; &quot;/group/4/users?sort=desc&quot;</code></pre><ul>
+<li>PS：这里就是说如果你在 GroupList 的签名里面使用<code>[AliasAs(&quot;sort&quot;)] 变量类型 变量名</code>的方式，即使原本的路径里面没有“sort”的属性，也会自动加上去。</li>
+</ul>
+<p>#Body 内容</p>
+<h2 id="通过使用-Body-属性，方法中的一个参数可以作为-Body"><a href="#通过使用-Body-属性，方法中的一个参数可以作为-Body" class="headerlink" title="通过使用 Body 属性，方法中的一个参数可以作为 Body"></a>通过使用 Body 属性，方法中的一个参数可以作为 Body</h2><pre><code>[Post(&quot;/users/new&quot;)]
+Task CreateUser([Body] User user);</code></pre><h2 id="根据参数的类型，提供-Body-数据有四种可能："><a href="#根据参数的类型，提供-Body-数据有四种可能：" class="headerlink" title="根据参数的类型，提供 Body 数据有四种可能："></a>根据参数的类型，提供 Body 数据有四种可能：</h2><ul>
+<li>如果类型为 Stream，则内容将通过 StreamContent 流式传输。</li>
+<li>如果类型是字符串，则该字符串将直接用作内容</li>
+<li>如果参数具有[Body（BodySerializationMethod.UrlEncoded）]属性，内容将被 URL 编码（见下面的 Form Posts 部分）</li>
+<li>对于所有其他类型，对象将被序列化为 JSON。</li>
+</ul>
+<p>#JSON 内容</p>
+<ul>
+<li>JSON 请求和响应使用 Json.NET 进行序列化/反序列化。 默认情况下，Refit 将使用可以通过设置 Newtonsoft.Json.JsonConvert.DefaultSettings 定义序列化器的设置：</li>
+</ul>
+<pre><code>JsonConvert.DefaultSettings = () =&gt; new JsonSerializerSettings()
+ {
+        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+        Converters = {new StringEnumConverter()}
+ };
+//## Serialized as: {&quot;day&quot;:&quot;Saturday&quot;}
+await PostSomeStuff(new { Day = DayOfWeek.Saturday });</code></pre><ul>
+<li>因为这些是全局设置，它们会影响整个应用程序。 将请求的设置隔离到特定的 AP 也许是有益的。 当创建一个 Refit 生成的实时界面时，您可以选择传递一个 RefitSettings，这将允许您指定你想要的 serializer 设置。 这允许您为不同的 API 具有不同的序列化器设置。</li>
+</ul>
+<pre><code>var gitHubApi = RestService.For&lt;IGitHubApi&gt;(&quot;https://api.github.com&quot;,new RefitSettings
+{
+        JsonSerializerSettings = new JsonSerializerSettings {
+            ContractResolver = new SnakeCasePropertyNamesContractResolver()
+} } );
+var otherApi = RestService.For&lt;IOtherApi&gt;(&quot;https://api.example.com&quot;,new RefitSettings
+{
+        JsonSerializerSettings = new JsonSerializerSettings {
+         ContractResolver = new CamelCasePropertyNamesContractResolver()
+} } );</code></pre><ul>
+<li>属性序列化/反序列化可以使用 Json.NET 的 JsonProperty 属性进行定制：</li>
+</ul>
+<pre><code>public class Foo
+{
+    // 像[AliasAs（“b”）]的使用将以form posts发布（见下文）
+    [JsonProperty(PropertyName=&quot;b&quot;)]
+    public string Bar { get; set; }
+}</code></pre><p>#Form posts</p>
+<ul>
+<li>对于采用表单帖子（即序列化为应用程序/ x-www-form-urlencoded）的 API，使用 BodySerializationMethod.UrlEncoded 初始化 Body 属性。参数可以是一个 IDictionary</li>
+</ul>
+<pre><code>public interface IMeasurementProtocolApi
+{
+    [Post(&quot;/collect&quot;)]
+    Task Collect([Body(BodySerializationMethod.UrlEncoded)] Dictionary&lt;string, object&gt; data);
+}
+var data = new Dictionary&lt;string, object&gt; {
+    {&quot;v&quot;, 1},
+    {&quot;tid&quot;, &quot;UA-1234-5&quot;},
+    {&quot;cid&quot;, new Guid(&quot;d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&quot;)},
+    {&quot;t&quot;, &quot;event&quot;},
+};
+// 序列化为: v=1&amp;tid=UA-1234-5&amp;cid=d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&amp;t=event
+await api.Collect(data);</code></pre><ul>
+<li>或者您可以传递任何对象，所有公共可读属性将作为请求中的表单字段序列化。 该方法允许您使用[AliasAs（“whatever”）]来别名属性名称，如果 API 具有隐藏字段名称，则可以帮助您：</li>
+</ul>
+<pre><code>public interface IMeasurementProtocolApi
+{
+    [Post(&quot;/collect&quot;)]
+    Task Collect([Body(BodySerializationMethod.UrlEncoded)] Measurement measurement);
+}
+public class Measurement
+{
+    // 属性可以是只读的，不需要[AliasAs]
+    public int v { get { return 1; }
+
+    [AliasAs(&quot;tid&quot;)]
+    public string WebPropertyId { get; set; }
+
+    [AliasAs(&quot;cid&quot;)]
+    public Guid ClientId { get;set; }
+
+    [AliasAs(&quot;t&quot;)]
+    public string Type { get; set; }
+
+    public object IgnoreMe { private get; set; }
+}
+var measurement = new Measurement {
+    WebPropertyId = &quot;UA-1234-5&quot;,
+    ClientId = new Guid(&quot;d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&quot;),
+    Type = &quot;event&quot;
+};
+//序列化为: v=1&amp;tid=UA-1234-5&amp;cid=d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&amp;t=event
+await api.Collect(measurement);</code></pre><h1 id="设置请求标头"><a href="#设置请求标头" class="headerlink" title="设置请求标头"></a>设置请求标头</h1><ul>
+<li><h2 id="静态标题"><a href="#静态标题" class="headerlink" title="静态标题"></a>静态标题</h2>您可以为应用 Headers 属性的方法设置一个或多个静态请求标头：</li>
+</ul>
+<pre><code>[Headers(&quot;User-Agent: Awesome Octocat App&quot;)]
+[Get(&quot;/users/{user}&quot;)]
+Task&lt;User&gt; GetUser(string user);</code></pre><p>也可以通过将 Headers 属性应用于接口，将静态标头添加到 API 中的每个请求中：</p>
+<pre><code>[Headers(&quot;User-Agent: Awesome Octocat App&quot;)]
+public interface IGitHubApi
+{
+    [Get(&quot;/users/{user}&quot;)]
+    Task&lt;User&gt; GetUser(string user);
+
+    [Post(&quot;/users/new&quot;)]
+    Task CreateUser([Body] User user);
+}</code></pre><ul>
+<li><h2 id="动态标题"><a href="#动态标题" class="headerlink" title="动态标题"></a>动态标题</h2>如果头文件的内容需要在运行时设置，则可以通过将 Header 属性应用到参数来为请求添加具有动态值的头文件：</li>
+</ul>
+<pre><code>[Get(&quot;/users/{user}&quot;)]
+Task&lt;User&gt; GetUser(string user, [Header(&quot;Authorization&quot;)] string authorization);
+// 将标题“Authorization：token OAUTH-TOKEN”添加到请求中
+var user = await GetUser(&quot;octocat&quot;, &quot;token OAUTH-TOKEN&quot;);</code></pre><ul>
+<li><h2 id="授权（动态标题缩减）"><a href="#授权（动态标题缩减）" class="headerlink" title="授权（动态标题缩减）"></a>授权（动态标题缩减）</h2>使用标头的最常见原因是授权。 今天，大多数 API 使用一些口味的 oAuth，访问令牌到期并刷新取得更长寿命的令牌。封装这些令牌用法的一种方法是，可以插入一个自定义的 HttpClientHandler。举个例子：</li>
+</ul>
+<pre><code>class AuthenticatedHttpClientHandler : HttpClientHandler
+{
+    private readonly Func&lt;Task&lt;string&gt;&gt; getToken;
+    public AuthenticatedHttpClientHandler(Func&lt;Task&lt;string&gt;&gt; getToken)
+    {
+        if (getToken == null) throw new ArgumentNullException(&quot;getToken&quot;);
+        this.getToken = getToken;
+    }
+    protected override async Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        // See if the request has an authorize header
+        var auth = request.Headers.Authorization;
+        if (auth != null)
+        {
+            var token = await getToken().ConfigureAwait(false);
+            request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);
+        }
+        return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    }
+}</code></pre><p>虽然 HttpClient 包含几乎相同的方法签名，但使用方式不同。 HttpClient.SendAsync 不被调用。 必须修改 HttpClientHandler。这个类是这样使用的（例如使用 ADAL 库来管理 Xamarin.Auth 或任何其他库的自动令牌刷新：</p>
+<pre><code>class LoginViewModel
+{
+    AuthenticationContext context = new AuthenticationContext(...);
+    private async Task&lt;string&gt; GetToken()
+    {
+        // 如果需要，AquireTokenAsync调用将提示用户界面
+        // 否则默认使用刷新令牌返回一个有效的访问令牌
+        var token = await context.AcquireTokenAsync(&quot;http://my.service.uri/app&quot;, &quot;clientId&quot;, new Uri(&quot;callback://complete&quot;));
+        return token;
+    }
+
+    public async void LoginAndCallApi()
+    {
+        var api = RestService.For&lt;IMyRestService&gt;(new HttpClient(new AuthenticatedHttpClientHandler(GetToken)) { BaseAddress = new Uri(&quot;https://the.end.point/&quot;) });
+        var location = await api.GetLocationOfRebelBase();
+    }
+}
+interface IMyRestService
+{
+    [Get(&quot;/getPublicInfo&quot;)]
+    Task&lt;Foobar&gt; SomePublicMethod();
+    [Get(&quot;/secretStuff&quot;)]
+    [Headers(&quot;Authorization: Bearer&quot;)]
+    Task&lt;Location&gt; GetLocationOfRebelBase();
+}</code></pre><p>在上面的例子中，任何时候调用需要身份验证的方法，AuthenticatedHttpClientHandler 将尝试获取一个新的访问令牌。 由应用程序提供一个，检查现有访问令牌的到期时间，并在需要时获取新的访问令牌。</p>
+<ul>
+<li><h1 id="重新定义标题"><a href="#重新定义标题" class="headerlink" title="重新定义标题"></a>重新定义标题</h1>不同于 Retrofit，其中标题不会相互覆盖，并且都添加到请求中，而不管定义同一个标题的次数如何，Refit 对 ASP.NET MVC 采用与动作过滤器相似的方法采用类似的方法 - 重新定义标题将替换 它按以下顺序排列：</li>
+<li>接口上的标题属性（最低优先级）</li>
+<li>标题属性在方法</li>
+<li>方法参数的标题属性（最高优先级）</li>
+</ul>
+<pre><code>[Headers(&quot;X-Emoji: :rocket:&quot;)]
+public interface IGitHubApi
+{
+    [Get(&quot;/users/list&quot;)]
+    Task&lt;List&gt; GetUsers();
+    [Get(&quot;/users/{user}&quot;)]
+    [Headers(&quot;X-Emoji: :smile_cat:&quot;)]
+    Task&lt;User&gt; GetUser(string user);
+    [Post(&quot;/users/new&quot;)]
+    [Headers(&quot;X-Emoji: :metal:&quot;)]
+    Task CreateUser([Body] User user, [Header(&quot;X-Emoji&quot;)] string emoji);
+}
+
+// X-Emoji: :rocket:
+var users = await GetUsers();
+// X-Emoji: :smile_cat:
+var user = await GetUser(&quot;octocat&quot;);
+// X-Emoji: :trollface:
+await CreateUser(user, &quot;:trollface:&quot;);</code></pre><ul>
+<li>#删除标题<br>在界面或方法上定义的标题可以通过重新定义没有值的静态标题（即不使用：<value>）或为动态标题传递 null 来删除。 空字符串将被包括为空标题。</value></li>
+</ul>
+<pre><code>[Headers(&quot;X-Emoji: :rocket:&quot;)]
+public interface IGitHubApi
+{
+    [Get(&quot;/users/list&quot;)]
+    [Headers(&quot;X-Emoji&quot;)] // 删除X-Emoji标题
+    Task&lt;List&gt; GetUsers();
+
+    [Get(&quot;/users/{user}&quot;)]
+    [Headers(&quot;X-Emoji:&quot;)] // 将X-Emoji标题重新定义为空
+    Task&lt;User&gt; GetUser(string user);
+
+    [Post(&quot;/users/new&quot;)]
+    Task CreateUser([Body] User user, [Header(&quot;X-Emoji&quot;)] string emoji);
+}
+
+// 没有X-Emoji标题
+var users = await GetUsers();
+// X-Emoji:
+var user = await GetUser(&quot;octocat&quot;);
+// 没有X-Emoji标题
+await CreateUser(user, null);
+// X-Emoji:
+await CreateUser(user, &quot;&quot;);</code></pre><ul>
+<li><h1 id="断点上传"><a href="#断点上传" class="headerlink" title="断点上传"></a>断点上传</h1>使用 Multipart 属性装饰的方法将使用多部分内容类型提交。 此时，multipart 方法支持以下参数类型：</li>
+<li>字符串（参数名称将用作名称和字符串值作为值）</li>
+<li>字节数组</li>
+<li>流</li>
+<li>FileInfo<br>参数名称将用作多部分数据中字段的名称。 这可以被 AliasAs 属性覆盖。要指定字节数组（byte []），Stream 和 FileInfo 参数的文件名和内容类型，需要使用包装类。 ByteArrayPart，StreamPart 和 FileInfoPart。</li>
+</ul>
+<pre><code>public interface ISomeApi
+{
+    [Multipart]
+    [Post(&quot;/users/{id}/photo&quot;)]
+    Task UploadPhoto(int id, [AliasAs(&quot;myPhoto&quot;)] StreamPart stream);
+}</code></pre><p>要将 Stream 传递给此方法，请构建如下所示的 StreamPart 对象：<br><code>someApiInstance.UploadPhoto(id, new StreamPart(myPhotoStream, &quot;photo.jpg&quot;, &quot;image/jpeg&quot;));</code><br>注意：此部分以前描述的 AttachmentName 属性已被弃用，不推荐使用它。</p>
+<h1 id="检索回应"><a href="#检索回应" class="headerlink" title="检索回应"></a>检索回应</h1><p>请注意，在 Refit 中，与 Retrofit 不同，没有同步网络请求的选项 - 所有请求都必须通过任务或通过 IObservable 进行异步。 不像 Retrofit，只能通过回调参数创建异步，因为我们生活在 async/await 未来。</p>
+<pre><code>[Post(&quot;/users/new&quot;)]
+Task CreateUser([Body] User user);
+
+// 如果网络呼叫失败，则会发生这种情况
+await CreateUser(someUser);</code></pre><p>如果 type 参数是’HttpResponseMessage’或’string’，则原始响应消息或作为字符串的内容将分别返回。</p>
+<pre><code>// Returns the content as a string (i.e. the JSON data)
+[Get(&quot;/users/{user}&quot;)]
+Task&lt;string&gt; GetUser(string user);
+
+//返回原始响应，作为可用于Reactive Extensions的IObservable
+[Get(&quot;/users/{user}&quot;)]
+IObservable&lt;HttpResponseMessage&gt; GetUser(string user);</code></pre><h1 id="使用通用接口"><a href="#使用通用接口" class="headerlink" title="使用通用接口"></a>使用通用接口</h1><p>当使用像 ASP.NET Web API 这样的东西，它是一个相当普遍的模式，拥有一整套 CRUD REST 服务。 Refit 现在允许您使用通用类型定义单个 API 接口：</p>
+<pre><code>public interface IReallyExcitingCrudApi&lt;T, in TKey&gt; where T : class
+{
+    [Post(&quot;&quot;)]
+    Task&lt;T&gt; Create([Body] T paylod);
+
+    [Get(&quot;&quot;)]
+    Task&lt;List&lt;T&gt;&gt; ReadAll();
+
+    [Get(&quot;/{key}&quot;)]
+    Task&lt;T&gt; ReadOne(TKey key);
+
+    [Put(&quot;/{key}&quot;)]
+    Task Update(TKey key, [Body]T payload);
+
+    [Delete(&quot;/{key}&quot;)]
+    Task Delete(TKey key);
+}</code></pre><ul>
+<li><h2 id="可以这样使用："><a href="#可以这样使用：" class="headerlink" title="可以这样使用："></a>可以这样使用：</h2></li>
+</ul>
+<pre><code>// 这里的“/ users”部分是很重要的，如果您希望它可以使用多种类型（除非每种类型都有不同的域）
+var api = RestService.For&lt;IReallyExcitingCrudApi&lt;User, string&gt;&gt;(&quot;http://api.example.com/users&quot;);</code></pre>
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/XamarinForms">XamarinForms</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "Xamarin Forms Api请求开源框架Refit翻译&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>
