@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>Xamrin 官方博客的文章Getting-started-with-async/await中文翻译 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期三, 五月 31日 2017, 12:09 凌晨</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<p>原文在此：<a href="https://blog.xamarin.com/getting-started-with-async-await/" target="_blank" rel="noopener">https://blog.xamarin.com/getting-started-with-async-await/</a><br>英语非常烂，翻得不好请指出。<br>Async／await 翻译<br>   异步编程对于流行的移动开发是很好的手段。对于长时间运行的任务使用异步方法（比如说下载数据的时候）可以保持你的界面有响应。在不使用异步方法的时候或者不正确使用异步或等待的时候，会使你的应用程序 ui 停止响应，然后用户会无法输入，直到这个任务执行完成。这样会导致用户体验很差，然后导致 app 在应用商城的评论很差，所以不使用异步编程并不是一个好的方案。<br>   今天我们会看到使用异步和怎么利用它在 ListView 中预防出现不可控的行为和意外。<br>什么叫做 async／await？<br>   在 net4.5 下分别引入了 async 和 await 关键字，使得你调用异步方法更方便并且让你的代码好读。这个 async／await 的语法糖的原理是使用了 TPL（Task Parallel Library 任务并行库）。如果你想开始一个新的任务并且在 ui 线程的代码运行之前优先完成，你的代码看起来可能是这样的：</p>
+<pre><code>// 开始一个新的任务 (创建一个新的线程)
+Task.Factory.StartNew (() =&gt; {
+    // 在后台线程上做点什么, 允许UI保持响应
+    DoSomething();
+// 当后台工作完成, 继续运行这个代码块
+}).ContinueWith (task =&gt; {
+    DoSomethingOnTheUIThread();
+// 以下的代码强制ContinueWith的代码在调用线程运行，一般是Main／UI线程
+}, TaskScheduler.FromCurrentSynchronizationContext ());</code></pre><p>这样不够完美，使用 async／await，上面的会变成：</p>
+<pre><code>await DoSomething();
+DoSomethingOnTheUIThread();</code></pre><p>上述的代码被后台编译成和第一个例子相同的 TPL 代码，所以说，这仅仅只是语法糖但又如此甜蜜。</p>
+<p>使用 async/await 的陷阱：<br>   在阅读关于使用 async／await 之后，你可以看见一句话“总是异步”但真正的意思是什么呢？简单地说，它的意思是任何一个异步方法的调用（即一个方法的签名有 async 关键字）在调用异步方法的时候都应该使用 await 关键字。当调用调用一个异步方法不使用 await 关键字的结果是抛出“运行时吞没”的异常，导致问题的原因变得很难追踪。使用 await 关键字的要求是：调用的异步方法的签名 async 关键字。举个例子：</p>
+<pre><code>async Task CallingMethod()
+{
+    var x = await MyMethodAsync();
+}</code></pre><p>这就有一个问题，如果你想使用 await 关键字调用一个异步方法的时候，可你又不能使用 async 修饰这个调用的方法，例如说调用的方法签名不能使用 async 关键字的方法，或者系统调用的构造方法。比如说 GetView 在安卓系统的 ArrayApdapter、或者 GetCell 在 ios 系统的 ITableViewDataSource。例如说：</p>
+<pre><code>public override View GetView(int position, View convertView, ViewGroup parent)
+{
+    /*
+    在方法签名有不兼容的返回类型，使用无法使用async关键字，
+    因此无法使用await关键字
+    */
+}
+</code></pre><p>正如你知道的，一个异步方法只能有 void、Task 或者 Task<t>这三种返回，并且返回 void 的情况仅在使得异步处理事件的时候才使用。在上述 GetView 方法的情况下，你需要返回一个安卓的 View，因为 OS 调用它所以明显不能使用 await 关键字，所以不能改成返回 Task<view>，因此不能处理为返回一个 Task<t>。所以你不能在上述的方法中用 async 关键字修饰，所以你也就不能在调用上述的方法的时候使用 await 关键字。为了绕开这个，做一个可能可以实现的尝试，就像过去做的一样。从 GetView 调用一个中间（或者在无法如何不能改变签名的平台上）方法然后异步调用这个中间的方法。</t></view></t></p>
+<pre><code>public override View GetView(int position, View convertView, ViewGroup parent)
+{
+    IntermediateMethod();
+    //更多代码
+}
+
+async Task IntermediateMethod()
+{
+     await MyMethodAsync();
+}</code></pre><p>这个问题是：“IntermediateMethod 现在是一个异步方法所以应该被等待就像 MyMethodAsync 方法一样需要被等待。”所以你没有实现什么东西，同样的 IntermediateMethod 现在也是异步应该被等待的。此外，GetView 方法将继续运行所有代码之后才调用“IntermediateMethod()”，这可能不是很让人满意。如果后面的代码调用“IntermediateMethod()”取决于“IntermediateMethod()”的结果，那么它不是让人满意的。在这种情况下，你可能会试着异步调用它的”Wait()”方法（或者 Result 属性）。比如说：</p>
+<pre><code>public override View GetView(int position, View convertView, ViewGroup parent)
+{
+    IntermediateMethod().Wait();
+    // 更多代码
+}</code></pre><p>异步方法调用“Wait()”导致调用线程停止，直到异步方法完成才会恢复。如果这是 Ui 线程，那么你的 UI 将在异步 Task 运行的时候挂起。这不是很好，尤其是在 ArrayAdapter 在为 ListView 的行提供数据的时候，用户将无法与 ListView 进行交互，直到所有的行的数据都已经完成下载，并且滚动是完全没有反应或者有卡顿的，这不是一个好的用户体验。还有一个可以调用异步任务的 Result 属性。如果你的异步任务是返回 Task<t>，则使用以下这种写法。这将导致调用的线程等待异步任务的结果。</t></p>
+<pre><code>public override View GetView(int position, View convertView, ViewGroup parent)
+{
+    view.Text = IntermediateMethod().Result;
+    // 更多代码
+}
+
+async Task&lt;string&gt; IntermediateMethod()
+{
+     return await MyMethodAsync();
+     // 在这个例子中MyMethodAsync也返回Task&lt;string&gt;。
+}</code></pre><p>事实上按上面代码那样做可能导致你的 UI 完全挂起并且那个不启动的 ListView 永远都不会填充它。可能还是一卡一卡的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-8b47e31b9e4fd081.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="image.png"></p>
+<p>一般来说，你应该避免使用“Wait()”和”Result”，特别是在 UI 线程上。在这个博客的末尾有一些 Ios 和安卓的项目，你可以分别看 ViewControllerJerky 和 MainActivityJerky 的这的实现，这些文件夹没有设置为在示例项目中进行编译。</p>
+<p>使用异步的方式：<br>那么在这种情况下异步如何实现呢？解决上面的问题的方法是回到以前实现 async/await 的 TPL。你要直接使用 TPL，但只有一次启动异步方法调用链（并且马上创建一个新线程）。TPL 在某处将直接使用，同样的你需要使用 TPL 启动一个新的线程。不能仅仅使用 async/await 关键字启动一个新的线程，所以对于一些方法的调用链不得不使用 TPL 启动新的线程（或另外一种方法），启动新线程的异步方法将会是一种框架方法，像許多（这种“多”不是绝大多的那种“多”）情況下的“.NET HttpClient”<br>異步方法。如果不使用异步框架方法，那么你的调用链中的某些方法不可不启动一个新的线程并且返回 Task 或者 Task<t>。<br>   让我们开始一个例子使用 GetView 在安卓平台的项目（尽管相同思想可以适用在任何平台例如 Xamarin.iOS, Xamarin.Forms），比如说我有一个 istView，我想填充从网络动态下载的文本（一般会先下载整个字符串列表，然后用已经下载的内容填充列表，但是为了演示，我逐行下载这些文本。再说了，可能有些地方也会要这么做呢）。<br>   我当然不想让 UI 线程等待多次下载。反而，我希望 ListView 能够开始就让用户可以滚动使用，并且随着文本的下载，文本将在每个 ListView 的 Item 中显示。我还想保证，如果一个 Item 滚出 View，那么当它被重用的时候，它会取消加载正在下载的文本，并且开始为该行添加新的文本。我们会用 TPL 和取消 Token 来实现这件事，代码的注释应该能说明正在做什么。</t></p>
+<pre><code>public override View GetView(int position, View convertView, ViewGroup parent)
+{
+   /* 我们需要一个CancellationTokenSource，如果在文本已经被加载的情况下
+       View在屏幕上重新展示的时候，可以取消这个异步调用。没有这个的话,
+      如果一个View正在加载一些文本，但View在屏幕上移动并且返回，则新加载的
+      数据可能比旧加载的数据所需的时间少，然后旧的数据就会覆盖新的数据，这样
+      就会显示错误的数据。所以在加载新文本之前，我们要在View重新出现时取消任何异步
+      任务。
+    */
+    CancellationTokenSource cts;
+    View view = convertView; // 如果有View可用，则重复利用现有的View
+
+    // 否则创建一个新的View
+    if (view == null) {
+        view = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
+    } else {
+        //如果View存在, 调用cts.Cancel()取消此View在等待的异步加载文本任务
+        var wrapper = view.Tag.JavaCast&lt;Wrapper&lt;CancellationTokenSource&gt;&gt;();
+        cts = wrapper.Data;
+        // 如果请求尚未取消，则取消异步任务。
+        if (!cts.IsCancellationRequested)
+        {
+           cts.Cancel();
+        }
+    }
+    TextView textView = view.FindViewById&lt;TextView&gt;(Android.Resource.Id.Text1);
+    textView.Text = &quot;placeholder&quot;;
+    // 为此View的“异步调用”创建新的CancellationTokenSource
+    cts = new CancellationTokenSource();
+    // 将其添加到包含在Java.Lang.Object中的View的Tag属性中
+    view.Tag = new Wrapper&lt;CancellationTokenSource&gt; { Data = cts };
+    // 获得取消的Token并且传入异步方法。
+    var ct = cts.Token;
+    Task.Run(async () =&gt; {
+        try
+        {
+            textView.Text = await GetTextAsync(position, ct);
+        } catch (System.OperationCanceledException ex) {
+            Console.WriteLine($&quot;Text load cancelled: {ex.Message}&quot;);
+        } catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+        }
+    }, ct);
+    return view;
+}</code></pre><p>简单来说，上述方法检查这是否是一个重用的 Item，如果是，但是还不完整，我们将取消现有的异步文本下载任务。然后将占位符文本加载到 Item 中，启动异步任务来下载改行的正确文本，并且立刻返回具有占位符文本的 View，进而填充 ListView。这样会保持 Ui 的响应，并且在 Item 中显示某些内容，而启动的任务会从 Web 获得正确的文本。<br>   随着文本的下载，你会看到占位符逐一更改成下载的文本（由于下载的次数不同，不一定是按顺序排列的。）。因为我做了这样简单、快速的请求所以我给异步任务添加了一个随机延迟来模拟这个行为，以下是 GetTextAsync 方法的实现：</p>
+<pre><code>async Task&lt;string&gt; GetTextAsync(int position, CancellationToken ct)
+{
+    // 检查任务是否被取消，如果被取消则抛出“取消”的异常。
+    // 很好的检查几个点，包括在返回字符串之前
+    ct.ThrowIfCancellationRequested();
+    // 模拟一个任务需要的时间变量
+    await Task.Delay(rand.Next(100,500));
+    ct.ThrowIfCancellationRequested();
+    if (client == null)
+    {
+        client = new HttpClient();
+    }
+    string response = await client.GetStringAsync(&quot;http://example.com&quot;);
+    string stringToDisplayInList = response.Substring(41, 14) + &quot; &quot; + position.ToString();
+    ct.ThrowIfCancellationRequested();
+    return stringToDisplayInList;
+}</code></pre><p>请注意，我可以使用 async 关键字来修饰传入 Task.Run()的 Lambda，从而让我等待着我的异步方法的调用，从而实现“总是异步”，在 ListView 上没有多余的卡顿！。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5692364-9995549dea3e9de4.gif?imageMogr2/auto-orient/strip" srcset="/img/loading.gif" alt="image.png"></p>
+<p>在行动中看它：<br>如果你想看到上面的 Xamarin.iOS、Xamarin.Android、Xamarin.Forms 的实现，请查看我的<a href="https://github.com/jgold6/AsyncAllTheWaySamples" target="_blank" rel="noopener">Github repo</a>。Ios 版本和上面的例子非常相似，唯一的区别在于如何将 CancellationTokenSource 附加到 Item，因为其没有 Tag 属性。然而，Xamarin.Forms 并没有直接等同于我所知道的 GetView 或 GetCell，所以我通过 App 的构造函数启动异步任务来模拟相同的行为来获取每一行的文本。<br>   异步编程是快乐的！</p>
+<p>译者附送：<br>AsyncAllTheWayXamForms 实现，AsyncAllTheWayXamForms.cs</p>
+<pre><code>using System;
+using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Collections.Generic;
+using UIKit;
+
+namespace AsyncAllTheWayXamForms
+{
+    public class App : Application
+    {
+        var items = new ObservableCollection&lt;string&gt;();
+        HttpClient client { get; set;}
+        Random rand { get; set;}
+        var indexes = new List&lt;int&gt;();
+        public App()
+        {
+            rand = new Random(DateTime.Now.Millisecond);
+            // 在项目列表占位符文本和数字1-50填充索引。
+            for (int i = 0; i &lt; 50; i++)
+            {
+                items.Add(&quot;Placeholder&quot;);
+                indexes.Add(i);
+            }
+            // 随机赋值索引（这样列表会以随机的排序加载）
+            for (int i = 0; i &lt; 49; i++)
+            {
+                int swapindex = rand.Next(0, 49);
+                int hold = indexes[i];
+                indexes[i] = indexes[swapindex];
+                indexes[swapindex] = hold;
+            }
+            // 这个app的根页面
+            var content = new ContentPage
+            {
+                Title = &quot;AsyncAllTheWayXamForms&quot;,
+                Content = new ListView
+                {
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    ItemsSource = items
+                }
+            };
+
+            MainPage = new NavigationPage(content);
+
+            Task.Run(async () =&gt;
+            {
+                if (client == null)
+                {
+                    client = new HttpClient();
+                }
+                for (int i = 0; i &lt; 50; i++)
+                {
+                    string text = await GetItemAsync(i);
+                    items.RemoveAt(indexes[i]);
+                    items.Insert(indexes[i], text);
+                }
+            });
+        }
+
+        public async Task&lt;string&gt; GetItemAsync(int i)
+        {
+            string response =
+                          await client.GetStringAsync(&quot;http://example.com&quot;);
+            string stringToDisplayInList = response.Substring(41, 14) +
+                           &quot; &quot; + indexes[i].ToString();
+            return stringToDisplayInList;
+        }
+
+        protected override void OnStart()
+        {
+            // 当app启动的时候调用（ps：在这里跟异步毫无关系,系统自带方法）
+        }
+
+        protected override void OnSleep()
+        {
+            // 当app挂起的时候调用（ps：在这里跟异步毫无关系,系统自带方法）
+        }
+
+        protected override void OnResume()
+        {
+            // 当app从挂起恢复的时候调用（ps：在这里跟异步毫无关系,系统自带方法）
+        }
+    }
+}</code></pre>
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/XamarinForms">XamarinForms</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "Xamrin 官方博客的文章Getting-started-with-async/await中文翻译&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>
