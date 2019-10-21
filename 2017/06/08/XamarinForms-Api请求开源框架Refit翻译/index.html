@@ -171,8 +171,7 @@ Task CreateUser([Body] User user);</code></pre><h2 id="根据参数的类型，�
 <li>如果参数具有[Body（BodySerializationMethod.UrlEncoded）]属性，内容将被 URL 编码（见下面的 Form Posts 部分）</li>
 <li>对于所有其他类型，对象将被序列化为 JSON。</li>
 </ul>
-<p>#JSON 内容</p>
-<ul>
+<h1 id="JSON-内容"><a href="#JSON-内容" class="headerlink" title="JSON 内容"></a>JSON 内容</h1><ul>
 <li>JSON 请求和响应使用 Json.NET 进行序列化/反序列化。 默认情况下，Refit 将使用可以通过设置 Newtonsoft.Json.JsonConvert.DefaultSettings 定义序列化器的设置：</li>
 </ul>
 <pre><code>JsonConvert.DefaultSettings = () =&gt; new JsonSerializerSettings()
@@ -201,8 +200,7 @@ var otherApi = RestService.For&lt;IOtherApi&gt;(&quot;https://api.example.com&qu
     // 像[AliasAs（“b”）]的使用将以form posts发布（见下文）
     [JsonProperty(PropertyName=&quot;b&quot;)]
     public string Bar { get; set; }
-}</code></pre><p>#Form posts</p>
-<ul>
+}</code></pre><h1 id="Form-posts"><a href="#Form-posts" class="headerlink" title="Form posts"></a>Form posts</h1><ul>
 <li>对于采用表单帖子（即序列化为应用程序/ x-www-form-urlencoded）的 API，使用 BodySerializationMethod.UrlEncoded 初始化 Body 属性。参数可以是一个 IDictionary</li>
 </ul>
 <pre><code>public interface IMeasurementProtocolApi
@@ -340,7 +338,7 @@ var users = await GetUsers();
 var user = await GetUser(&quot;octocat&quot;);
 // X-Emoji: :trollface:
 await CreateUser(user, &quot;:trollface:&quot;);</code></pre><ul>
-<li>#删除标题<br>在界面或方法上定义的标题可以通过重新定义没有值的静态标题（即不使用：<value>）或为动态标题传递 null 来删除。 空字符串将被包括为空标题。</value></li>
+<li><h1 id="删除标题"><a href="#删除标题" class="headerlink" title="删除标题"></a>删除标题</h1>在界面或方法上定义的标题可以通过重新定义没有值的静态标题（即不使用：<value>）或为动态标题传递 null 来删除。 空字符串将被包括为空标题。</value></li>
 </ul>
 <pre><code>[Headers(&quot;X-Emoji: :rocket:&quot;)]
 public interface IGitHubApi

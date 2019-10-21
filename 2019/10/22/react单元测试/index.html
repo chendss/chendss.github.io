@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>前端测试技术研究报告 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H7f2b5132a5034125b82295bb5cb34db0j.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期二, 十月 22日 2019, 12:25 凌晨</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="前端测试技术研究报告"><a href="#前端测试技术研究报告" class="headerlink" title="前端测试技术研究报告"></a>前端测试技术研究报告</h1><h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><ul>
+<li>前言</li>
+<li>前端测试包含的内容<ul>
+<li>单元测试</li>
+<li>UI 自动化测试</li>
+</ul>
+</li>
+<li>前端测试的意义<ul>
+<li>单元测试的意义</li>
+<li>UI 自动化测试的意义</li>
+</ul>
+</li>
+<li>单元测试<ul>
+<li>单元测试是什么</li>
+<li>前端需要单元测试的部分<ul>
+<li>函数测试</li>
+<li>组件测试</li>
+</ul>
+</li>
+<li>编写测试用例的原则</li>
+<li>react 测试工具链的选择<ul>
+<li>测试工具库<ul>
+<li>官方测试工具库 react-dom/test-utils</li>
+<li>第三方测试工具库 Enzyme</li>
+</ul>
+</li>
+<li>测试框架</li>
+<li>小结</li>
+</ul>
+</li>
+<li>单元测试包含的主要部分<ul>
+<li>断言</li>
+<li>测试用例</li>
+</ul>
+</li>
+<li>基于 Enzyme 的 react 单元测试实际体验<ul>
+<li>功能简介</li>
+<li>函数测试<ul>
+<li>具有返回值的函数测试</li>
+<li>没有返回值的函数测试</li>
+<li>小结</li>
+</ul>
+</li>
+<li>组件测试<ul>
+<li>组件基础测试-浅层渲染（<strong>shallow</strong>）</li>
+<li>组件 render，渲染纯 HTML</li>
+<li>组件深度渲染（<strong>mount</strong>）</li>
+<li>小结</li>
+</ul>
+</li>
+<li>测试性能</li>
+<li>小结</li>
+</ul>
+</li>
+<li>单元测试总结<ul>
+<li>进行单元测试的优势</li>
+<li>进行单元测试的弊端</li>
+<li>单元测试结论</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UI 自动化测试<ul>
+<li>UI 自动化测试工具</li>
+<li>测试载体介绍</li>
+<li>实际载体测试<ul>
+<li>测试点选取</li>
+<li>如何实现</li>
+<li>测试结果</li>
+</ul>
+</li>
+<li>UI 自动化测试总结<ul>
+<li>进行 UI 自动测试的优势</li>
+<li>进行 UI 自动测试的缺点</li>
+<li>关于 UI 自动测试的总结</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>总结</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前端开发中的测试在前端的开发过程中一直不是必须包含的步骤。但是随着每个项目的<strong>复杂化</strong>、代码的<strong>高复用性</strong>要求、组件之间的<strong>高内聚低耦合</strong>的要求越来越高，我们需要使用一些其他手段来保证<strong>代码质量</strong>并且缩短<strong>回馈周期</strong>，而进行<strong>整体测试</strong>就是其中一种手段，也就是本文要探讨的范畴。</p>
+<h2 id="前端测试包含的内容"><a href="#前端测试包含的内容" class="headerlink" title="前端测试包含的内容"></a>前端测试包含的内容</h2><ul>
+<li>单元测试</li>
+<li>UI 自动化测试</li>
+</ul>
+<h2 id="前端测试的意义"><a href="#前端测试的意义" class="headerlink" title="前端测试的意义"></a>前端测试的意义</h2><h4 id="单元测试的意义"><a href="#单元测试的意义" class="headerlink" title="单元测试的意义"></a>单元测试的意义</h4><ul>
+<li><strong>快速</strong>反馈功能是否良好，验证想法</li>
+<li>保证代码重构的<strong>安全性</strong>，即修改代码后可快速发现对整体是否有差的影响</li>
+<li><strong>节约</strong>手动测试的时间，避免重复劳动</li>
+<li>保证代码<strong>质量</strong></li>
+<li>某种程度促使编写更<strong>低耦合</strong>的代码以便测试</li>
+<li>容易<strong>隔离</strong>和<strong>定位</strong>错误，有利于调试工作</li>
+</ul>
+<h4 id="UI-自动化测试的意义"><a href="#UI-自动化测试的意义" class="headerlink" title="UI 自动化测试的意义"></a>UI 自动化测试的意义</h4><ul>
+<li>批量输出当前场景的实际浏览器截图以便校验</li>
+<li>快速定位实际效果与设计稿的<strong>偏差</strong></li>
+<li>快速判断当前实现是否符合业务场景</li>
+</ul>
+<h2 id="一、单元测试"><a href="#一、单元测试" class="headerlink" title="一、单元测试"></a>一、单元测试</h2><h3 id="1-1、单元测试是什么"><a href="#1-1、单元测试是什么" class="headerlink" title="1.1、单元测试是什么"></a>1.1、单元测试是什么</h3><p>是指对项目中的最小可测试单元进行检查和验证。</p>
+<p>对于前端来说，比如某一个函数的<strong>功能</strong>是否正常、组件的<strong>表现</strong>是否正常，简单来说就是对人为规定的最小可测试模块进行工程化测试。软件的独立单元将在与程序的其他部分相隔离互不影响的情况下进行测试。</p>
+<h3 id="1-2、前端需要单元测试的部分"><a href="#1-2、前端需要单元测试的部分" class="headerlink" title="1.2、前端需要单元测试的部分"></a>1.2、前端需要单元测试的部分</h3><p>对于前端来说可分拆的最小部分为<strong>函数</strong>，最小可视化内容为<strong>组件</strong>，所以前端的测试内容可以分为<strong>函数</strong>、<strong>组件</strong></p>
+<h4 id="1-2-1、函数测试"><a href="#1-2-1、函数测试" class="headerlink" title="1.2.1、函数测试"></a>1.2.1、函数测试</h4><p>对于 react 而言，函数一般在整体项目里的覆盖率并不高在 10%左右。</p>
+<ul>
+<li>对于有返回值的函数：对函数进行输入值模拟且判断，输出值校验。</li>
+<li>对于没有返回值的函数：寻找函数中可观察到特性（例如某个对象的状态被改变）进行校验。</li>
+</ul>
+<h4 id="1-2-2、组件测试"><a href="#1-2-2、组件测试" class="headerlink" title="1.2.2、组件测试"></a>1.2.2、组件测试</h4><p>对于 react 而言，组件在整体项目里占比非常高，可以达到 80-90%。</p>
+<ul>
+<li>组件是否正常渲染</li>
+<li>组件特定节点值是否正确</li>
+<li>组件特定节点属性值是否正确。</li>
+</ul>
+<h3 id="1-3、编写测试用例的原则"><a href="#1-3、编写测试用例的原则" class="headerlink" title="1.3、编写测试用例的原则"></a>1.3、编写测试用例的原则</h3><ul>
+<li>只考虑测试，不考虑内部实现</li>
+<li>数据尽量模拟真实</li>
+<li>充分考虑数据的边界条件</li>
+<li>对重点、核心代码，重点测试</li>
+</ul>
+<h3 id="1-3、react-测试工具链的选择"><a href="#1-3、react-测试工具链的选择" class="headerlink" title="1.3、react 测试工具链的选择"></a>1.3、react 测试工具链的选择</h3><h4 id="1-3-1、测试工具库"><a href="#1-3-1、测试工具库" class="headerlink" title="1.3.1、测试工具库"></a>1.3.1、测试工具库</h4><h6 id="1-3-1-1、官方测试工具库-react-dom-test-utils"><a href="#1-3-1-1、官方测试工具库-react-dom-test-utils" class="headerlink" title="1.3.1.1、官方测试工具库 react-dom/test-utils"></a>1.3.1.1、官方测试工具库 <strong>react-dom/test-utils</strong></h6><p>react 本身只能用这套工具库测试，但是由于它太不方便了，并且上手难度也相对较高，于是 Airbnb 公司开发另外一套测试工具库来替代它。换言之这套测试工具库的在当前并不是特别适合开展探讨，所以就不对它展开探讨。</p>
+<h6 id="1-3-1-2、第三方测试工具库-Enzyme"><a href="#1-3-1-2、第三方测试工具库-Enzyme" class="headerlink" title="1.3.1.2、第三方测试工具库 Enzyme"></a>1.3.1.2、第三方测试工具库 <strong><a href="https://yq.aliyun.com/go/articleRenderRedirect?url=https://github.com/airbnb/enzyme" target="_blank" rel="noopener">Enzyme</a></strong></h6><p>Enzyme 是由 Airbnb 开源的一个 React 的 JavaScript 测试工具，它具有如下特点</p>
+<ul>
+<li>API 和 jQuery 操作 DOM 一样灵活易用</li>
+<li>使用的是 cheerio 库来解析虚拟 DOM</li>
+<li><strong>兼容</strong>大多数断言库和测试框架</li>
+<li><strong>便利</strong>的工具函数库封装，可以处理浅渲染，静态渲染标记以及 DOM 渲染</li>
+</ul>
+<h4 id="1-3-2、测试框架"><a href="#1-3-2、测试框架" class="headerlink" title="1.3.2、测试框架"></a>1.3.2、测试框架</h4><p>当前市面上的测试框架各有各的优势和缺点，不分伯仲，本次测试框架的探讨并不是<strong>最主要</strong>的部分，所以选用一个配置最为简单，最为灵活的测试框架-<strong>Mocha</strong></p>
+<h4 id="1-3-3、小结"><a href="#1-3-3、小结" class="headerlink" title="1.3.3、小结"></a>1.3.3、小结</h4><p>选用更为简单易用的<strong>Enzyme</strong> 作为测试工具库，选用简单灵活的<strong>Mocha</strong>作为测试框架，进行以下的单元测试。</p>
+<h3 id="1-4、单元测试包含的主要部分"><a href="#1-4、单元测试包含的主要部分" class="headerlink" title="1.4、单元测试包含的主要部分"></a>1.4、单元测试包含的主要部分</h3><h4 id="1-4-1、断言"><a href="#1-4-1、断言" class="headerlink" title="1.4.1、断言"></a>1.4.1、断言</h4><p>当断言失败时则表示测试不通过</p>
+<ul>
+<li>同等性断言：相等则通过</li>
+<li>比较性断言：大小关系符合预期则通过</li>
+<li>类型性断言：类型符合预期则通过</li>
+<li>条件性测试：某种条件为<code>true</code>则通过</li>
+</ul>
+<h4 id="1-4-2、测试用例"><a href="#1-4-2、测试用例" class="headerlink" title="1.4.2、测试用例"></a>1.4.2、测试用例</h4><p>为某个特殊目标而编制的一组测试输入、执行条件以及预期结果，以便测试某个功能是否达到预期，多表现为一个函数。</p>
+<h3 id="1-5、基于-Enzyme-的-react-单元测试实际体验"><a href="#1-5、基于-Enzyme-的-react-单元测试实际体验" class="headerlink" title="1.5、基于 Enzyme 的 react 单元测试实际体验"></a>1.5、基于 Enzyme 的 react 单元测试实际体验</h3><h4 id="1-5-1、功能简介"><a href="#1-5-1、功能简介" class="headerlink" title="1.5.1、功能简介"></a>1.5.1、功能简介</h4><ul>
+<li>浅层渲染（<strong>shallow</strong>）- 将一个组件渲染成虚拟 DOM 对象，但是只渲染第一层，不渲染所有子组件，这种渲染方式速度<strong>特别快</strong>，因为不需要真正加载进 DOM</li>
+<li>渲染成静态的 HTML 字符串（<strong>render</strong>）- 将组件渲染成 HTML 字符串，与浅层渲染很像，不一样是<strong>render</strong>返回的是一个<strong>Cheerio</strong>实例对象</li>
+<li>加载为真实<strong>dom</strong>节点（<strong>mount</strong>）- 将 React 组件加载为真实 DOM 节点</li>
+</ul>
+<h4 id="1-5-2、函数测试"><a href="#1-5-2、函数测试" class="headerlink" title="1.5.2、函数测试"></a>1.5.2、函数测试</h4><h6 id="1-5-2-1、具有返回值的函数测试"><a href="#1-5-2-1、具有返回值的函数测试" class="headerlink" title="1.5.2.1、具有返回值的函数测试"></a>1.5.2.1、具有返回值的函数测试</h6><p>这里挑选两个函数进行测试，一个简单一个稍微复杂些</p>
+<ul>
+<li>加法函数<strong>add</strong> - 传入两个数字，返回它们的和。下面是核心的测试代码</li>
+</ul>
+<pre><code class="javascript">describe(&#39;加法函数测试&#39;, () =&gt; {
+  it(&#39;1+1应该等于2&#39;, () =&gt; {
+    expect(add(1, 1)).to.be.equal(2);
+  });
+});</code></pre>
+<p>可以看到结果为测试通过</p>
+<img src="https://ae01.alicdn.com/kf/Ua30d64524b074f65aba7e9e1161472701.png" srcset="/img/loading.gif" class="bm">
+
+<ul>
+<li>冒泡排序函数测试 - <strong>sort</strong>，传入一个数字数组，返回一个按从小到大排序的数字，下面是测试的核心代码</li>
+</ul>
+<pre><code class="javascript">describe(&#39;冒泡排序测试&#39;, () =&gt; {
+  it(&#39;[1,5,6,8,9,0,-1]应该排序为[-1,0,1,5,6,8,9]&#39;, () =&gt; {
+    let sortValue = sort([1, 5, 6, 8, 9, 0, -1]).join(&#39;&#39;);
+    let expectValue = [-1, 0, 1, 5, 6, 8, 9].join(&#39;&#39;);
+    expect(sortValue).to.be.equal(expectValue);
+  });
+});</code></pre>
+<img src="https://ae01.alicdn.com/kf/Ud84a108fd6534859b46b1da6704b8f4dK.png" srcset="/img/loading.gif">
+
+<p>显然断言失败了，提示我们输出的值跟期望值不一致，通过修改 bug 再次运行测试</p>
+<img src="https://ae01.alicdn.com/kf/U8afe8bc3329546f98b5b8967dafb41e8r.png" srcset="/img/loading.gif">
+
+<p>这次断言成功了</p>
+<h6 id="1-5-2-2、没有返回值的函数测试"><a href="#1-5-2-2、没有返回值的函数测试" class="headerlink" title="1.5.2.2、没有返回值的函数测试"></a>1.5.2.2、没有返回值的函数测试</h6><p>前面 1.5.2.1 采取一个一个函数进行测试，现在进行多个函数并行测试</p>
+<p>场景为：定义一个 Store 类，具有 loading 和 tableData 两个变量，向外暴露 4 个函数，代码如下。</p>
+<pre><code class="javascript">import { sort } from &#39;./math&#39;; // 冒泡排序函数
+class Store {
+  constructor() {
+    this.loading = true;
+    this.tableData = [1, 2, 3, 4, 0, 11, 43, 24, 67, 7];
+  }
+}
+
+const store = new Store();
+
+export const getLoading = function() {
+  return store.loading;
+};
+
+export const getData = function() {
+  return store.tableData;
+};
+
+export const close = function() {
+  store.loading = false;
+};
+
+export const sortTableData = function() {
+  store.tableData = sort(store.tableData);
+};</code></pre>
+<p>将对 4 个暴露出来的函数进行测试，其中<code>getLoading</code>、<code>getData</code>具有返回值。</p>
+<p>而<code>close</code>、<code>sortTableData</code>不具有返回值，显然要判断这两个函数是否正确，就必须在测试代码调用<code>getLoading</code>或者<code>getData</code>用以观察<code>close</code>、<code>sortTableData</code>是否正确执行，所以要先对<code>getLoading</code>、<code>getData</code>进行测试。核心测试代码如下：</p>
+<pre><code class="javascript">describe(&#39;有返回-获得store loading状态&#39;, () =&gt; {
+  it(&#39;应该返回ture&#39;, () =&gt; {
+    let value = getLoading();
+    expect(value).to.be.equal(true);
+  });
+});
+
+describe(&#39;有返回-获得store tableData值&#39;, () =&gt; {
+  it(&#39;应该返回 1234114324677&#39;, () =&gt; {
+    let value = getData().join(&#39;&#39;);
+    let expectValue = [1, 2, 3, 4, 0, 11, 43, 24, 67, 7].join(&#39;&#39;);
+    expect(value).to.be.equal(expectValue);
+  });
+});
+
+describe(&#39;无返回-修改loading值状态&#39;, () =&gt; {
+  it(&#39;应该成功修改store的loading状态为false&#39;, () =&gt; {
+    close();
+    let expectValue = false;
+    expect(getLoading()).to.be.equal(expectValue);
+  });
+});
+
+describe(&#39;无返回-修改tableData排序&#39;, () =&gt; {
+  it(&#39;应该成功修改tableData为[0, 1, 2, 3, 4, 7, 11, 24, 43,67]&#39;, () =&gt; {
+    sortTableData();
+    let value = getData().join(&#39;&#39;);
+    let expectValue = [0, 1, 2, 3, 4, 7, 11, 24, 43, 67];
+    expect(value).to.be.equal(expectValue.join(&#39;&#39;));
+  });
+});</code></pre>
+<img src="https://ae01.alicdn.com/kf/Ue398637e07554cfca1213360edf3a2bcI.png" srcset="/img/loading.gif">
+
+<p>从结果看出，并行测试具有顺序的概念，确保了前两个函数的正确性，后两个函数才可以正确测试，并且测试的速度是非常快的，并不会收到多个测试用例的影响而导致不可接受的变慢。</p>
+<h6 id="1-5-2-3-小结"><a href="#1-5-2-3-小结" class="headerlink" title="1.5.2.3 小结"></a>1.5.2.3 小结</h6><p>无论是具有返回值还是没有返回值的函数进行测试都<strong>相对简单</strong>，测试代码的编写也并<strong>不复杂</strong>，但是却可以带来<strong>一劳永逸</strong>的效果，每次运行都可以对所有的函数进行测试。而在没有进行单元测试，就得对每一个函数单独手动测试，可能耗费大量时间，所以单论函数测试来说，进行单元测试是有<strong>极大</strong>的好处的。</p>
+<h4 id="1-5-3、组件测试"><a href="#1-5-3、组件测试" class="headerlink" title="1.5.3、组件测试"></a>1.5.3、组件测试</h4><p>一个简单的 todo-list 组件，标题为<strong>todo-list</strong>具有以下功能</p>
+<ul>
+<li><p>添加一条 todo</p>
+</li>
+<li><p>删除一条 todo</p>
+</li>
+<li><p>输入 todo 文字功能</p>
+</li>
+</ul>
+<p>整体如图所示 <img src="https://ae01.alicdn.com/kf/U6b0f7c12b4164a63a6ddbaf0ed231e4bb.png" srcset="/img/loading.gif"></p>
+<p>将为此组件编写以下几个测试点</p>
+<ul>
+<li>1、标题是否为<strong>todo-list</strong></li>
+<li>2、添加 todo 按钮文本是否为<strong>添加一条 todo</strong></li>
+<li>3、判断输入框的提示是否为<strong>请输入</strong></li>
+<li>4、删除 todo 按钮文本是否为<strong>删除</strong></li>
+<li>5、初始化数据为<strong>第一条</strong>、<strong>第二条</strong>、<strong>第三条</strong></li>
+<li>6、todo 输入功能是否正确</li>
+<li>7、添加 todo 功能是否正确</li>
+<li>8、删除 todo 功能是否正确</li>
+</ul>
+<h6 id="1-5-3-1、组件基础测试-浅层渲染（shallow）"><a href="#1-5-3-1、组件基础测试-浅层渲染（shallow）" class="headerlink" title="1.5.3.1、组件基础测试-浅层渲染（shallow）"></a>1.5.3.1、组件基础测试-浅层渲染（<strong>shallow</strong>）</h6><p>浅层渲染由于不与 dom 交互，并且不涉及到子组件，所以 1、2、3、4 测试点适合使用<strong>浅层渲染</strong>来测试</p>
+<ul>
+<li>App.jsx 的核心代码如下：</li>
+</ul>
+<pre><code class="jsx">&lt;div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}
+&gt;
+  &lt;h1&gt;todo-list&lt;/h1&gt;
+  &lt;TodoList /&gt;
+  &lt;AddTodo /&gt;
+&lt;/div&gt;</code></pre>
+<p>AddTodo.jsx 核心代码如下</p>
+<pre><code class="jsx">&lt;div className=&quot;add-todo&quot;&gt;
+  &lt;input
+    className=&quot;add-input&quot;
+    type=&quot;text&quot;
+    placeholder=&quot;请输入&quot;
+    ref=&quot;todoTitle&quot;
+  /&gt;
+  &lt;button className=&quot;add-button&quot; onClick={this.addTodo.bind(this)}&gt;
+    添加一条todo
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+<p>TodoItem.jsx 核心代码如下</p>
+<pre><code class="jsx">&lt;li&gt;
+  &lt;span
+    className={`todo-text ${todoDone}`}
+    onClick={this.toggleDone.bind(this)}
+  &gt;
+    {todo.name}
+  &lt;/span&gt;
+  &lt;button className=&quot;delete&quot; onClick={this.deleteTodo.bind(this)}&gt;
+    {&#39; &#39;}
+    删除{&#39; &#39;}
+  &lt;/button&gt;
+&lt;/li&gt;</code></pre>
+<p>于是根据以上组件的编写形式，测试用例代码如下</p>
+<pre><code class="javascript">describe(&#39;判断标题是否正确&#39;, () =&gt; {
+  it(&#39;标题应该为 todo-list&#39;, () =&gt; {
+    let app = shallow(&lt;App /&gt;);
+    expect(app.find(&#39;h1&#39;).text()).to.equal(&#39;todo-list&#39;);
+  });
+});
+
+describe(&#39;添加todo按钮文本是否为 添加一条todo&#39;, () =&gt; {
+  it(&#39;按钮文本应该为 添加一条todo&#39;, () =&gt; {
+    let addTodo = shallow(&lt;AddTodo /&gt;);
+    expect(addTodo.find(&#39;.add-button&#39;).text()).to.equal(&#39;添加一条todo&#39;);
+  });
+});
+
+describe(&#39;判断输入框的提示是否为 请输入&#39;, () =&gt; {
+  it(&#39;提示文本应该为 请输入&#39;, () =&gt; {
+    let addTodo = shallow(&lt;AddTodo /&gt;);
+    let input = addTodo.find(&#39;input&#39;);
+    let placeholder = input.node.props.placeholder;
+    expect(placeholder).to.equal(&#39;请输入&#39;);
+  });
+});
+
+describe(&#39;删除todo按钮文本是否为 删除&#39;, () =&gt; {
+  it(&#39;按钮文本应该为 删除&#39;, () =&gt; {
+    let todoItem = shallow(&lt;TodoItem todo=&quot;测试&quot; done={false} /&gt;);
+    expect(
+      todoItem
+        .find(&#39;.delete&#39;)
+        .text()
+        .trim()
+    ).to.equal(&#39;删除&#39;);
+  });
+});</code></pre>
+<p>测试结果如下</p>
+<img src="https://ae01.alicdn.com/kf/Uf224558ae059484ebd4121f9ae964a041.png" srcset="/img/loading.gif">
+
+<h6 id="1-5-3-2、组件-render，渲染纯-HTML"><a href="#1-5-3-2、组件-render，渲染纯-HTML" class="headerlink" title="1.5.3.2、组件 render，渲染纯 HTML"></a>1.5.3.2、组件 render，渲染纯 HTML</h6><p>此方法会把组件渲染成一个 HTML 字符串，跟浅渲染很像，不同的是内部使用的是<a href="https://github.com/cheeriojs/cheerio#api" target="_blank" rel="noopener">Cheerio </a>库，接下来将使用这个方法进行测试点 5，核心测试代码如下：</p>
+<pre><code class="javascript">describe(&#39;初始化数据为-&quot;第一条&quot;、&quot;第二条&quot;、&quot;第三条&quot;&#39;, function() {
+  it(&#39;应该没有一条数据的状态是完成的&#39;, function() {
+    let app = render(&lt;App /&gt;);
+    expect(app.find(&#39;.todo-done&#39;).length).to.equal(0);
+  });
+  it(&#39;应该有3条数据，并且分别为“第一条”，“第二条”，“第三条”&#39;, function() {
+    let value = [&#39;第一条&#39;, &#39;第二条&#39;, &#39;第三条&#39;].join(&#39;&#39;);
+    let app = render(&lt;App /&gt;);
+    let todoItems = app.find(&#39;.todo-item .todo-text&#39;);
+    let expectValue = todoItems.length === 3 &amp;&amp; value === todoItems.text();
+    expect(expectValue).to.equal(true);
+  });
+});</code></pre>
+<p>测试结果如图</p>
+<img src="https://ae01.alicdn.com/kf/Ufa4a59b00e6c4abba4bdcb26b4c6e940O.png" srcset="/img/loading.gif">
+
+<h6 id="1-5-3-3、组件深度渲染（mount）"><a href="#1-5-3-3、组件深度渲染（mount）" class="headerlink" title="1.5.3.3、组件深度渲染（mount）"></a>1.5.3.3、组件深度渲染（<strong>mount</strong>）</h6><p>对于按钮点击这类需要触发的测试，靠浅渲染和静态渲染（render）是无法进行测试，需要用到<strong>mount</strong>渲染才能进行测试，所以测试点 6、7、8 适合使用深度渲染来测，核心测试代码如下：</p>
+<pre><code class="javascript">describe(&#39;测试添加功能是否正确&#39;, () =&gt; {
+  it(&#39;添加-todo-list的数组应该增加一个&#39;, () =&gt; {
+    let app = mount(&lt;App /&gt;);
+    let todoLength = app.find(&#39;li&#39;).length;
+    let addInput = app.find(&#39;.add-input&#39;).get(0);
+    addInput.value = &#39;测试&#39;;
+    app.find(&#39;.add-button&#39;).simulate(&#39;click&#39;);
+    expect(app.find(&#39;li&#39;).length).to.equal(todoLength + 1);
+  });
+
+  it(&#39;添加一条数据的内容应该等于输入框输入的内容&#39;, () =&gt; {
+    let app = mount(&lt;App /&gt;);
+    let value = &#39;增加一条todo&#39;;
+
+    let input = app.find(&#39;.add-input&#39;).get(0);
+    input.value = value;
+
+    app.find(&#39;.add-button&#39;).simulate(&#39;click&#39;); // 模拟点击
+    let todos = app.find(&#39;.todo-text&#39;);
+    let lastItem = todos.last();
+    expect(lastItem.text()).to.equal(value);
+  });
+});
+
+describe(&#39;测试删除按能是否正确&#39;, () =&gt; {
+  it(&#39;删除-todo-list的数组应该变少一个&#39;, () =&gt; {
+    let app = mount(&lt;App /&gt;);
+    let todoLength = app.find(&#39;li&#39;).length;
+    app
+      .find(&#39;button.delete&#39;)
+      .at(0)
+      .simulate(&#39;click&#39;);
+    expect(app.find(&#39;li&#39;).length).to.equal(todoLength - 1);
+  });
+});</code></pre>
+<p>测试结果如下：</p>
+<img src="https://ae01.alicdn.com/kf/U7d143a20ad224c0fab2b183d4f5746d9F.png" srcset="/img/loading.gif">
+
+<h6 id="1-5-3-4、-小结"><a href="#1-5-3-4、-小结" class="headerlink" title="1.5.3.4、 小结"></a>1.5.3.4、 小结</h6><p>根据上面的实际体验，由于框架和工具库提供的丰富 api 以致我们编写测试代码可以非常简单地实现需求，其代码量和复杂度也并不高。</p>
+<h4 id="1-5-4、测试性能"><a href="#1-5-4、测试性能" class="headerlink" title="1.5.4、测试性能"></a>1.5.4、测试性能</h4><ul>
+<li><p>当存在 1 个测试用例时，耗时为</p>
+<img src="https://ae01.alicdn.com/kf/Ua6b83a9b02464b15846bb67fbfb32df9h.png" srcset="/img/loading.gif">
+</li>
+<li><p>当存在 4 个测试用例时，耗时为</p>
+<img src="https://ae01.alicdn.com/kf/U201a27b05ff042b8bb9c0dad39aacdb2S.png" srcset="/img/loading.gif">
+</li>
+<li><p>把上面所实现的测试用例全部执行，耗时为</p>
+<img src="https://ae01.alicdn.com/kf/U292ed6f4f71a464cac6b3ee819efd468i.png" srcset="/img/loading.gif">
+
+</li>
+</ul>
+<p>可以看出，测试用例的个数对测试速度的影响是不明显的，这里的时间变长主要是因为<strong>mount</strong>渲染的方式会导致 dom 加载，当撤去<strong>mount</strong>渲染的测试之后，耗时仅在<code>45ms</code></p>
+<h4 id="1-5-5、小结"><a href="#1-5-5、小结" class="headerlink" title="1.5.5、小结"></a>1.5.5、小结</h4><h3 id="1-6、单元测试总结"><a href="#1-6、单元测试总结" class="headerlink" title="1.6、单元测试总结"></a>1.6、单元测试总结</h3><h4 id="1-6-1、进行单元测试的优势"><a href="#1-6-1、进行单元测试的优势" class="headerlink" title="1.6.1、进行单元测试的优势"></a>1.6.1、进行单元测试的优势</h4><ul>
+<li>保证代码单元的质量</li>
+<li>缩短后期开发人员<strong>自测时间</strong></li>
+<li>提高项目的<strong>稳定性</strong>和<strong>健壮性</strong></li>
+<li>不需要等到整个项目<strong>编写完成</strong>才测试，写一个单元就可以进行单元测试</li>
+<li>快速反馈<strong>函数</strong>，<strong>组件</strong>，<strong>UI</strong>的正确性，并且判断是否符合业务需求</li>
+</ul>
+<h4 id="1-6-2、进行单元测试的弊端"><a href="#1-6-2、进行单元测试的弊端" class="headerlink" title="1.6.2、进行单元测试的弊端"></a>1.6.2、进行单元测试的弊端</h4><ul>
+<li>因为单元测试的核心是<strong>独立</strong>，所以这也是它的不足，无法测试整体之间相互依赖的关系</li>
+<li>前期需要投入更多<strong>时间</strong>来编写单元测试</li>
+<li>编写单元测试的代码时需要更为<strong>小心谨慎</strong>，因为单元测试本身也可能存在 bug</li>
+<li><strong>UI</strong>测试的复杂度会随着项目本身的复杂度变得越来越难以测试</li>
+<li>为其一个单元编写的测试用例不止一个，这将增加开发<strong>时间</strong></li>
+<li>往往测试代码会比项目代码<strong>更多</strong></li>
+</ul>
+<h4 id="1-6-3、单元测试结论"><a href="#1-6-3、单元测试结论" class="headerlink" title="1.6.3、单元测试结论"></a>1.6.3、单元测试结论</h4><p>根据以上测试和实际编写测试代码，可以得出两点</p>
+<ul>
+<li><p>在项目复杂相对<strong>比较低</strong>的时候，组件测试和函数测试均可以进行<strong>100%</strong>覆盖测试，这样带来的好处是极大保证了代码的<strong>可靠性</strong>和<strong>质量</strong>。</p>
+</li>
+<li><p>在项目复杂度比较<strong>高</strong>的情况下，函数测试进行<strong>100%</strong>覆盖测试，而组件测试在<strong>复杂度高</strong>的情况下测试代码将会<strong>迅速膨胀</strong>这个时候就<strong>不适合</strong>进行 100%覆盖测试了，可以挑选<strong>重要程度高</strong>的组件进行测试。</p>
+</li>
+</ul>
+<p>综合以上两点，单元测试均是给项目提供了一道很好的屏障，保障代码<strong>可靠性</strong>、<strong>健壮性</strong>、<strong>低耦合性</strong>，对整体的项目是利大于弊的。</p>
+<h2 id="二、UI-自动化测试"><a href="#二、UI-自动化测试" class="headerlink" title="二、UI 自动化测试"></a>二、UI 自动化测试</h2><p>UI 自动化测试的思路大致是将页面运行在无界浏览器（虚拟浏览器/无头浏览器），通过常规的 dom 操作模拟真实行为，生成当前场景的截图并且输出，然后进行人工校验。</p>
+<h3 id="2-1、UI-自动化测试工具"><a href="#2-1、UI-自动化测试工具" class="headerlink" title="2.1、UI 自动化测试工具"></a>2.1、UI 自动化测试工具</h3><p>各个语言都有自己的虚拟浏览器实现，比较适合前端开发人员使用的就是<code>puppeteer</code>+<code>node</code>这套开发工具链来实现。</p>
+<h3 id="2-2、测试载体介绍"><a href="#2-2、测试载体介绍" class="headerlink" title="2.2、测试载体介绍"></a>2.2、测试载体介绍</h3><p>项目原型是一个商城的 H5 端，层级关系如下</p>
+<ul>
+<li>登录页</li>
+<li>首页</li>
+<li>商品列表页 底部有两个导航按钮分别为 <strong>商品列表</strong>、<strong>订单列表</strong></li>
+<li>商品详情页</li>
+<li>确认订单页</li>
+<li>订单列表页 底部有两个导航按钮分别为 <strong>商品列表</strong>、<strong>订单列表</strong></li>
+</ul>
+<h3 id="2-3、实际载体测试"><a href="#2-3、实际载体测试" class="headerlink" title="2.3、实际载体测试"></a>2.3、实际载体测试</h3><h4 id="2-3-1、测试点选取"><a href="#2-3-1、测试点选取" class="headerlink" title="2.3.1、测试点选取"></a>2.3.1、测试点选取</h4><ul>
+<li>登录页<ul>
+<li>不输入用户名点击登录</li>
+<li>不输入密码点击登录</li>
+<li>输入用户名和密码点击登录</li>
+</ul>
+</li>
+<li>首页<ul>
+<li>点击商品列表按钮</li>
+<li>点击订单列表按钮</li>
+</ul>
+</li>
+<li>商品列表页<ul>
+<li>滚动列表</li>
+<li>点击商品</li>
+<li>点击底部商品列表按钮</li>
+<li>点击底部订单列表按钮</li>
+</ul>
+</li>
+<li>商品详情页<ul>
+<li>点击确认订单</li>
+</ul>
+</li>
+<li>确认订单页<ul>
+<li>不输入收货人点击确认下单</li>
+<li>输入收货人点击确认下单</li>
+</ul>
+</li>
+<li>订单列表页<ul>
+<li>点击商品列表按钮</li>
+<li>点击订单列表按钮</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-2、如何实现"><a href="#2-3-2、如何实现" class="headerlink" title="2.3.2、如何实现"></a>2.3.2、如何实现</h4><p>由于篇幅问题，以下展示部分代码，代码描述的是测试登录流程测试</p>
+<pre><code class="javascript">async clickLogin ({ className, imgName }) {
+  const page = this.page
+  await page.reload()
+  let classList = [
+    &#39;.user .am-input-control input&#39;,
+    &#39;.pwd .am-input-control input&#39;,
+  ]
+  for (let cls of classList) {
+    if (cls.includes(className) || className == null) {
+      await page.focus(cls)
+      await page.keyboard.type(&#39;yun-xi&#39;)
+    }
+  }
+  await page.click(&#39;.login-btn&#39;)
+  await UiTest.screenImg(page, imgName, &#39;login&#39;)
+}
+
+async describeLogin () {
+  let classList = [
+    { className: &#39;user&#39;, imgName: &#39;不输入密码&#39; },
+    { className: &#39;pwd&#39;, imgName: &#39;不输入用户名&#39; },
+    { className: &#39;&#39;, imgName: &#39;输入用户名和密码&#39; },
+  ]
+  for (let cls of classList) {
+    await this.clickLogin(cls)
+  }
+}</code></pre>
+<p>其他的流程也是类似实现方案。</p>
+<h4 id="2-3-3、测试结果"><a href="#2-3-3、测试结果" class="headerlink" title="2.3.3、测试结果"></a>2.3.3、测试结果</h4><p>测试完成后会生成一系列图片，根据流程不同存在不同文件夹，如图所示</p>
+<img src="https://ae01.alicdn.com/kf/U511ec549adc04cb780d401f3474602d6r.png" srcset="/img/loading.gif">
+
+<p>每个文件夹中包含其流程测试点的图片展示</p>
+<img src="https://ae01.alicdn.com/kf/U30ccb2b656c6478a807a404091b10ae2x.png" srcset="/img/loading.gif">
+
+<p>具体的效果如图，截取登录流程-当用户不输入密码的情况下页面的反应</p>
+<img src="https://ae01.alicdn.com/kf/U2a84f76c08f64a8ba2911586b65d5a45R.png" srcset="/img/loading.gif" width="300px">
+
+<h3 id="2-4、UI-自动测试总结"><a href="#2-4、UI-自动测试总结" class="headerlink" title="2.4、UI 自动测试总结"></a>2.4、UI 自动测试总结</h3><h4 id="2-4-1、进行-UI-自动测试的优势"><a href="#2-4-1、进行-UI-自动测试的优势" class="headerlink" title="2.4.1、进行 UI 自动测试的优势"></a>2.4.1、进行 UI 自动测试的优势</h4><ul>
+<li>UI 可以很快速地校验并且反馈，<strong>缩短</strong>开发与 UI 之间的<strong>沟通时间</strong></li>
+<li>开发人员对整体的流程把握<strong>更清晰</strong></li>
+<li>测试流程<strong>一次编写多次运行</strong>，省去实际页面操作的<strong>时间</strong></li>
+<li>在编写测试代码时可以发现一些开发时没有发现的问题，相当于是<strong>系统自测</strong></li>
+<li>使用 mock 测试时，测试速度<strong>非常快</strong>远超人为测试，提高测试<strong>效率</strong></li>
+</ul>
+<h4 id="2-4-2、进行-UI-自动测试的缺点"><a href="#2-4-2、进行-UI-自动测试的缺点" class="headerlink" title="2.4.2、进行 UI 自动测试的缺点"></a>2.4.2、进行 UI 自动测试的缺点</h4><ul>
+<li>当页面交互非常多的时候，编写测试用例的代码就会迅速膨胀（本测试载体的测试代码约 180 行）</li>
+<li>连同接口一起测试的时候测试时间并不是很快，因为必须等待接口数据</li>
+</ul>
+<h4 id="2-4-3、关于-UI-自动测试的总结"><a href="#2-4-3、关于-UI-自动测试的总结" class="headerlink" title="2.4.3、关于 UI 自动测试的总结"></a>2.4.3、关于 UI 自动测试的总结</h4><p>根据以上实际测试和编写测试代码，可以得出 UI 自动化测试是利大于弊的，进行 UI 自动测试的时候实际上是对整体流程的深入理解，减少大部分的简单错误，同时也加快 UI 与开发之间的反馈时间（缩短了大量的人为操作页面时间）。</p>
+<h2 id="三、结论"><a href="#三、结论" class="headerlink" title="三、结论"></a>三、结论</h2><p>根据以上所有实际使用与编写，单元测试在复杂项目下可以酌情<strong>减少</strong>组件测试的覆盖率，在<strong>复杂度低</strong>的项目里，进行 100%覆盖编写是<strong>极其有利</strong>的。UI 自动化测试在<strong>复杂度较低</strong>的项目下进行 100%覆盖是可以<strong>极大</strong>提高交稿质量和开发效率的，在项目<strong>复杂度比较高</strong>的情况下，可以挑选<strong>重要</strong>的页面进行测试。总而言之，根据测试结果本文认为进行单元测试和 UI 自动化测试都是<strong>利大于弊</strong>的。</p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "前端测试技术研究报告&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>

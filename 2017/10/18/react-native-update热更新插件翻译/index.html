@@ -124,8 +124,7 @@
 			<div class="py-5 z-depth-3" id="board">
 				<div class="post-content mx-auto">
 					<div class="markdown-body">
-						<p>#原文地址：<a href="https://github.com/remobile/react-native-update" target="_blank" rel="noopener">https://github.com/remobile/react-native-update</a></p>
-<h1 id="React-Native-更新-remobile"><a href="#React-Native-更新-remobile" class="headerlink" title="React Native 更新 (remobile)"></a>React Native 更新 (remobile)</h1><p>更新 js 版本和 app 版本</p>
+						<h1 id="原文地址：https-github-com-remobile-react-native-update"><a href="#原文地址：https-github-com-remobile-react-native-update" class="headerlink" title="原文地址：https://github.com/remobile/react-native-update"></a>原文地址：<a href="https://github.com/remobile/react-native-update" target="_blank" rel="noopener">https://github.com/remobile/react-native-update</a></h1><h1 id="React-Native-更新-remobile"><a href="#React-Native-更新-remobile" class="headerlink" title="React Native 更新 (remobile)"></a>React Native 更新 (remobile)</h1><p>更新 js 版本和 app 版本</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="sh">npm install @remobile/react-native-update --save</code></pre>
 <h3 id="安装-Android"><a href="#安装-Android" class="headerlink" title="安装 (Android)"></a>安装 (Android)</h3><pre><code class="gradle">...
 include &#39;:react-native-update&#39;
@@ -169,8 +168,7 @@ public class MainApplication extends Application implements ReactApplication {
     };
     ......
 }</code></pre>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="UpdatePage-js"><a href="#UpdatePage-js" class="headerlink" title="UpdatePage.js"></a>UpdatePage.js</h4><p>#####定义全局变量</p>
-<pre><code class="js">&#39;use strict&#39;;
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="UpdatePage-js"><a href="#UpdatePage-js" class="headerlink" title="UpdatePage.js"></a>UpdatePage.js</h4><h5 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h5><pre><code class="js">&#39;use strict&#39;;
 import React, { Component } from &#39;react&#39;;
 import {
   View,
@@ -206,8 +204,7 @@ ERROR_UNZIP_JS = 4; // 解压js
 
 var PROGRESS_WIDTH = sr.tw*0.7;
 var {Button, ProgressBar} = COMPONENTS;</code></pre>
-<p>#####进度 view</p>
-<pre><code>var ProgressInfo = React.createClass({
+<h5 id="进度-view"><a href="#进度-view" class="headerlink" title="进度 view"></a>进度 view</h5><pre><code>var ProgressInfo = React.createClass({
     render() {
         const { progress } = this.props;
         if (progress &lt; 1000) {
@@ -235,8 +232,7 @@ var {Button, ProgressBar} = COMPONENTS;</code></pre>
             );
         }
     }
-});</code></pre><p>#####页面显示 view ######函数</p>
-<pre><code>module.exports = React.createClass({
+});</code></pre><h5 id="页面显示-view"><a href="#页面显示-view" class="headerlink" title="页面显示 view"></a>页面显示 view</h5><h6 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h6><pre><code>module.exports = React.createClass({
     getInitialState() {
         const {options} = this.props;
         return {
@@ -289,8 +285,7 @@ var {Button, ProgressBar} = COMPONENTS;</code></pre>
                 onError:(errCode)=&gt;{this.onError(errCode)},
             });
         }
-    },</code></pre><p>######页面的 render</p>
-<pre><code>    render() {
+    },</code></pre><h6 id="页面的-render"><a href="#页面的-render" class="headerlink" title="页面的 render"></a>页面的 render</h6><pre><code>    render() {
         var components = {};
         const {
           currentVersion,
@@ -361,11 +356,9 @@ var {Button, ProgressBar} = COMPONENTS;</code></pre>
             ……
         );
     },
-});</code></pre><p>######样式</p>
-<pre><code>var styles = StyleSheet.create({
+});</code></pre><h6 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h6><pre><code>var styles = StyleSheet.create({
     ……
-});</code></pre><h4 id="UpdateInfoBox-js"><a href="#UpdateInfoBox-js" class="headerlink" title="UpdateInfoBox.js"></a>UpdateInfoBox.js</h4><p>#####全局变量</p>
-<pre><code class="js">&#39;use strict&#39;;
+});</code></pre><h4 id="UpdateInfoBox-js"><a href="#UpdateInfoBox-js" class="headerlink" title="UpdateInfoBox.js"></a>UpdateInfoBox.js</h4><h5 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h5><pre><code class="js">&#39;use strict&#39;;
 var React = require(&#39;react&#39;);
 var ReactNative = require(&#39;react-native&#39;);
 var { StyleSheet, View, Text, Image, TouchableOpacity } = ReactNative;
@@ -390,8 +383,7 @@ var ERROR_NULL = 0,
 
 var PROGRESS_WIDTH = sr.tw * 0.7;
 var { Button, ProgressBar } = COMPONENTS;</code></pre>
-<p>#####进度 view</p>
-<pre><code>var ProgressInfo = React.createClass({
+<h5 id="进度-view-1"><a href="#进度-view-1" class="headerlink" title="进度 view"></a>进度 view</h5><pre><code>var ProgressInfo = React.createClass({
     render() {
         const { progress } = this.props;
         if (progress &lt; 1000) {
@@ -419,8 +411,7 @@ var { Button, ProgressBar } = COMPONENTS;</code></pre>
             );
         }
     }
-});</code></pre><p>#####页面 view ######函数</p>
-<pre><code>module.exports = React.createClass({
+});</code></pre><h5 id="页面-view-函数"><a href="#页面-view-函数" class="headerlink" title="页面 view ######函数"></a>页面 view ######函数</h5><pre><code>module.exports = React.createClass({
     getInitialState() {
         return {
             status:STATUS_HAS_VEW_VERSION,
@@ -555,8 +546,7 @@ var { Button, ProgressBar } = COMPONENTS;</code></pre>
             &lt;/View&gt;
         );
     },
-});</code></pre><p>######样式</p>
-<pre><code>
+});</code></pre><h6 id="样式-1"><a href="#样式-1" class="headerlink" title="样式"></a>样式</h6><pre><code>
 var styles = StyleSheet.create({
    ……
 });</code></pre><h2 id="Update-的方法"><a href="#Update-的方法" class="headerlink" title="Update 的方法"></a>Update 的方法</h2><ul>

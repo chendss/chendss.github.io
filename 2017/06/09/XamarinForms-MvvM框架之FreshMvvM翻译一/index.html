@@ -171,27 +171,26 @@ Task PopPage(bool modal = false);
 }</code></pre><ul>
 <li>在 PushPage 和 PopPage 中，您可以执行任何您喜欢的导航，这可以从简单的导航到高级嵌套导航。</li>
 </ul>
-<p>##该框架包含一些内置的导航容器，用于不同类型的导航。</p>
-<ul>
-<li>###基本导航 - 内置</li>
+<h2 id="该框架包含一些内置的导航容器，用于不同类型的导航。"><a href="#该框架包含一些内置的导航容器，用于不同类型的导航。" class="headerlink" title="该框架包含一些内置的导航容器，用于不同类型的导航。"></a>该框架包含一些内置的导航容器，用于不同类型的导航。</h2><ul>
+<li><h3 id="基本导航-内置"><a href="#基本导航-内置" class="headerlink" title="基本导航 - 内置"></a>基本导航 - 内置</h3></li>
 </ul>
 <pre><code>var page = FreshPageModelResolver.ResolvePageModel&lt;MainMenuPageModel&gt; ();
 var basicNavContainer = new FreshNavigationContainer (page);
 MainPage = basicNavContainer;</code></pre><ul>
-<li>###主要细节 - 内置</li>
+<li><h3 id="主要细节-内置"><a href="#主要细节-内置" class="headerlink" title="主要细节 - 内置"></a>主要细节 - 内置</h3></li>
 </ul>
 <pre><code>var masterDetailNav = new FreshMasterDetailNavigationContainer ();
 masterDetailNav.Init (&quot;Menu&quot;);
 masterDetailNav.AddPage&lt;ContactListPageModel&gt; (&quot;Contacts&quot;, null);
 masterDetailNav.AddPage&lt;QuoteListPageModel&gt; (&quot;Pages&quot;, null);
 MainPage = masterDetailNav;</code></pre><ul>
-<li>###标签导航 - 内置</li>
+<li><h3 id="标签导航-内置"><a href="#标签导航-内置" class="headerlink" title="标签导航 - 内置"></a>标签导航 - 内置</h3></li>
 </ul>
 <pre><code>var tabbedNavigation = new FreshTabbedNavigationContainer ();
 tabbedNavigation.AddTab&lt;ContactListPageModel&gt; (&quot;Contacts&quot;, null);
 tabbedNavigation.AddTab&lt;QuoteListPageModel&gt; (&quot;Pages&quot;, null);
 MainPage = tabbedNavigation;</code></pre><ul>
-<li>###实施自定义导航</li>
+<li><h3 id="实施自定义导航"><a href="#实施自定义导航" class="headerlink" title="实施自定义导航"></a>实施自定义导航</h3></li>
 </ul>
 <p>可以通过实现 IFreshNavigationService.来设置任何类型的导航。在示例应用程序中有一个示例，名为 CustomImplementedNav.cs。</p>
 <h2 id="示例应用程序"><a href="#示例应用程序" class="headerlink" title="示例应用程序"></a>示例应用程序</h2><ul>
@@ -200,7 +199,7 @@ MainPage = tabbedNavigation;</code></pre><ul>
 <li>MasterDetail 导航例子</li>
 <li>使用 MasterDetail Popover 示例的 Tabbed 导航（这在 Sample App 中被称为 CustomImplementedNav）</li>
 </ul>
-<p>##控制反转（IOC）<br>所以你不需要使用你自己的 IOC 容器，FreshMvvm 自带了一个内置的 IOC 容器，它使用的是 TinyIOC，但使用不同的命名来避免冲突。要在容器中注册服务注册：</p>
+<h2 id="控制反转（IOC）"><a href="#控制反转（IOC）" class="headerlink" title="控制反转（IOC）"></a>控制反转（IOC）</h2><p>所以你不需要使用你自己的 IOC 容器，FreshMvvm 自带了一个内置的 IOC 容器，它使用的是 TinyIOC，但使用不同的命名来避免冲突。要在容器中注册服务注册：</p>
 <pre><code>FreshIOC.Container.Register&lt;IDatabaseService, DatabaseService&gt;();</code></pre><p>注入时使用：</p>
 <pre><code>FreshIOC.Container.Resolve&lt;IDatabaseService&gt;();</code></pre><p>这也是驱动构建器注入的方式。</p>
 <p>我们现在流畅支持 API 来设置对象在 IOC 容器内的生命周期。</p>
@@ -266,8 +265,7 @@ protected virtual void ViewIsAppearing (object sender, EventArgs e)
     Task PopPageModel(object data, bool modal = false);
     Task PushPageModel&lt;T&gt;() where T : FreshBasePageModel;
 }</code></pre><h2 id="Page-的重要方法"><a href="#Page-的重要方法" class="headerlink" title="Page 的重要方法"></a>Page 的重要方法</h2><p>PageModel Init PropertyChanged</p>
-<p>###示例 PageModel</p>
-<pre><code>[ImplementPropertyChanged] // 使用Fody for Property更改通知
+<h3 id="示例-PageModel"><a href="#示例-PageModel" class="headerlink" title="示例 PageModel"></a>示例 PageModel</h3><pre><code>[ImplementPropertyChanged] // 使用Fody for Property更改通知
 public class QuoteListPageModel : FreshBasePageModel
 {
     IDatabaseService _databaseService;
@@ -351,7 +349,7 @@ public class QuoteListPageModel : FreshBasePageModel
 <li>（2）使用新的推动导航容器模型的能力。</li>
 </ul>
 <p>为了支持这两种情况，我得出结论，FreshMvvm 需要具有命名 NavigationServices 的能力，以便我们可以支持多个 NavigationService。</p>
-<p>##使用多个导航容器<br>在下面我们运行一个单一的主细节的两个导航堆栈。</p>
+<h2 id="使用多个导航容器"><a href="#使用多个导航容器" class="headerlink" title="使用多个导航容器"></a>使用多个导航容器</h2><p>在下面我们运行一个单一的主细节的两个导航堆栈。</p>
 <pre><code>var masterDetailsMultiple = new MasterDetailPage (); //generic master detail page
 
 //我们使用ContactList设置第一个导航容器
@@ -387,8 +385,7 @@ var masterDetailNav = new FreshMasterDetailNavigationContainer (&quot;secondNavP
 masterDetailNav.Init (&quot;Menu&quot;, &quot;Menu.png&quot;);
 masterDetailNav.AddPage&lt;ContactListPageModel&gt; (&quot;Contacts&quot;, null);
 masterDetailNav.AddPage&lt;QuoteListPageModel&gt; (&quot;Quotes&quot;, null);
-await CoreMethods.PushNewNavigationServiceModal(masterDetailNav);</code></pre><p>##在 Xamarin.Forms MainPage 上切换 NavigationStacks</p>
-<p>Xamarin.Forms 中有些情况可能需要运行多个导航堆栈。 一个很好的例子是当你有一个用于认证的导航堆栈和一个应用程序主区域的堆栈。</p>
+await CoreMethods.PushNewNavigationServiceModal(masterDetailNav);</code></pre><h2 id="在-Xamarin-Forms-MainPage-上切换-NavigationStacks"><a href="#在-Xamarin-Forms-MainPage-上切换-NavigationStacks" class="headerlink" title="在 Xamarin.Forms MainPage 上切换 NavigationStacks"></a>在 Xamarin.Forms MainPage 上切换 NavigationStacks</h2><p>Xamarin.Forms 中有些情况可能需要运行多个导航堆栈。 一个很好的例子是当你有一个用于认证的导航堆栈和一个应用程序主区域的堆栈。</p>
 <p>首先我们可以为导航容器设置一些名称。</p>
 <pre><code>public class NavigationContainerNames
 {

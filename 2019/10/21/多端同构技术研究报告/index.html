@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <link rel="icon" type="image/png" href="https://ae01.alicdn.com/kf/H8ff31a9fc9c74ede9f02e1bfaf701d418.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="CardHouse">
+  <meta name="keywords" content>
+  <title>多端同构技术研究报告 ~ 少爷的博客</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  
+    <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+   <meta name="referrer" content="never">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>少爷的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2"
+         style="background: url('https://ae01.alicdn.com/kf/H12efcabc2fcc4900ae8ab61cf14b20491.jpg')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p>星期一, 十月 21日 2019, 6:25 晚上</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="多端同构技术研究报告"><a href="#多端同构技术研究报告" class="headerlink" title="多端同构技术研究报告"></a>多端同构技术研究报告</h1><h2 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h2><ul>
+<li>技术背景</li>
+<li>项目背景</li>
+<li>技术方案比较<ul>
+<li>chameleon</li>
+<li>uni-app</li>
+<li>Taro</li>
+</ul>
+</li>
+<li>Taro 实际测试</li>
+<li>结论<ul>
+<li>Taro 优点</li>
+<li>Taro 缺点</li>
+</ul>
+</li>
+</ul>
+<h2 id="一、技术背景"><a href="#一、技术背景" class="headerlink" title="一、技术背景"></a>一、技术背景</h2><p>最近几年来，整个前端领域发展的速度是史无前例的，效率型的前端框架也逐渐出现在世人面前，每个团队选择的技术解决方案都不尽相同，由于为互联网的特性及中国自身的独特性，各个产品对于多端的投放的需求是一致的。而像小程序这种跨端业务场景和现有的开发方式也不一样，为了满足业务的需求技术人员在日常开发中会因为投放平台的不一样而进行<strong>多套</strong>代码的维护，效率较<strong>低</strong>且成本也<strong>高</strong>。由此，为了更好地处理这种场景，跨端框架应景而生。</p>
+<h2 id="二、项目背景"><a href="#二、项目背景" class="headerlink" title="二、项目背景"></a>二、项目背景</h2><p>现如今市面上端的形态百花齐放，H5、微信小程序、支付宝小程序等各种端大行其道，而这些端目前还处于“各自为政”的状态。</p>
+<p>如果在不同的端都要求有所表现的时候，针对不同的端去编写多套代码，那么将导致面对同一个应用时开发、测试的工作量从 1 单位变成 N 单位，这样显然是极其耗费人力物力成本的。</p>
+<p>面对这样的窘境，这时候如果可以只编写一套代码就能够适配到多端的能力对节约成本、项目推进、开发维护就极为重要了。换言之，我们需要一个编写一套代码即可在多端直接运行的框架，也这是本文研究的出发点。</p>
+<h2 id="三、技术方案比较"><a href="#三、技术方案比较" class="headerlink" title="三、技术方案比较"></a>三、技术方案比较</h2><p>关于多端框架，市面上目前有很多，主要对知名度较为大、较为流行的框架来研究。分别是<code>chameleon</code>、<code>uni-app</code>、<code>Taro</code></p>
+<h4 id="3-1、chameleon"><a href="#3-1、chameleon" class="headerlink" title="3.1、chameleon"></a>3.1、chameleon</h4><ul>
+<li>chameleon 是有<strong>滴滴</strong>开源的一套多端同构技术方案。</li>
+<li>github 的 start 数仅有<strong>5000+</strong>，由此可见，热度偏低。</li>
+<li>技术栈采用类<strong>vue</strong>写法，支持 es6。</li>
+<li>支持 css 预编译（sass、less、stylues）。</li>
+<li>支持范围 移动端、H5、微信小程序、百度小程序、支付宝小程序。</li>
+<li>官方的 demo 中，滚动列表的流畅度并不令人满意，所以该框架的<strong>性能偏弱</strong>。</li>
+<li>官网并未提及成功案例。</li>
+<li>从官方 isseus 来看，isseus 关闭速度并不理想，如图<img src="https://ae01.alicdn.com/kf/H00f14b430d5a48e0a49a7e7ba84f3b0cs.png" srcset="/img/loading.gif" alt="image-20190625164249296"></li>
+</ul>
+<h4 id="3-2、uni-app"><a href="#3-2、uni-app" class="headerlink" title="3.2、uni-app"></a>3.2、uni-app</h4><ul>
+<li>uni-app 是 dcloud 推出的多端同构技术方案，核心代码不开源。</li>
+<li>github 的 start 数 8000+，热度一般。</li>
+<li>技术栈采用类<strong>vue</strong>写法，支持 es6。</li>
+<li>支持 css 预编译（sass、less、stylues）。</li>
+<li>支持范围 微信、百度、支付宝、今日头条等小程序，H5，以及 iOS 和 Android 的 App。</li>
+<li>支持多端条件编译，可以为特定平台编写特定代码。</li>
+<li>有专门的论坛，还有视频教程，QQ 群微信群都活跃。</li>
+</ul>
+<h4 id="3-3、Taro"><a href="#3-3、Taro" class="headerlink" title="3.3、Taro"></a>3.3、Taro</h4><ul>
+<li>Taro 是由京东凹凸实验室团队推出的多端同构技术方案，开源。</li>
+<li>github 的 start 数有近<strong>20000</strong>，由此可见，热度非常高。</li>
+<li>技术栈采用<strong>React</strong>写法，支持 es6、es7、es8。</li>
+<li>支持 css 预编译（sass、less、postcss）。</li>
+<li>支持范围 微信、百度、支付宝、今日头条等小程序，H5，以及 iOS 和 Android 的 App。</li>
+<li>支持多端条件编译，可以为特定平台编写特定代码、加载特定资源。</li>
+<li>支持 Taro 代码与小程序代码混写，在极端情况下可以使用原生代码处理问题。</li>
+<li>大量线上成功案例<ul>
+<li>微信小程序：京东购物、京品百货、拼多多卷商等等</li>
+<li>H5：猫眼电影、作业部落、时尚衣橱等等</li>
+<li>支付宝小程序：时光简纸、爱享到</li>
+<li>百度小程序：京东好物街、CSDN、启信宝等等</li>
+</ul>
+</li>
+<li>文档详尽、api 多端公用性高。</li>
+</ul>
+<h4 id="3-4、小结"><a href="#3-4、小结" class="headerlink" title="3.4、小结"></a>3.4、小结</h4><p>基于上面对各个技术方案的分析与了解，综合从 github 维护热度、社区交流活跃性、开发团队背景、端的覆盖范围、生态环境来看，<strong>Taro</strong>是更为合适的技术方案。</p>
+<h2 id="四、实际测试"><a href="#四、实际测试" class="headerlink" title="四、实际测试"></a>四、实际测试</h2><p>本次测试机型为 iphone5se 和小米 8</p>
+<h5 id="测试-demo-介绍"><a href="#测试-demo-介绍" class="headerlink" title="测试 demo 介绍"></a>测试 demo 介绍</h5><p>本 demo 是仿照知乎发现页的一个长列表，具有功能为：点赞、展开折叠；样式方面：css3 动画 loading 动画、展开折叠的过度动画。如图所示</p>
+<img src="https://ae01.alicdn.com/kf/Hddb74b11c39d47dcb839550d59aaf0c4V.png" srcset="/img/loading.gif" class="bm" width="300px">
+
+<h5 id="基础测试-包含样式测试、功能测试"><a href="#基础测试-包含样式测试、功能测试" class="headerlink" title="基础测试(包含样式测试、功能测试)"></a>基础测试(包含样式测试、功能测试)</h5><ul>
+<li>苹果 5se-<strong>ios</strong><ul>
+<li>微信小程序 <strong>样式</strong>:loaing 动画正常、展开折叠过度正常; <strong>功能方面</strong>:点赞正常、样式正常<ul>
+<li><img src="https://ae01.alicdn.com/kf/Hec6bd9451f004941b56344547ebd8498D.gif" srcset="/img/loading.gif" class="bm" width="300px"></li>
+</ul>
+</li>
+<li>支付宝小程序如图 <strong>样式</strong>:loaing 动画正常、展开折叠过度正常; <strong>功能方面</strong>:点赞正常、样式正常<ul>
+<li><img src="https://ae01.alicdn.com/kf/Hf2629fdc8fee40c696d38492c4a8f28ad.gif" srcset="/img/loading.gif" class="bm" width="300px"></li>
+</ul>
+</li>
+<li>h5 如图 <strong>样式</strong>:loaing 动画正常、展开折叠过度正常; <strong>功能方面</strong>:点赞正常、样式正常<ul>
+<li><img src="https://ae01.alicdn.com/kf/Hf9e28e8132e946a38730ed90598b44a3g.gif" srcset="/img/loading.gif" class="bm" width="300px"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>小米 8-<strong>安卓</strong><ul>
+<li>微信小程序 <strong>样式</strong>:loaing 动画正常、展开折叠过度正常; <strong>功能方面</strong>:点赞正常、样式正常<ul>
+<li><img src="https://ae01.alicdn.com/kf/H24b944e0dce043e68cf9c0ced9e2ff95t.gif" srcset="/img/loading.gif" class="bm" width="300px"></li>
+</ul>
+</li>
+<li>支付宝小程序(由于本人手机问题无法测试)</li>
+<li>H5 <strong>样式</strong>:loaing 动画正常、展开折叠过度正常; <strong>功能方面</strong>:点赞正常、样式正常<ul>
+<li><img src="https://ae01.alicdn.com/kf/H172685b26d6e49e19e10fc7883b01c0bB.gif" srcset="/img/loading.gif" class="bm" width="300px">
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h5><p>采取长列表测试,不做任何优化的情况下观察多端的响应速度,</p>
+<p>测试环境 h5 均使用系统自带浏览器进行测试;微信和支付宝小程序均使用各自平台下最新客户端.</p>
+<p>测试对象为<strong>含有 100 条数据的长列表</strong>以及<strong>含有 500 条数据的长列表</strong>.</p>
+<ul>
+<li><p>苹果 5se-<strong>ios</strong>,左图为 100 条数据列表,右图为 500 条数据列表</p>
+<ul>
+<li><p>微信小程序</p>
+<ul>
+<li><img src="https://ae01.alicdn.com/kf/H3a663804689d4d0999d883e219cfb629p.gif" srcset="/img/loading.gif" width="250px"><img src="https://ae01.alicdn.com/kf/He2fcee0b3b874859b560ce3aa6b31f1b8.gif" srcset="/img/loading.gif" width="250px"></li>
+</ul>
+</li>
+<li><p>支付宝小程序</p>
+<ul>
+<li><img src="https://ae01.alicdn.com/kf/H923b8fb9c7234fb591a2b8964610300dZ.gif" srcset="/img/loading.gif" width="300px"><img src="https://ae01.alicdn.com/kf/H181f87d30bb344c79bcec73dc63e96d5G.gif" srcset="/img/loading.gif" width="300px"></li>
+</ul>
+</li>
+<li><p>h5</p>
+<ul>
+<li><img src="https://ae01.alicdn.com/kf/He1897565a96643a789a9734924d4e5d1Y.gif" srcset="/img/loading.gif" width="300px"><img src="https://ae01.alicdn.com/kf/Ha0afe436f07d42e6bea25633039c4934J.gif" srcset="/img/loading.gif" width="300px"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>小米 8-<strong>安卓</strong></p>
+<ul>
+<li>微信小程序<ul>
+<li><img src="https://images.weserv.nl/?url=https://img01.sogoucdn.com/app/a/100520146/8f9cf2e28600e42f0cb1a7cd3163b41f" srcset="/img/loading.gif" width="300px"><img src="https://ae01.alicdn.com/kf/H2f0c2d2098b945a78a6344eb73137deew.gif" srcset="/img/loading.gif" width="300px"></li>
+</ul>
+</li>
+<li>支付宝小程序(由于手机问题,无法测试)</li>
+<li>h5<ul>
+<li><img src="https://ae01.alicdn.com/kf/H1b46f314d77b4e41acbef98c3e7eb7290.gif" srcset="/img/loading.gif" width="300px"><img src="https://images.weserv.nl/?url=https://img03.sogoucdn.com/app/a/100520146/1abf071380ba76bc5e8f8be8d9fe39f3" srcset="/img/loading.gif" width="300px"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>测试小结</p>
+<ul>
+<li>当数据量为 100 条的时候,<strong>苹果 5se</strong>和<strong>小米 8</strong>三端的响应速度有在合理范围内</li>
+<li>当数据量为 500 条的时候,支付宝、微信小程序的响应速度也在合理范围内,而 h5 端就开始了较为明显的卡顿,手指按下到响应有较为明显的延迟.</li>
+<li>从测试结果看,同样的代码在不同端下的性能是有差异的<ul>
+<li>在<strong>苹果 5se</strong>下 性能从高到低的顺序为 微信小程序&gt;支付宝小程序&gt;h5</li>
+<li>在<strong>小米 8</strong>下性能高低的顺序为 h5&gt;微信小程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>优点<ul>
+<li>性能优异</li>
+<li>社区活跃</li>
+<li>文档详尽</li>
+<li>语法优雅</li>
+<li>多端效果理想</li>
+<li>上手成本低</li>
+<li>编译速度快</li>
+<li>可多端同时调试</li>
+<li>工单响应速度快,平均 24 小时内就会有回复<img class="bm" src="https://ae01.alicdn.com/kf/H7dd32e5c32e44472b4c8d2c7a7a51052k.png" width="500px"></li>
+<li>更新频率快,可以有效跟上小程序的更新<img class="bm" src="https://ae01.alicdn.com/kf/Hf2315b5370944b21970264c897e71594R.png" width="500px"></li>
+<li>技术栈为<strong>React</strong>，市面上认可的热门框架</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不能使用 Array.map 之外的方法操作 JSX 数组</li>
+<li>不支持级联 css 选择器</li>
+<li>不能使用 css 的<strong>*</strong>号选择器</li>
+<li>同一套 css 代码在某些属性不指定的情况下,各端表现不一致,例如 width、height 不指定的话,在不同的端会有偏差.</li>
+</ul>
+</li>
+</ul>
+<p>基于以上优缺点以及测试结果,<strong>Taro</strong>是一个可以解决同业务不同端的多端同构技术方案,从性能、社区、研发团队、技术栈来看都是一个相对成熟的方案.</p>
+
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5 footer">
+  <div class="text-center py-3">
+    <i class="iconfont icon-love"></i>
+    <a
+      href="https://github.com/chendss?tab=repositories"
+      target="_blank"
+      rel="nofollow noopener"
+    >
+      <b>github</b></a
+    >
+    <i class="iconfont icon-love"></i>
+    <br />
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
+<script>
+  $(document).ready(function() {
+    $('pre').addClass('prettyprint linenums');
+    prettyPrint();
+  });
+</script>
+  <script src="/lib/typed/typed.min.js" ></script>
+<script>
+  var typed = new Typed('#subtitle', {
+    strings: [
+      '  ',
+      "多端同构技术研究报告&nbsp;",
+    ],
+    cursorChar: "_",
+    typeSpeed: 70,
+    loop: false,
+  });
+  typed.stop();
+  $(document).ready(function () {
+    $(".typed-cursor").addClass("h2");
+    typed.start();
+  });
+</script>
+  <script src="/lib/anchor/anchor.min.js" ></script>
+<script>
+  anchors.options = {
+    placement: "right",
+    visible: "false",
+    
+  };
+  var el = "h1,h2,h3,h4,h5,h6".split(",");
+  var res = [];
+  for (item of el) {
+    res.push(".markdown-body > " + item)
+  }
+  anchors.add(res.join(", "))
+</script>
+  <script src="/js/local-search.js" ></script>
+<script>
+  var path = "/local-search.xml";
+  var inputArea = document.querySelector('#local-search-input');
+  inputArea.onclick = function() {
+    getSearchFile(path);
+    this.onclick = null;
+  };
+</script>
+
+
+</body>
+</html>
