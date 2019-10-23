@@ -6,20 +6,19 @@ $(document).ready(function () {
   var tocLimMin = main.offset().top - navHeight;
   var tocLimMax = $("#comments").offset().top - navHeight;
   $(window).scroll(function () {
+    const navH = document.querySelector('#navbar').offsetHeight
     var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-    if (tocLimMin <= scroH && scroH <= tocLimMax) {
+    if (document.querySelector('.container-fluid').getBoundingClientRect().y <= navH) {
       toc.css({
         "display": "block",
         "position": "fixed",
-        "top": tocT
+        "top": navH
       })
-    } else if (scroH <= tocLimMin) {
+    } else {
       toc.css({
         "position": "",
         "top": ''
       })
-    } else if (scroH > tocLimMax) {
-      toc.css("display", "none")
     }
   });
   tocbot.init({

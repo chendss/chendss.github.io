@@ -509,7 +509,8 @@ main .right {
   white-space: nowrap;
 }
 main .right #toc {
-  position: relative !important;
+  position: relative;
+  transition: all 0.5s;
 }
 main .container-fluid .row {
   flex-wrap: nowrap;

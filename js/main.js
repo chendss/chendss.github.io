@@ -1,4 +1,4 @@
-function scrollToElement(target, offset) {
+function scrollToElement (target, offset) {
   var scroll_offset = $(target).offset();
   $("body,html").animate({
     scrollTop: scroll_offset.top + (offset || 0),
@@ -6,7 +6,7 @@ function scrollToElement(target, offset) {
   })
 }
 
-function scrollToBoard() {
+function scrollToBoard () {
   scrollToElement('#board', -$("#navbar").height());
 }
 
@@ -74,3 +74,56 @@ $(document).ready(function () {
     })
   });
 });
+
+const getScrollTop = function () {
+  var scroll_top = 0;
+  if (document.documentElement && document.documentElement.scrollTop) {
+    scroll_top = document.documentElement.scrollTop
+  }
+  else if (document.body) {
+    scroll_top = document.body.scrollTop
+  }
+  return scroll_top
+}
+
+const throttle = function (func, delay) {
+  var prev = Date.now()
+  return function () {
+    var context = this
+    var args = arguments
+    var now = Date.now()
+    if (now - prev >= delay) {
+      func.apply(context, args)
+      prev = Date.now()
+    }
+  }
+}
+
+class Queue {
+  constructor() {
+    this.list = []
+    this.lock = false
+    setInterval(() => {
+      if (!this.lock) {
+        const handle = this.list.pop()
+        handle && handle()
+        this.list = []
+      }
+    }, 50)
+  }
+  add (handle) {
+    this.lock = true
+    this.list.push(handle)
+    this.lock = false
+  }
+}
+
+const queue = new Queue()
+
+const scrollHandle = function () {
+  const baseTop = document.querySelector('header').offsetHeight - 50
+  const dom = document.querySelector('#toc')
+  dom.setAttribute('style', `margin-top:${Math.max(0, getScrollTop() - baseTop)}px`)
+}
+
+// window.addEventListener('scroll', throttle(scrollHandle, 25))
