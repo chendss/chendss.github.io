@@ -14,7 +14,7 @@
   <meta name="description" content>
   <meta name="author" content="CardHouse">
   <meta name="keywords" content>
-  <title>归档 ~ 少爷的博客</title>
+  <title>基于webpack4手把手教你构建单页面（非主流框架） ~ 少爷的博客</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
@@ -30,7 +30,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
    <meta name="referrer" content="never">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -102,6 +102,9 @@
             </span>
 
             
+              <br>
+              <p>星期六, 十月 26日 2019, 6:39 晚上</p>
+            
           </div>
 
           
@@ -112,41 +115,99 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 26 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/07/01/screen使用教程-无比简单/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">screen使用教程-无比简单</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
-    
-    <a href="/2019/07/01/nginx的邻居caddy/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nginx的邻居caddy</span>
-      <span style="float: right;">07-01</span>
-    </a>
-  
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="d-none d-lg-block col-lg-2 left"></div>
+		<div class="col-lg-8 nopadding-md">
+			<div class="py-5 z-depth-3" id="board">
+				<div class="post-content mx-auto">
+					<div class="markdown-body">
+						<h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>最近准备个礼物送给女朋友，之前送的东西都是可爱型，这次换点不一样的。准备写一个回忆杀</p>
+<h1 id="项目架构思路"><a href="#项目架构思路" class="headerlink" title="项目架构思路"></a>项目架构思路</h1><ul>
+<li>初始化项目</li>
+<li>整体项目结构划分</li>
+<li>技术选型</li>
+<li>配置<em>webpack</em></li>
+<li>业务代码编写</li>
+</ul>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><ul>
+<li><p>建立空文件夹，执行 <code>yarn</code></p>
+</li>
+<li><p>执行<code>npm init</code> 一路回车就可以了，都是一些后期可以改的配置无需在意，这个时候生成的<em>package.json</em>文件应该是</p>
+<pre><code class="json">{
+  &quot;name&quot;: &quot;your name&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;, // #tag
+  &quot;dependencies&quot;: {
+  },
+  &quot;devDependencies&quot;: {},
+  &quot;scripts&quot;: {},
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>安装 <em>webpack</em> ,执行 // 为什么要分开3条命令，因为这样安装失败容易定位问题</p>
+<ul>
+<li><code>yarn add webpack -d</code> </li>
+<li><code>yarn add webpack-cli -d</code> </li>
+<li><code>yarn add webpack-dev-server -d</code></li>
+</ul>
+</li>
+<li><p>新建<em>.gitignore</em>文件（<a href="https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208" target="_blank" rel="noopener">解释这个文件的用处</a>），写入代码 为了不让这个破包的东西加入git监听</p>
+<pre><code class="shell">node_modules/</code></pre>
+</li>
+</ul>
+<p>到这项目的基本要素已经有了，可以看到项目的目录变成了<img src="https://ae01.alicdn.com/kf/Udb7de13570734babab448ead668dec1ad.png" srcset="/img/loading.gif" alt></p>
+<h2 id="整体项目结构划分"><a href="#整体项目结构划分" class="headerlink" title="整体项目结构划分"></a>整体项目结构划分</h2><p>遵循模块分离的思想，关于webpack配置的应该单独放在一个文件夹 <strong>webpack</strong></p>
+<p>业务逻辑一个文件夹  <strong>src</strong></p>
+<p>配置文件也应该独占一个文件夹 <strong>config</strong></p>
+<p>得到如图<img src="https://ae01.alicdn.com/kf/U4bdb0433c94f40c5b828777090d2db872.png" srcset="/img/loading.gif" alt></p>
+<h3 id="src"><a href="#src" class="headerlink" title="src"></a>src</h3>
+						<hr />
+					</div>
+					<br />
+					<div>
+						
+						<p>
+							<i class="iconfont icon-tag"></i>
+							
+							<a class="hover-with-bg" href="/tags/%E5%89%8D%E7%AB%AF">前端</a>
+							
+						</p>
+						
+						<p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block col-lg-2 toc-container right">
+			
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+		</div>
+	</div>
 </div>
 
+<!-- custom -->
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+	<div class="container comments mx-auto" id="comments">
+		
+	</div>
+</div>
+
     
   </main>
 
@@ -197,7 +258,8 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>    <script src="/lib/prettify/prettify.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script> <script src="/lib/popper/popper.min.js" ></script> <script src="/lib/bootstrap/js/bootstrap.min.js" ></script> <script src="/lib/mdbootstrap/js/mdb.min.js" ></script> <script src="/js/main.js" ></script>  <script src="/js/lazyload.js" ></script>   
+<script src="/lib/tocbot/tocbot.min.js" ></script>  <script src="/js/post.js" ></script>   <script src="/lib/prettify/prettify.min.js" ></script>
 <script>
   $(document).ready(function() {
     $('pre').addClass('prettyprint linenums');
@@ -209,7 +271,7 @@
   var typed = new Typed('#subtitle', {
     strings: [
       '  ',
-      "归档&nbsp;",
+      "基于webpack4手把手教你构建单页面（非主流框架）&nbsp;",
     ],
     cursorChar: "_",
     typeSpeed: 70,
